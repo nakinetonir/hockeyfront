@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { getTeamBrand, isTeam360 } from '../../../core/utils/team-branding';
 
 @Component({
@@ -7,8 +7,17 @@ import { getTeamBrand, isTeam360 } from '../../../core/utils/team-branding';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="team-logo-wrap" [class.team-logo-360]="animate360 && is360Team" [attr.title]="resolvedName">
-      <img *ngIf="logo; else fallback" class="team-logo" [class.team-logo-large]="size === 'lg'" [src]="logo" [alt]="resolvedName" />
+    <div class="team-logo-wrap" [class.team-logo-360]="animate360 && is360Team" [class.team-logo-wrap-large]="size === 'lg'" [attr.title]="resolvedName">
+      <img
+        *ngIf="logo && !hasImageError; else fallback"
+        class="team-logo"
+        [class.team-logo-large]="size === 'lg'"
+        [src]="logo"
+        [alt]="resolvedName"
+        loading="lazy"
+        decoding="async"
+        (error)="handleImageError()"
+      />
       <ng-template #fallback>
         <div class="team-logo team-logo-fallback" [class.team-logo-large]="size === 'lg'">
           {{ initials }}
@@ -17,10 +26,15 @@ import { getTeamBrand, isTeam360 } from '../../../core/utils/team-branding';
     </div>
   `
 })
-export class TeamLogoComponent {
+export class TeamLogoComponent implements OnChanges {
   @Input() team?: string | null;
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() animate360 = false;
+  hasImageError = false;
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    this.hasImageError = false;
+  }
 
   get brand() {
     return getTeamBrand(this.team);
@@ -46,5 +60,9 @@ export class TeamLogoComponent {
 
   get is360Team(): boolean {
     return isTeam360(this.team);
+  }
+
+  handleImageError(): void {
+    this.hasImageError = true;
   }
 }

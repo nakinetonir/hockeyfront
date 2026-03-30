@@ -33,8 +33,8 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
         </div>
       </div>
 
-      <div class="card table-wrap">
-        <table>
+      <div class="card table-wrap responsive-table-card">
+        <table class="stats-table">
           <thead>
             <tr>
               <th>Portero</th>
@@ -48,17 +48,18 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
           </thead>
           <tbody>
             <tr *ngFor="let item of filteredGoalies" [class.team-360-row]="is360(item.team)">
-              <td>{{ item.goalie }}</td>
-              <td>
+              <td [attr.data-label]="'Portero'" class="primary-cell">{{ item.goalie }}</td>
+              <td [attr.data-label]="'Equipo'">
                 <div class="team-cell">
                   <app-team-logo [team]="item.team" [animate360]="true"></app-team-logo>
+                  <span class="team-cell-name">{{ item.team }}</span>
                 </div>
               </td>
-              <td>{{ item.matches || 0 }}</td>
-              <td>{{ item.goals_allowed || 0 }}</td>
-              <td>{{ item.shots || 0 }}</td>
-              <td>{{ item.saves || ((item.shots || 0) - (item.goals_allowed || 0)) }}</td>
-              <td>{{ item.save_pct || 0 | number:'1.0-2' }}</td>
+              <td [attr.data-label]="'Partidos'">{{ item.matches || 0 }}</td>
+              <td [attr.data-label]="'GC'">{{ item.goals_allowed || 0 }}</td>
+              <td [attr.data-label]="'Tiros'">{{ item.shots || 0 }}</td>
+              <td [attr.data-label]="'Paradas'">{{ item.saves || ((item.shots || 0) - (item.goals_allowed || 0)) }}</td>
+              <td [attr.data-label]="'SV%'">{{ item.save_pct || 0 | number:'1.0-2' }}</td>
             </tr>
           </tbody>
         </table>

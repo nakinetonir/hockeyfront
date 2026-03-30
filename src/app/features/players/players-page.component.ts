@@ -33,8 +33,8 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
         </div>
       </div>
 
-      <div class="card table-wrap">
-        <table>
+      <div class="card table-wrap responsive-table-card">
+        <table class="stats-table">
           <thead>
             <tr>
               <th>Jugador</th>
@@ -47,16 +47,17 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
           </thead>
           <tbody>
             <tr *ngFor="let item of filteredPlayers" [class.team-360-row]="is360(item.team)">
-              <td>{{ item.player }}</td>
-              <td>
+              <td [attr.data-label]="'Jugador'" class="primary-cell">{{ item.player }}</td>
+              <td [attr.data-label]="'Equipo'">
                 <div class="team-cell">
                   <app-team-logo [team]="item.team" [animate360]="true"></app-team-logo>
+                  <span class="team-cell-name">{{ item.team }}</span>
                 </div>
               </td>
-              <td>{{ item.matches || 0 }}</td>
-              <td>{{ item.goals || 0 }}</td>
-              <td>{{ item.assists || 0 }}</td>
-              <td>{{ item.points || ((item.goals || 0) + (item.assists || 0)) }}</td>
+              <td [attr.data-label]="'Partidos'">{{ item.matches || 0 }}</td>
+              <td [attr.data-label]="'Goles'">{{ item.goals || 0 }}</td>
+              <td [attr.data-label]="'Asistencias'">{{ item.assists || 0 }}</td>
+              <td [attr.data-label]="'Puntos'">{{ item.points || ((item.goals || 0) + (item.assists || 0)) }}</td>
             </tr>
           </tbody>
         </table>

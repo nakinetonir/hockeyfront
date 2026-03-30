@@ -33,7 +33,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
         </div>
       </div>
 
-      <div class="grid" style="gap: 12px">
+      <div class="grid matches-grid" style="gap: 12px">
         <div class="card match-card" *ngFor="let item of filteredMatches" [class.team-360-card]="is360(item.home_team) || is360(item.away_team)">
           <div style="display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap;">
             <div style="width:100%;">
@@ -41,11 +41,17 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
               <div class="match-header">
                 <div class="match-side">
                   <app-team-logo [team]="item.home_team" size="lg" [animate360]="true"></app-team-logo>
-                  <span class="match-score">{{ item.home_score ?? '-' }}</span>
+                  <div class="match-team-meta">
+                    <span class="match-team-name">{{ item.home_team }}</span>
+                    <span class="match-score">{{ item.home_score ?? '-' }}</span>
+                  </div>
                 </div>
                 <div class="match-versus">vs</div>
-                <div class="match-side">
-                  <span class="match-score">{{ item.away_score ?? '-' }}</span>
+                <div class="match-side match-side-away">
+                  <div class="match-team-meta match-team-meta-away">
+                    <span class="match-team-name">{{ item.away_team }}</span>
+                    <span class="match-score">{{ item.away_score ?? '-' }}</span>
+                  </div>
                   <app-team-logo [team]="item.away_team" size="lg" [animate360]="true"></app-team-logo>
                 </div>
               </div>

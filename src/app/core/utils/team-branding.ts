@@ -10,62 +10,62 @@ const TEAM_BRANDS: TeamBrand[] = [
   {
     key: '360',
     name: 'Club Tres60',
-    logo: 'assets/teams/360.png',
+    logo: '/assets/teams/360.png',
     aliases: ['360', 'tres60', 'tres 60', 'club tres60', 'club 360'],
     specialAnimation: '360'
   },
   {
     key: 'las-rozas',
     name: 'CHC Las Rozas',
-    logo: 'assets/teams/lasrozas.png',
+    logo: '/assets/teams/lasrozas.png',
     aliases: ['las rozas', 'chc', 'chc las rozas', 'club hockey las rozas']
   },
   {
     key: 'lobos',
     name: 'Lobos',
-    logo: 'assets/teams/lobos.png',
+    logo: '/assets/teams/lobos.png',
     aliases: ['lobos', 'club lobos', 'lobos hockey']
   },
   {
     key: 'madrid-patina',
     name: 'Madrid Patina',
-    logo: 'assets/teams/madridpatina.png',
+    logo: '/assets/teams/madridpatina.png',
     aliases: ['madrid patina', 'madrid patina stars', 'stars', 'madridpatina']
   },
   {
     key: 'mamuts',
     name: 'Mamuts de Villaverde',
-    logo: 'assets/teams/mamuts.png',
+    logo: '/assets/teams/mamuts.png',
     aliases: ['mamuts', 'mamuts de villaverde', 'villaverde']
   },
   {
     key: 'pinguinos',
     name: 'Pinguinos',
-    logo: 'assets/teams/pinguinos.png',
+    logo: '/assets/teams/pinguinos.png',
     aliases: ['pinguinos', 'pinguinos madrid', 'penguins']
   },
   {
     key: 'renos',
     name: 'Ciudad Patin Renos',
-    logo: 'assets/teams/renos.png',
+    logo: '/assets/teams/renos.png',
     aliases: ['renos', 'ciudad patin renos', 'ciudad patin']
   },
   {
     key: 'rolleybears',
     name: 'Rollybears Parla',
-    logo: 'assets/teams/rolleybeers.png',
+    logo: '/assets/teams/rolleybeers.png',
     aliases: ['rollybears', 'rolleybears', 'parla', 'rollybears parla']
   },
   {
     key: 'tirso',
     name: 'Club Patín Tirso',
-    logo: 'assets/teams/tirso.png',
+    logo: '/assets/teams/tirso.png',
     aliases: ['tirso', 'club patin tirso', 'cpt tirso']
   },
   {
     key: 'vikings',
     name: 'CPLG Vikings',
-    logo: 'assets/teams/vikings.png',
+    logo: '/assets/teams/vikings.png',
     aliases: ['vikings', 'vikins', 'cplg', 'cplg vikings']
   }
 ];
