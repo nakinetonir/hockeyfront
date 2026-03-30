@@ -1,22 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ApiService } from '../../core/services/api.service';
 import { PlayerTotal } from '../../core/models/api.models';
+import { ApiService } from '../../core/services/api.service';
+import { filterByTeamText, isTeam360 } from '../../core/utils/team-branding';
+import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.component';
 
 @Component({
   selector: 'app-players-page',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TeamLogoComponent],
   template: `
     <section>
       <h1 class="page-title">Jugadores</h1>
-      <p class="page-subtitle">Acumulado por jugador de goles, asistencias y puntos.</p>
+      <p class="page-subtitle">Acumulado por jugador de goles, asistencias y puntos. Puedes buscar por jugador y por equipo.</p>
 
-      <div class="filters card">
+      <div class="filters card filters-3">
         <div>
-          <label class="small">Buscar</label>
+          <label class="small">Buscar jugador</label>
           <input [(ngModel)]="search" (ngModelChange)="load()" placeholder="Nombre del jugador" />
+        </div>
+        <div>
+          <label class="small">Buscar equipo</label>
+          <input [(ngModel)]="teamSearch" (ngModelChange)="applyTeamFilter()" placeholder="Ej. 360, Vikings, Rollybears..." />
         </div>
         <div>
           <label class="small">Equipo</label>
@@ -40,9 +46,13 @@ import { PlayerTotal } from '../../core/models/api.models';
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of players">
+            <tr *ngFor="let item of filteredPlayers" [class.team-360-row]="is360(item.team)">
               <td>{{ item.player }}</td>
-              <td>{{ item.team }}</td>
+              <td>
+                <div class="team-cell">
+                  <app-team-logo [team]="item.team" [animate360]="true"></app-team-logo>
+                </div>
+              </td>
               <td>{{ item.matches || 0 }}</td>
               <td>{{ item.goals || 0 }}</td>
               <td>{{ item.assists || 0 }}</td>
@@ -57,8 +67,10 @@ import { PlayerTotal } from '../../core/models/api.models';
 export class PlayersPageComponent implements OnInit {
   private readonly api = inject(ApiService);
   players: PlayerTotal[] = [];
+  filteredPlayers: PlayerTotal[] = [];
   teams: string[] = [];
   search = '';
+  teamSearch = '';
   team = '';
 
   ngOnInit(): void {
@@ -69,6 +81,15 @@ export class PlayersPageComponent implements OnInit {
   load(): void {
     this.api.getPlayers({ search: this.search, team: this.team, page: 1, limit: 100 }).subscribe((data) => {
       this.players = data.items;
+      this.applyTeamFilter();
     });
+  }
+
+  applyTeamFilter(): void {
+    this.filteredPlayers = filterByTeamText(this.players, (item) => item.team, this.teamSearch);
+  }
+
+  is360(team?: string): boolean {
+    return isTeam360(team);
   }
 }

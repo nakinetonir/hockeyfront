@@ -1,22 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ApiService } from '../../core/services/api.service';
 import { MatchItem } from '../../core/models/api.models';
+import { ApiService } from '../../core/services/api.service';
+import { filterByTeamText, isTeam360 } from '../../core/utils/team-branding';
+import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.component';
 
 @Component({
   selector: 'app-matches-page',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TeamLogoComponent],
   template: `
     <section>
       <h1 class="page-title">Partidos</h1>
-      <p class="page-subtitle">Histórico de partidos importados desde MongoDB.</p>
+      <p class="page-subtitle">Histórico de partidos importados desde MongoDB, con búsqueda por equipo y logos en cada enfrentamiento.</p>
 
-      <div class="filters card">
+      <div class="filters card filters-3">
         <div>
-          <label class="small">Buscar</label>
-          <input [(ngModel)]="search" (ngModelChange)="load()" placeholder="Equipo, pista o fecha" />
+          <label class="small">Buscar general</label>
+          <input [(ngModel)]="search" (ngModelChange)="load()" placeholder="Pista o fecha" />
+        </div>
+        <div>
+          <label class="small">Buscar equipo</label>
+          <input [(ngModel)]="teamSearch" (ngModelChange)="applyTeamFilter()" placeholder="Equipo local o visitante" />
         </div>
         <div>
           <label class="small">Equipo</label>
@@ -28,11 +34,21 @@ import { MatchItem } from '../../core/models/api.models';
       </div>
 
       <div class="grid" style="gap: 12px">
-        <div class="card" *ngFor="let item of matches">
+        <div class="card match-card" *ngFor="let item of filteredMatches" [class.team-360-card]="is360(item.home_team) || is360(item.away_team)">
           <div style="display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap;">
-            <div>
+            <div style="width:100%;">
               <div class="badge">{{ item.status || 'Finalizado' }}</div>
-              <h3 style="margin:10px 0 6px;">{{ item.home_team }} {{ item.home_score ?? '-' }} - {{ item.away_score ?? '-' }} {{ item.away_team }}</h3>
+              <div class="match-header">
+                <div class="match-side">
+                  <app-team-logo [team]="item.home_team" size="lg" [animate360]="true"></app-team-logo>
+                  <span class="match-score">{{ item.home_score ?? '-' }}</span>
+                </div>
+                <div class="match-versus">vs</div>
+                <div class="match-side">
+                  <span class="match-score">{{ item.away_score ?? '-' }}</span>
+                  <app-team-logo [team]="item.away_team" size="lg" [animate360]="true"></app-team-logo>
+                </div>
+              </div>
               <div class="small">{{ item.date || 'Sin fecha' }} · {{ item.venue || 'Sin pista' }}</div>
             </div>
           </div>
@@ -44,8 +60,10 @@ import { MatchItem } from '../../core/models/api.models';
 export class MatchesPageComponent implements OnInit {
   private readonly api = inject(ApiService);
   matches: MatchItem[] = [];
+  filteredMatches: MatchItem[] = [];
   teams: string[] = [];
   search = '';
+  teamSearch = '';
   team = '';
 
   ngOnInit(): void {
@@ -56,6 +74,19 @@ export class MatchesPageComponent implements OnInit {
   load(): void {
     this.api.getMatches({ search: this.search, team: this.team, page: 1, limit: 100 }).subscribe((data) => {
       this.matches = data.items;
+      this.applyTeamFilter();
     });
+  }
+
+  applyTeamFilter(): void {
+    this.filteredMatches = filterByTeamText(
+      this.matches,
+      (item) => `${item.home_team || ''} ${item.away_team || ''}`,
+      this.teamSearch
+    );
+  }
+
+  is360(team?: string): boolean {
+    return isTeam360(team);
   }
 }
