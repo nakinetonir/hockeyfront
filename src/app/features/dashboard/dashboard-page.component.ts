@@ -42,7 +42,7 @@ import { isTeam360 } from '../../core/utils/team-branding';
               <tbody>
                 <tr *ngFor="let item of data.topScorers" [class.team-360-row]="is360(item.team)">
                   <td>{{ item.player }}</td>
-                  <td><div class="team-cell"><app-team-logo [team]="item.team" [animate360]="true"></app-team-logo><span class="team-cell-name dashboard-team-name">{{ item.team }}</span></div></td>
+                  <td><div class="team-cell team-cell-logo-only"><app-team-logo [team]="item.team" [animate360]="true"></app-team-logo></div></td>
                   <td>{{ item.goals || 0 }}</td>
                   <td>{{ item.assists || 0 }}</td>
                 </tr>
@@ -59,7 +59,7 @@ import { isTeam360 } from '../../core/utils/team-branding';
               <tbody>
                 <tr *ngFor="let item of data.topAssisters" [class.team-360-row]="is360(item.team)">
                   <td>{{ item.player }}</td>
-                  <td><div class="team-cell"><app-team-logo [team]="item.team" [animate360]="true"></app-team-logo><span class="team-cell-name dashboard-team-name">{{ item.team }}</span></div></td>
+                  <td><div class="team-cell team-cell-logo-only"><app-team-logo [team]="item.team" [animate360]="true"></app-team-logo></div></td>
                   <td>{{ item.assists || 0 }}</td>
                   <td>{{ item.points || ((item.goals || 0) + (item.assists || 0)) }}</td>
                 </tr>
@@ -76,7 +76,7 @@ import { isTeam360 } from '../../core/utils/team-branding';
               <tbody>
                 <tr *ngFor="let item of data.topGoalies" [class.team-360-row]="is360(item.team)">
                   <td>{{ item.goalie }}</td>
-                  <td><div class="team-cell"><app-team-logo [team]="item.team" [animate360]="true"></app-team-logo><span class="team-cell-name dashboard-team-name">{{ item.team }}</span></div></td>
+                  <td><div class="team-cell team-cell-logo-only"><app-team-logo [team]="item.team" [animate360]="true"></app-team-logo></div></td>
                   <td>{{ item.save_pct || 0 | number:'1.0-2' }}</td>
                   <td>{{ item.shots || 0 }}</td>
                 </tr>

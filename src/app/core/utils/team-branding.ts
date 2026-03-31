@@ -60,7 +60,17 @@ const TEAM_BRANDS: TeamBrand[] = [
     key: 'tirso',
     name: 'Club Patín Tirso',
     logo: '/assets/teams/tirso.png',
-    aliases: ['tirso', 'club patin tirso', 'cpt tirso']
+    aliases: [
+      'tirso',
+      'club patin tirso',
+      'club patín tirso',
+      'cpt tirso',
+      'tirso madrid',
+      'club patin tirso madrid',
+      'club patin tirso de molina',
+      'cp tirso',
+      'c p tirso'
+    ]
   },
   {
     key: 'vikings',

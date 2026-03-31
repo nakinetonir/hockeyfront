@@ -50,9 +50,8 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
             <tr *ngFor="let item of filteredGoalies" [class.team-360-row]="is360(item.team)">
               <td [attr.data-label]="'Portero'" class="primary-cell">{{ item.goalie }}</td>
               <td [attr.data-label]="'Equipo'">
-                <div class="team-cell">
+                <div class="team-cell team-cell-logo-only">
                   <app-team-logo [team]="item.team" [animate360]="true"></app-team-logo>
-                  <span class="team-cell-name">{{ item.team }}</span>
                 </div>
               </td>
               <td [attr.data-label]="'Partidos'">{{ item.matches || 0 }}</td>
