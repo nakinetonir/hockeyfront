@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { DashboardSummary, GoalieTotal, MatchItem, PaginationResult, PlayerTotal } from '../models/api.models';
+import { DashboardSummary, GoalieTotal, MatchItem, PaginationResult, PlayerTotal, TeamShotTotal } from '../models/api.models';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
@@ -23,6 +23,10 @@ export class ApiService {
 
   getMatches(filters: Record<string, string | number>): Observable<PaginationResult<MatchItem>> {
     return this.http.get<PaginationResult<MatchItem>>(`${this.baseUrl}/matches`, { params: this.toParams(filters) });
+  }
+
+  getTeamShots(filters: Record<string, string | number>): Observable<PaginationResult<TeamShotTotal>> {
+    return this.http.get<PaginationResult<TeamShotTotal>>(`${this.baseUrl}/team-shots`, { params: this.toParams(filters) });
   }
 
   getTeams(): Observable<{ items: string[] }> {

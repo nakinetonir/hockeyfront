@@ -3,7 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PlayerTotal } from '../../core/models/api.models';
 import { ApiService } from '../../core/services/api.service';
-import { filterByTeamText, isTeam360 } from '../../core/utils/team-branding';
+import { isTeam360 } from '../../core/utils/team-branding';
 import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.component';
 
 @Component({
@@ -13,16 +13,12 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
   template: `
     <section>
       <h1 class="page-title">Jugadores</h1>
-      <p class="page-subtitle">Acumulado por jugador de goles, asistencias y puntos. Puedes buscar por jugador y por equipo.</p>
+      <p class="page-subtitle">Acumulado por jugador de goles, asistencias y puntos. Filtra por jugador o por el desplegable de equipos.</p>
 
-      <div class="filters card filters-3">
+      <div class="filters card filters-2">
         <div>
           <label class="small">Buscar jugador</label>
           <input [(ngModel)]="search" (ngModelChange)="load()" placeholder="Nombre del jugador" />
-        </div>
-        <div>
-          <label class="small">Buscar equipo</label>
-          <input [(ngModel)]="teamSearch" (ngModelChange)="applyTeamFilter()" placeholder="Ej. 360, Vikings, Rollybears..." />
         </div>
         <div>
           <label class="small">Equipo</label>
@@ -46,7 +42,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of filteredPlayers" [class.team-360-row]="is360(item.team)">
+            <tr *ngFor="let item of players" [class.team-360-row]="is360(item.team)">
               <td [attr.data-label]="'Jugador'" class="primary-cell">{{ item.player }}</td>
               <td [attr.data-label]="'Equipo'">
                 <div class="team-cell team-cell-logo-only">
@@ -67,10 +63,8 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
 export class PlayersPageComponent implements OnInit {
   private readonly api = inject(ApiService);
   players: PlayerTotal[] = [];
-  filteredPlayers: PlayerTotal[] = [];
   teams: string[] = [];
   search = '';
-  teamSearch = '';
   team = '';
 
   ngOnInit(): void {
@@ -81,12 +75,7 @@ export class PlayersPageComponent implements OnInit {
   load(): void {
     this.api.getPlayers({ search: this.search, team: this.team, page: 1, limit: 100 }).subscribe((data) => {
       this.players = data.items;
-      this.applyTeamFilter();
     });
-  }
-
-  applyTeamFilter(): void {
-    this.filteredPlayers = filterByTeamText(this.players, (item) => item.team, this.teamSearch);
   }
 
   is360(team?: string): boolean {

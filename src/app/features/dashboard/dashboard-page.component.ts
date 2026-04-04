@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ApiService } from '../../core/services/api.service';
 import { DashboardSummary } from '../../core/models/api.models';
-import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.component';
 import { isTeam360 } from '../../core/utils/team-branding';
+import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.component';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -11,8 +11,8 @@ import { isTeam360 } from '../../core/utils/team-branding';
   imports: [CommonModule, TeamLogoComponent],
   template: `
     <section>
-      <h1 class="page-title">Liga Senior 2</h1>
-      <p class="page-subtitle">Dashboard de estadísticas acumuladas de jugadores, porteros y partidos.</p>
+      <h1 class="page-title">Dashboard</h1>
+      <p class="page-subtitle">Resumen general de partidos, goleadores, porteros y tiros por equipo.</p>
 
       <div class="grid grid-4" *ngIf="summary as data">
         <div class="card">
@@ -83,6 +83,24 @@ import { isTeam360 } from '../../core/utils/team-branding';
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 20px" *ngIf="summary?.topShotTeams?.length">
+        <div class="badge">Top tiros por equipo</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Equipo</th><th>TF</th><th>TC</th><th>Media TF</th><th>Media TC</th></tr></thead>
+            <tbody>
+              <tr *ngFor="let item of summary?.topShotTeams" [class.team-360-row]="is360(item.team)">
+                <td><div class="team-cell team-cell-with-name"><app-team-logo [team]="item.team" [animate360]="true"></app-team-logo><span>{{ item.team }}</span></div></td>
+                <td>{{ item.shots_for || 0 }}</td>
+                <td>{{ item.shots_against || 0 }}</td>
+                <td>{{ item.avg_shots_for ?? 0 | number:'1.0-2' }}</td>
+                <td>{{ item.avg_shots_against ?? 0 | number:'1.0-2' }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>

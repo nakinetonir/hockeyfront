@@ -18,65 +18,59 @@ const TEAM_BRANDS: TeamBrand[] = [
     key: 'las-rozas',
     name: 'CHC Las Rozas',
     logo: '/assets/teams/lasrozas.png',
-    aliases: ['las rozas', 'chc', 'chc las rozas', 'club hockey las rozas']
+    aliases: ['las rozas', 'las rozas b', 'chc', 'chc las rozas', 'club hockey las rozas']
   },
   {
     key: 'lobos',
     name: 'Lobos',
     logo: '/assets/teams/lobos.png',
-    aliases: ['lobos', 'club lobos', 'lobos hockey']
+    aliases: ['lobos', 'lobos castilla', 'lobos castilla a', 'club lobos', 'lobos hockey']
   },
   {
     key: 'madrid-patina',
     name: 'Madrid Patina',
     logo: '/assets/teams/madridpatina.png',
-    aliases: ['madrid patina', 'madrid patina stars', 'stars', 'madridpatina']
+    aliases: ['madrid patina', 'madridpatina', 'madrid patina a', 'madrid patina stars', 'stars']
   },
   {
     key: 'mamuts',
     name: 'Mamuts de Villaverde',
     logo: '/assets/teams/mamuts.png',
-    aliases: ['mamuts', 'mamuts de villaverde', 'villaverde']
+    aliases: ['mamuts', 'mamuts b', 'mamuts de villaverde', 'villaverde']
   },
   {
     key: 'pinguinos',
     name: 'Pinguinos',
     logo: '/assets/teams/pinguinos.png',
-    aliases: ['pinguinos', 'pinguinos madrid', 'penguins']
+    aliases: ['pinguinos', 'pinguinos b', 'pinguinos madrid', 'penguins']
   },
   {
     key: 'renos',
     name: 'Ciudad Patin Renos',
     logo: '/assets/teams/renos.png',
-    aliases: ['renos', 'ciudad patin renos', 'ciudad patin']
+    aliases: ['renos', 'renos mostoles', 'renos mostoles a', 'ciudad patin renos', 'ciudad patin']
   },
   {
     key: 'rolleybears',
     name: 'Rollybears Parla',
     logo: '/assets/teams/rolleybeers.png',
-    aliases: ['rollybears', 'rolleybears', 'parla', 'rollybears parla']
+    aliases: ['rollybears', 'rolleybears', 'rollybears parla', 'parla']
   },
   {
     key: 'tirso',
     name: 'Club Patín Tirso',
     logo: '/assets/teams/tirso.png',
     aliases: [
-      'tirso',
-      'club patin tirso',
-      'club patín tirso',
-      'cpt tirso',
-      'tirso madrid',
-      'club patin tirso madrid',
-      'club patin tirso de molina',
-      'cp tirso',
-      'c p tirso'
+      'tirso', 'tirso patin', 'tirso patin b', 'tirso patín b',
+      'tiso', 'tiso patin', 'tiso patin b', 'tiso patín b',
+      'club patin tirso', 'club patín tirso', 'cpt tirso', 'cp tirso', 'c p tirso'
     ]
   },
   {
     key: 'vikings',
     name: 'CPLG Vikings',
     logo: '/assets/teams/vikings.png',
-    aliases: ['vikings', 'vikins', 'cplg', 'cplg vikings']
+    aliases: ['vikings', 'vikings b', 'vikins', 'cplg', 'cplg vikings']
   }
 ];
 
@@ -106,6 +100,7 @@ export function getTeamBrand(team?: string | null): TeamBrand | undefined {
 export function isTeam360(team?: string | null): boolean {
   return getTeamBrand(team)?.specialAnimation === '360';
 }
+
 
 export function filterByTeamText<T>(items: T[], selector: (item: T) => string | undefined | null, teamSearch: string): T[] {
   const query = normalize(teamSearch || '');

@@ -875,3 +875,17 @@ input, select {
     height: 34px;
   }
 }
+
+
+.filters-2 {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.team-cell-with-name {
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.team-cell-logo-only {
+  min-height: 56px;
+}
