@@ -12,7 +12,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
   template: `
     <section>
       <h1 class="page-title">Dashboard</h1>
-      <p class="page-subtitle">Resumen general de partidos, goleadores, porteros y tiros por equipo.</p>
+      <p class="page-subtitle">Resumen general de partidos, goleadores, porteros y equipos.</p>
 
       <div class="grid grid-4" *ngIf="summary as data">
         <div class="card">
@@ -86,18 +86,18 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
         </div>
       </div>
 
-      <div class="card" style="margin-top: 20px" *ngIf="summary?.topShotTeams?.length">
-        <div class="badge">Top tiros por equipo</div>
+      <div class="card" style="margin-top: 20px" *ngIf="summary?.topTeams?.length">
+        <div class="badge">Top equipos</div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Equipo</th><th>TF</th><th>TC</th><th>Media TF</th><th>Media TC</th></tr></thead>
+            <thead><tr><th>Equipo</th><th>GF</th><th>GC</th><th>TF</th><th>TC</th></tr></thead>
             <tbody>
-              <tr *ngFor="let item of summary?.topShotTeams" [class.team-360-row]="is360(item.team)">
+              <tr *ngFor="let item of summary?.topTeams" [class.team-360-row]="is360(item.team)">
                 <td><div class="team-cell team-cell-with-name"><app-team-logo [team]="item.team" [animate360]="true"></app-team-logo><span>{{ item.team }}</span></div></td>
+                <td>{{ item.goals_for || 0 }}</td>
+                <td>{{ item.goals_against || 0 }}</td>
                 <td>{{ item.shots_for || 0 }}</td>
                 <td>{{ item.shots_against || 0 }}</td>
-                <td>{{ item.avg_shots_for ?? 0 | number:'1.0-2' }}</td>
-                <td>{{ item.avg_shots_against ?? 0 | number:'1.0-2' }}</td>
               </tr>
             </tbody>
           </table>

@@ -19,12 +19,16 @@ export interface GoalieTotal {
   save_pct?: number;
 }
 
-export interface TeamShotTotal {
+export interface TeamSummary {
   _id?: string;
   team: string;
   matches?: number;
+  goals_for?: number;
+  goals_against?: number;
   shots_for?: number;
   shots_against?: number;
+  avg_goals_for?: number | null;
+  avg_goals_against?: number | null;
   avg_shots_for?: number | null;
   avg_shots_against?: number | null;
 }
@@ -62,5 +66,5 @@ export interface DashboardSummary {
   topScorers: PlayerTotal[];
   topAssisters: PlayerTotal[];
   topGoalies: GoalieTotal[];
-  topShotTeams: TeamShotTotal[];
+  topTeams: TeamSummary[];
 }

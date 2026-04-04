@@ -13,7 +13,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
           <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Dashboard</a>
           <a routerLink="/jugadores" routerLinkActive="active">Jugadores</a>
           <a routerLink="/porteros" routerLinkActive="active">Porteros</a>
-          <a routerLink="/tiros-equipos" routerLinkActive="active">Tiros por equipo</a>
+          <a routerLink="/equipos" routerLinkActive="active">Equipos</a>
           <a routerLink="/partidos" routerLinkActive="active">Partidos</a>
         </nav>
       </div>

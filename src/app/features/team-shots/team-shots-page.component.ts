@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../core/services/api.service';
-import { TeamShotTotal } from '../../core/models/api.models';
+import { TeamSummary } from '../../core/models/api.models';
 import { isTeam360 } from '../../core/utils/team-branding';
 import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.component';
 
@@ -12,8 +12,8 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
   imports: [CommonModule, FormsModule, TeamLogoComponent],
   template: `
     <section>
-      <h1 class="page-title">Tiros por equipo</h1>
-      <p class="page-subtitle">Totales y medias de tiros a favor y en contra por equipo.</p>
+      <h1 class="page-title">Equipos</h1>
+      <p class="page-subtitle">Totales y medias de goles y tiros a favor y en contra por equipo.</p>
 
       <div class="filters card filters-2">
         <div>
@@ -31,10 +31,14 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
             <tr>
               <th>Equipo</th>
               <th>Partidos</th>
-              <th>Tiros a favor</th>
-              <th>Tiros en contra</th>
-              <th>Media a favor</th>
-              <th>Media en contra</th>
+              <th>GF</th>
+              <th>GC</th>
+              <th>TF</th>
+              <th>TC</th>
+              <th>Media GF</th>
+              <th>Media GC</th>
+              <th>Media TF</th>
+              <th>Media TC</th>
             </tr>
           </thead>
           <tbody>
@@ -46,10 +50,14 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
                 </div>
               </td>
               <td [attr.data-label]="'Partidos'">{{ item.matches || 0 }}</td>
-              <td [attr.data-label]="'Tiros a favor'">{{ item.shots_for || 0 }}</td>
-              <td [attr.data-label]="'Tiros en contra'">{{ item.shots_against || 0 }}</td>
-              <td [attr.data-label]="'Media a favor'">{{ item.avg_shots_for ?? 0 | number:'1.0-2' }}</td>
-              <td [attr.data-label]="'Media en contra'">{{ item.avg_shots_against ?? 0 | number:'1.0-2' }}</td>
+              <td [attr.data-label]="'GF'">{{ item.goals_for || 0 }}</td>
+              <td [attr.data-label]="'GC'">{{ item.goals_against || 0 }}</td>
+              <td [attr.data-label]="'TF'">{{ item.shots_for || 0 }}</td>
+              <td [attr.data-label]="'TC'">{{ item.shots_against || 0 }}</td>
+              <td [attr.data-label]="'Media GF'">{{ item.avg_goals_for ?? 0 | number:'1.0-2' }}</td>
+              <td [attr.data-label]="'Media GC'">{{ item.avg_goals_against ?? 0 | number:'1.0-2' }}</td>
+              <td [attr.data-label]="'Media TF'">{{ item.avg_shots_for ?? 0 | number:'1.0-2' }}</td>
+              <td [attr.data-label]="'Media TC'">{{ item.avg_shots_against ?? 0 | number:'1.0-2' }}</td>
             </tr>
           </tbody>
         </table>
@@ -59,7 +67,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
 })
 export class TeamShotsPageComponent implements OnInit {
   private readonly api = inject(ApiService);
-  items: TeamShotTotal[] = [];
+  items: TeamSummary[] = [];
   teams: string[] = [];
   team = '';
 
@@ -69,7 +77,7 @@ export class TeamShotsPageComponent implements OnInit {
   }
 
   load(): void {
-    this.api.getTeamShots({ team: this.team, page: 1, limit: 100 }).subscribe((data) => {
+    this.api.getTeamStats({ team: this.team, page: 1, limit: 100 }).subscribe((data) => {
       this.items = data.items;
     });
   }

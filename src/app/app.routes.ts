@@ -10,6 +10,7 @@ export const routes: Routes = [
   { path: 'jugadores', component: PlayersPageComponent },
   { path: 'porteros', component: GoaliesPageComponent },
   { path: 'partidos', component: MatchesPageComponent },
-  { path: 'tiros-equipos', component: TeamShotsPageComponent },
+  { path: 'equipos', component: TeamShotsPageComponent },
+  { path: 'tiros-equipos', redirectTo: 'equipos' },
   { path: '**', redirectTo: '' }
 ];
