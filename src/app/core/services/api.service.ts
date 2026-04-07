@@ -2,7 +2,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { DashboardSummary, GoalieTotal, MatchItem, PaginationResult, PlayerTotal, TeamSummary } from '../models/api.models';
+import {
+  DashboardSummary,
+  GoalieTotal,
+  MatchItem,
+  PaginationResult,
+  PlayerAnalysisResponse,
+  PlayerTotal,
+  TeamSummary
+} from '../models/api.models';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
@@ -31,6 +39,14 @@ export class ApiService {
 
   getTeams(): Observable<{ items: string[] }> {
     return this.http.get<{ items: string[] }>(`${this.baseUrl}/teams`);
+  }
+
+  getPlayerAnalysis(payload: {
+    nombre: string;
+    tipo: 'jugador' | 'portero';
+    equipo: string;
+  }): Observable<PlayerAnalysisResponse | PlayerAnalysisResponse[]> {
+    return this.http.post<PlayerAnalysisResponse | PlayerAnalysisResponse[]>(`${this.baseUrl}/reports/player-analysis`, payload);
   }
 
   private toParams(filters: Record<string, string | number>): HttpParams {

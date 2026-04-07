@@ -68,3 +68,29 @@ export interface DashboardSummary {
   topGoalies: GoalieTotal[];
   topTeams: TeamSummary[];
 }
+
+export interface AnalysisVideo {
+  titulo: string;
+  url: string;
+}
+
+export interface AnalysisExercise {
+  nombre: string;
+  descripcion: string;
+  objetivo: string;
+}
+
+export interface AnalysisConclusion {
+  resumen: string;
+  nivel: string;
+}
+
+export interface PlayerAnalysisResponse {
+  nombre: string;
+  equipo: string;
+  analisis: string;
+  puntos_mejora: string[];
+  ejercicios: AnalysisExercise[];
+  videos: AnalysisVideo[];
+  conclusion: AnalysisConclusion;
+}

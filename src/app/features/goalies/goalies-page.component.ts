@@ -1,19 +1,22 @@
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { GoalieTotal } from '../../core/models/api.models';
+import { finalize } from 'rxjs/operators';
+import { GoalieTotal, PlayerAnalysisResponse } from '../../core/models/api.models';
 import { ApiService } from '../../core/services/api.service';
 import { isTeam360 } from '../../core/utils/team-branding';
+import { PlayerAnalysisModalComponent } from '../../shared/components/player-analysis-modal/player-analysis-modal.component';
 import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.component';
 
 @Component({
   selector: 'app-goalies-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, TeamLogoComponent],
+  imports: [CommonModule, FormsModule, TeamLogoComponent, PlayerAnalysisModalComponent],
   template: `
     <section>
       <h1 class="page-title">Porteros</h1>
-      <p class="page-subtitle">Acumulado por portero de goles encajados, tiros recibidos y porcentaje de paradas. Filtra por portero o por el desplegable de equipos.</p>
+      <p class="page-subtitle">Acumulado por portero de goles encajados, tiros recibidos y porcentaje de paradas. Haz clic en un portero para ver su análisis personalizado.</p>
 
       <div class="filters card filters-2">
         <div>
@@ -29,8 +32,11 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
         </div>
       </div>
 
+      <p class="analysis-status" *ngIf="loadingAnalysis">Cargando análisis...</p>
+      <p class="analysis-error" *ngIf="analysisError">{{ analysisError }}</p>
+
       <div class="card table-wrap responsive-table-card">
-        <table class="stats-table">
+        <table class="stats-table clickable-table">
           <thead>
             <tr>
               <th>Portero</th>
@@ -43,7 +49,12 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of goalies" [class.team-360-row]="is360(item.team)">
+            <tr
+              *ngFor="let item of goalies"
+              [class.team-360-row]="is360(item.team)"
+              class="clickable-row"
+              (click)="openAnalysis(item)"
+            >
               <td [attr.data-label]="'Portero'" class="primary-cell">{{ item.goalie }}</td>
               <td [attr.data-label]="'Equipo'">
                 <div class="team-cell team-cell-logo-only">
@@ -59,8 +70,35 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
           </tbody>
         </table>
       </div>
+
+      <app-player-analysis-modal
+        [open]="analysisModalOpen"
+        [analysis]="selectedAnalysis"
+        (close)="closeModal()"
+      />
     </section>
-  `
+  `,
+  styles: [`
+    .clickable-row {
+      cursor: pointer;
+    }
+
+    .clickable-row:hover {
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .analysis-status {
+      margin: 16px 0;
+      color: #1d4ed8;
+      font-weight: 600;
+    }
+
+    .analysis-error {
+      margin: 16px 0;
+      color: #b91c1c;
+      font-weight: 600;
+    }
+  `]
 })
 export class GoaliesPageComponent implements OnInit {
   private readonly api = inject(ApiService);
@@ -68,6 +106,10 @@ export class GoaliesPageComponent implements OnInit {
   teams: string[] = [];
   search = '';
   team = '';
+  loadingAnalysis = false;
+  analysisError = '';
+  analysisModalOpen = false;
+  selectedAnalysis: PlayerAnalysisResponse | null = null;
 
   ngOnInit(): void {
     this.api.getTeams().subscribe((data) => (this.teams = data.items));
@@ -78,6 +120,40 @@ export class GoaliesPageComponent implements OnInit {
     this.api.getGoalies({ search: this.search, team: this.team, page: 1, limit: 100 }).subscribe((data) => {
       this.goalies = data.items;
     });
+  }
+
+  openAnalysis(item: GoalieTotal): void {
+    if (!item.goalie || !item.team) {
+      return;
+    }
+
+    this.loadingAnalysis = true;
+    this.analysisError = '';
+
+    this.api
+      .getPlayerAnalysis({
+        nombre: item.goalie,
+        tipo: 'portero',
+        equipo: item.team
+      })
+      .pipe(finalize(() => (this.loadingAnalysis = false)))
+      .subscribe({
+        next: (response) => {
+          this.selectedAnalysis = Array.isArray(response) ? (response[0] ?? null) : response;
+          this.analysisModalOpen = !!this.selectedAnalysis;
+          if (!this.selectedAnalysis) {
+            this.analysisError = 'No se recibió información para este portero.';
+          }
+        },
+        error: (error: HttpErrorResponse) => {
+          this.analysisError = error.error?.message || 'No se pudo cargar el análisis del portero.';
+        }
+      });
+  }
+
+  closeModal(): void {
+    this.analysisModalOpen = false;
+    this.selectedAnalysis = null;
   }
 
   is360(team?: string): boolean {
