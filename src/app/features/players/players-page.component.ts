@@ -7,12 +7,13 @@ import { PlayerAnalysisResponse, PlayerTotal } from '../../core/models/api.model
 import { ApiService } from '../../core/services/api.service';
 import { isTeam360 } from '../../core/utils/team-branding';
 import { PlayerAnalysisModalComponent } from '../../shared/components/player-analysis-modal/player-analysis-modal.component';
+import { AnalysisLoadingOverlayComponent } from '../../shared/components/analysis-loading-overlay/analysis-loading-overlay.component';
 import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.component';
 
 @Component({
   selector: 'app-players-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, TeamLogoComponent, PlayerAnalysisModalComponent],
+  imports: [CommonModule, FormsModule, TeamLogoComponent, PlayerAnalysisModalComponent, AnalysisLoadingOverlayComponent],
   template: `
     <section>
       <h1 class="page-title">Jugadores</h1>
@@ -32,7 +33,6 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
         </div>
       </div>
 
-      <p class="analysis-status" *ngIf="loadingAnalysis">Cargando análisis...</p>
       <p class="analysis-error" *ngIf="analysisError">{{ analysisError }}</p>
 
       <div class="card table-wrap responsive-table-card">
@@ -69,6 +69,12 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
         </table>
       </div>
 
+      <app-analysis-loading-overlay
+        [open]="loadingAnalysis"
+        [title]="loadingTitle"
+        [subtitle]="loadingSubtitle"
+      />
+
       <app-player-analysis-modal
         [open]="analysisModalOpen"
         [analysis]="selectedAnalysis"
@@ -85,11 +91,6 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       background: rgba(59, 130, 246, 0.08);
     }
 
-    .analysis-status {
-      margin: 16px 0;
-      color: #1d4ed8;
-      font-weight: 600;
-    }
 
     .analysis-error {
       margin: 16px 0;
@@ -108,6 +109,8 @@ export class PlayersPageComponent implements OnInit {
   analysisError = '';
   analysisModalOpen = false;
   selectedAnalysis: PlayerAnalysisResponse | null = null;
+  loadingTitle = 'Preparando análisis personalizado';
+  loadingSubtitle = 'Estamos consultando el workflow y construyendo recomendaciones con estadísticas, ejercicios y vídeos.';
 
   ngOnInit(): void {
     this.api.getTeams().subscribe((data) => (this.teams = data.items));
@@ -125,6 +128,8 @@ export class PlayersPageComponent implements OnInit {
       return;
     }
 
+    this.loadingTitle = `Analizando a ${item.player}`;
+    this.loadingSubtitle = `Consultando el workflow para ${item.team} y preparando un resumen visual con recomendaciones y vídeos.`;
     this.loadingAnalysis = true;
     this.analysisError = '';
 
