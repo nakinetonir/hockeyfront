@@ -127,7 +127,6 @@ import { PlayerAnalysisResponse } from '../../../core/models/api.models';
       border-radius: 12px;
       padding: 16px;
       margin-top: 12px;
-      background: #f8fafc;
     }
 
     .video-toggle {
