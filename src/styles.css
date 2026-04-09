@@ -1135,3 +1135,104 @@ input, select {
     }
   }
 }
+
+
+
+/* === FIX móvil Club Tres60: watermark visible + animación dedicada === */
+@media (max-width: 720px) {
+  .stats-table tr.team-watermark-row.team-360-row {
+    position: relative;
+    isolation: isolate;
+    background-image:
+      linear-gradient(90deg, rgba(4, 11, 24, 0.94), rgba(4, 11, 24, 0.72)),
+      radial-gradient(circle at center, rgba(56, 189, 248, 0.22), rgba(34, 197, 94, 0.14) 36%, rgba(8, 15, 30, 0) 74%),
+      var(--team-logo-url) !important;
+    background-repeat: no-repeat, no-repeat, no-repeat !important;
+    background-position: 0 0, 50% 50%, 50% 50% !important;
+    background-size: auto, 172% 172%, 75% auto !important;
+    animation:
+      team360-row-enter 0.85s ease both,
+      team360-row-pulse 2.4s ease-in-out infinite,
+      team360-watermark-breathe-mobile-strong 3.1s ease-in-out infinite !important;
+  }
+
+  .stats-table tr.team-watermark-row.team-360-row::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      linear-gradient(118deg,
+        rgba(255,255,255,0) 0%,
+        rgba(125, 211, 252, 0.12) 22%,
+        rgba(96, 165, 250, 0.28) 45%,
+        rgba(34, 197, 94, 0.12) 56%,
+        rgba(255,255,255,0) 74%
+      ),
+      var(--team-logo-url) center center / 75% auto no-repeat !important;
+    opacity: 0.50 !important;
+    mix-blend-mode: screen;
+    transform-origin: center center;
+    animation:
+      team360-mobile-logo-float 3.1s ease-in-out infinite,
+      team360-mobile-logo-flash 2.2s ease-in-out infinite !important;
+  }
+
+  .stats-table tr.team-watermark-row.team-360-row::after {
+    opacity: 0.26 !important;
+    animation:
+      team360-charge-flash 2.4s ease-out infinite,
+      team360-mobile-spark-shift 3.4s ease-in-out infinite !important;
+  }
+
+  .stats-table tr.team-watermark-row.team-360-row > td {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@keyframes team360-watermark-breathe-mobile-strong {
+  0%, 100% {
+    background-size: auto, 172% 172%, 72% auto;
+    background-position: 0 0, 50% 50%, 50% 50%;
+    filter: saturate(1) brightness(1);
+  }
+  50% {
+    background-size: auto, 188% 188%, 78% auto;
+    background-position: 0 0, 50% 50%, 50% 50%;
+    filter: saturate(1.2) brightness(1.06);
+  }
+}
+
+@keyframes team360-mobile-logo-float {
+  0%, 100% {
+    transform: scale(0.98) translate3d(0, 0, 0);
+    opacity: 0.46;
+  }
+  50% {
+    transform: scale(1.04) translate3d(0, -1px, 0);
+    opacity: 0.62;
+  }
+}
+
+@keyframes team360-mobile-logo-flash {
+  0%, 100% {
+    filter: drop-shadow(0 0 0 rgba(56, 189, 248, 0));
+  }
+  35% {
+    filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.18));
+  }
+  65% {
+    filter: drop-shadow(0 0 18px rgba(34, 197, 94, 0.16));
+  }
+}
+
+@keyframes team360-mobile-spark-shift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
