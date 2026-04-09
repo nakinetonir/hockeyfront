@@ -588,11 +588,48 @@ input, select {
     width: 100%;
   }
 
+  .stats-table td.team-data-cell::before {
+    content: '';
+    display: none;
+  }
+
+  .stats-table td.team-data-cell {
+    justify-content: flex-end;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .stats-table td.team-data-cell .team-cell {
+    justify-content: flex-end;
+  }
+
   .team-cell-name {
     display: inline;
     max-width: 120px;
     text-align: right;
     word-break: break-word;
+  }
+
+  .team-logo-wrap {
+    width: 58px;
+    height: 58px;
+    border-radius: 15px;
+  }
+
+  .team-logo {
+    width: 42px;
+    height: 42px;
+  }
+
+  .team-logo-wrap-large {
+    width: 82px;
+    height: 82px;
+    border-radius: 20px;
+  }
+
+  .team-logo-large {
+    width: 66px;
+    height: 66px;
   }
 
   .match-card {
@@ -630,14 +667,14 @@ input, select {
   }
 
   .team-logo-wrap-large {
-    width: 72px;
-    height: 72px;
-    border-radius: 18px;
+    width: 82px;
+    height: 82px;
+    border-radius: 20px;
   }
 
   .team-logo-large {
-    width: 60px;
-    height: 60px;
+    width: 66px;
+    height: 66px;
   }
 }
 

@@ -43,7 +43,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
           </thead>
           <tbody>
             <tr *ngFor="let item of items" [class.team-360-row]="is360(item.team)">
-              <td [attr.data-label]="'Equipo'">
+              <td [attr.data-label]="'Equipo'" class="team-data-cell">
                 <div class="team-cell team-cell-with-name">
                   <app-team-logo [team]="item.team" [animate360]="true"></app-team-logo>
                   <span>{{ item.team }}</span>

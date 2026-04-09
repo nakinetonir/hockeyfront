@@ -56,7 +56,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
               (click)="openAnalysis(item)"
             >
               <td [attr.data-label]="'Portero'" class="primary-cell">{{ item.goalie }}</td>
-              <td [attr.data-label]="'Equipo'">
+              <td [attr.data-label]="'Equipo'" class="team-data-cell">
                 <div class="team-cell team-cell-logo-only">
                   <app-team-logo [team]="item.team" [animate360]="true"></app-team-logo>
                 </div>
