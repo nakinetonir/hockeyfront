@@ -39,20 +39,14 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
             <div style="width:100%;">
               <div class="badge">{{ item.status || 'Finalizado' }}</div>
               <div class="match-header">
-                <div class="match-side">
+                <div class="match-side match-side-stack" [attr.title]="item.home_team || 'Equipo local'">
                   <app-team-logo [team]="item.home_team" size="lg" [animate360]="true"></app-team-logo>
-                  <div class="match-team-meta">
-                    <span class="match-team-name">{{ item.home_team }}</span>
-                    <span class="match-score">{{ item.home_score ?? '-' }}</span>
-                  </div>
+                  <span class="match-score">{{ item.home_score ?? '-' }}</span>
                 </div>
                 <div class="match-versus">vs</div>
-                <div class="match-side match-side-away">
-                  <div class="match-team-meta match-team-meta-away">
-                    <span class="match-team-name">{{ item.away_team }}</span>
-                    <span class="match-score">{{ item.away_score ?? '-' }}</span>
-                  </div>
+                <div class="match-side match-side-stack" [attr.title]="item.away_team || 'Equipo visitante'">
                   <app-team-logo [team]="item.away_team" size="lg" [animate360]="true"></app-team-logo>
+                  <span class="match-score">{{ item.away_score ?? '-' }}</span>
                 </div>
               </div>
               <div class="small">{{ item.date || 'Sin fecha' }} · {{ item.venue || 'Sin pista' }}</div>

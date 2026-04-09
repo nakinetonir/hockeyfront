@@ -1,10 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 
+interface MatchLogEntry {
+  minute: number;
+  text: string;
+  homeScore: number;
+  awayScore: number;
+}
+
 interface MatchLogScenario {
-  matchup: string;
-  score: string;
-  entries: string[];
+  home: string;
+  away: string;
+  entries: MatchLogEntry[];
 }
 
 @Component({
@@ -20,10 +27,12 @@ interface MatchLogScenario {
         <h2>{{ title }}</h2>
         <p class="loader-subtitle">{{ subtitle }}</p>
 
-        <div class="fun-match-log" *ngIf="matchLog.length" aria-label="Bitácora ficticia de espera">
+        <div class="fun-match-log" *ngIf="scenarioHome && scenarioAway" aria-label="Bitácora ficticia de espera">
           <div class="fun-match-log__eyebrow">Partido ficticio mientras espera</div>
-          <div class="fun-match-log__match">{{ matchLogMatchup }}</div>
-          <div class="fun-match-log__score">{{ matchLogScore }}</div>
+          <div class="fun-match-log__match">{{ scenarioHome }} vs {{ scenarioAway }}</div>
+          <div class="fun-match-log__score">
+            {{ scenarioHome }} {{ visibleHomeScore }} - {{ visibleAwayScore }} {{ scenarioAway }}
+          </div>
 
           <div class="fun-match-log__list">
             <div
@@ -31,7 +40,11 @@ interface MatchLogScenario {
               *ngFor="let entry of matchLog; let i = index"
               [class.fun-match-log__item--active]="i === activeLogIndex"
             >
-              {{ entry }}
+              {{ formatMinute(entry.minute) }} · {{ entry.text }}
+            </div>
+
+            <div class="fun-match-log__item fun-match-log__item--pending" *ngIf="matchLog.length < scenarioEntries.length">
+              {{ nextMinuteLabel }} · El partido sigue avanzando...
             </div>
           </div>
         </div>
@@ -89,7 +102,7 @@ interface MatchLogScenario {
 
     .analysis-loader-card {
       position: relative;
-      width: min(720px, 100%);
+      width: min(760px, 100%);
       overflow: hidden;
       border-radius: 28px;
       padding: 28px 28px 24px;
@@ -134,7 +147,7 @@ interface MatchLogScenario {
       font-size: clamp(1.5rem, 2vw, 2.2rem);
       line-height: 1.1;
       z-index: 1;
-      max-width: calc(100% - 292px);
+      max-width: calc(100% - 320px);
     }
 
     .loader-subtitle {
@@ -142,14 +155,15 @@ interface MatchLogScenario {
       z-index: 1;
       margin: 0 0 22px;
       color: #cbd5e1;
-      max-width: min(58ch, calc(100% - 292px));
+      max-width: min(58ch, calc(100% - 320px));
     }
 
     .fun-match-log {
       position: absolute;
-      top: 26px;
-      right: 24px;
-      width: 248px;
+      top: 22px;
+      right: 22px;
+      width: 276px;
+      max-width: calc(100% - 44px);
       padding: 14px;
       border-radius: 18px;
       border: 1px solid rgba(125, 211, 252, 0.18);
@@ -168,16 +182,19 @@ interface MatchLogScenario {
     }
 
     .fun-match-log__match {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 700;
-      line-height: 1.2;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
     }
 
     .fun-match-log__score {
       margin-top: 4px;
       color: #bef264;
       font-weight: 800;
-      font-size: 1rem;
+      font-size: 0.94rem;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
     }
 
     .fun-match-log__list {
@@ -192,9 +209,10 @@ interface MatchLogScenario {
       color: #cbd5e1;
       background: rgba(30, 41, 59, 0.6);
       font-size: 0.8rem;
-      line-height: 1.35;
+      line-height: 1.4;
       border: 1px solid rgba(148, 163, 184, 0.08);
       transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+      overflow-wrap: anywhere;
     }
 
     .fun-match-log__item--active {
@@ -202,6 +220,11 @@ interface MatchLogScenario {
       border-color: rgba(125, 211, 252, 0.35);
       background: rgba(14, 116, 144, 0.16);
       color: #f8fafc;
+    }
+
+    .fun-match-log__item--pending {
+      opacity: 0.72;
+      font-style: italic;
     }
 
     .rink-scene {
@@ -469,14 +492,23 @@ export class AnalysisLoadingOverlayComponent implements OnChanges, OnDestroy {
   @Input() open = false;
   @Input() title = 'Preparando análisis personalizado';
   @Input() subtitle = 'Estamos consultando el workflow y construyendo recomendaciones con estadísticas, ejercicios y vídeos.';
+  @Input() teams: string[] = [];
 
-  matchLog: string[] = [];
-  matchLogMatchup = '';
-  matchLogScore = '';
+  matchLog: MatchLogEntry[] = [];
+  scenarioEntries: MatchLogEntry[] = [];
+  scenarioHome = '';
+  scenarioAway = '';
+  visibleHomeScore = 0;
+  visibleAwayScore = 0;
   activeLogIndex = 0;
 
-  private rotationTimer: ReturnType<typeof setInterval> | null = null;
+  private revealTimer: ReturnType<typeof setInterval> | null = null;
   private refreshTimer: ReturnType<typeof setInterval> | null = null;
+
+  get nextMinuteLabel(): string {
+    const nextEntry = this.scenarioEntries[this.matchLog.length];
+    return this.formatMinute(nextEntry?.minute ?? 1);
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('open' in changes) {
@@ -492,28 +524,45 @@ export class AnalysisLoadingOverlayComponent implements OnChanges, OnDestroy {
     this.stopFunLog();
   }
 
+  formatMinute(value: number): string {
+    return `${value}'`;
+  }
+
   private startFunLog(): void {
     this.buildScenario();
     this.stopTimers();
 
-    this.rotationTimer = setInterval(() => {
-      this.activeLogIndex = this.matchLog.length ? (this.activeLogIndex + 1) % this.matchLog.length : 0;
-    }, 1600);
+    this.revealTimer = setInterval(() => {
+      if (this.matchLog.length >= this.scenarioEntries.length) {
+        return;
+      }
+
+      this.matchLog = [...this.matchLog, this.scenarioEntries[this.matchLog.length]];
+      this.activeLogIndex = this.matchLog.length - 1;
+
+      const current = this.matchLog[this.activeLogIndex];
+      this.visibleHomeScore = current.homeScore;
+      this.visibleAwayScore = current.awayScore;
+    }, 1700);
 
     this.refreshTimer = setInterval(() => {
       this.buildScenario();
-    }, 12000);
+    }, 13500);
   }
 
   private stopFunLog(): void {
     this.stopTimers();
     this.activeLogIndex = 0;
+    this.matchLog = [];
+    this.scenarioEntries = [];
+    this.visibleHomeScore = 0;
+    this.visibleAwayScore = 0;
   }
 
   private stopTimers(): void {
-    if (this.rotationTimer) {
-      clearInterval(this.rotationTimer);
-      this.rotationTimer = null;
+    if (this.revealTimer) {
+      clearInterval(this.revealTimer);
+      this.revealTimer = null;
     }
 
     if (this.refreshTimer) {
@@ -524,113 +573,141 @@ export class AnalysisLoadingOverlayComponent implements OnChanges, OnDestroy {
 
   private buildScenario(): void {
     const scenario = this.generateScenario();
-    this.matchLog = scenario.entries;
-    this.matchLogMatchup = scenario.matchup;
-    this.matchLogScore = scenario.score;
+    this.scenarioHome = scenario.home;
+    this.scenarioAway = scenario.away;
+    this.scenarioEntries = scenario.entries;
+    this.matchLog = [];
     this.activeLogIndex = 0;
+    this.visibleHomeScore = 0;
+    this.visibleAwayScore = 0;
   }
 
   private generateScenario(): MatchLogScenario {
-    const teams = [
-      'Glaciares del Norte',
-      'Rockets del Hielo',
-      'Pingüinos de Lavapiés',
-      'Cometas Azules',
-      'Lobos del Palacio',
-      'Titanes del Rink',
-      'Truenos del Manzanares',
-      'Nómadas del Puck',
-      'Osos del Sur',
-      'Halcones Helados'
+    const knownTeams = this.teams.filter((team) => !!team?.trim());
+    const fallbackTeams = [
+      'Club Tres60',
+      'CHC Las Rozas',
+      'Lobos',
+      'Madrid Patina',
+      'Mamuts de Villaverde',
+      'Pinguinos',
+      'Ciudad Patin Renos',
+      'Rollybears Parla',
+      'Club Patín Tirso',
+      'CPLG Vikings'
     ];
 
-    const home = this.pickOne(teams);
-    let away = this.pickOne(teams.filter((team) => team !== home));
+    const pool = (knownTeams.length >= 2 ? knownTeams : fallbackTeams).map((team) => team.trim());
+    const home = this.pickOne(pool);
+    const away = this.pickOne(pool.filter((team) => team !== home)) ?? pool.find((team) => team !== home) ?? 'Rival';
 
-    if (!away) {
-      away = 'Rivales del Hielo';
-    }
+    const homeScorers = ['Hernández', 'Santos', 'Velasco', 'Prieto', 'Martín', 'Gonzalo'];
+    const awayScorers = ['Rey', 'Navas', 'Muñiz', 'Campos', 'Ortega', 'Ruiz'];
 
-    const firstHalfMinutes = this.pickUniqueMinutes(2 + Math.floor(Math.random() * 2), 3, 24);
-    const secondHalfMinutes = this.pickUniqueMinutes(2 + Math.floor(Math.random() * 3), 27, 49);
-    const goalsHome = 1 + Math.floor(Math.random() * 4);
-    const goalsAway = Math.floor(Math.random() * 4);
+    let homeScore = 0;
+    let awayScore = 0;
 
-    const homeScorers = [
-      'Lara Velasco',
-      'Nico Guerra',
-      'Dani Solís',
-      'Bruno Salvat',
-      'Irene Campos',
-      'Leo Amaro'
+    const entries: MatchLogEntry[] = [
+      {
+        minute: this.randomRange(2, 6),
+        text: `Comienza la primera parte con mucha intensidad entre ${home} y ${away}.`,
+        homeScore,
+        awayScore
+      }
     ];
 
-    const awayScorers = [
-      'Marta Rey',
-      'Pablo Navas',
-      'Gael Prieto',
-      'Ariadna Cruz',
-      'Saúl Ortega',
-      'Noa Muñiz'
-    ];
+    homeScore += 1;
+    entries.push({
+      minute: this.randomRange(7, 14),
+      text: `Gol de ${this.pickOne(homeScorers)} para ${home} tras una jugada rápida por la banda.`,
+      homeScore,
+      awayScore
+    });
 
-    const goalEvents: Array<{ minute: number; text: string }> = [];
-    for (let i = 0; i < goalsHome; i++) {
-      goalEvents.push({
-        minute: this.randomMinute(),
-        text: `${this.randomMinuteLabel(this.randomMinute())}`
+    if (Math.random() > 0.45) {
+      awayScore += 1;
+      entries.push({
+        minute: this.randomRange(15, 22),
+        text: `Empata ${away} con un disparo lejano de ${this.pickOne(awayScorers)}.`,
+        homeScore,
+        awayScore
+      });
+    } else {
+      entries.push({
+        minute: this.randomRange(15, 22),
+        text: `Paradón del portero de ${away} para mantener vivo el partido.`,
+        homeScore,
+        awayScore
       });
     }
 
-    const entries = [
-      `${this.formatMinute(firstHalfMinutes[0] ?? 6)} · Primera parte con presión alta de ${home}.`,
-      `${this.formatMinute(firstHalfMinutes[1] ?? 14)} · Gol de ${this.pickOne(homeScorers)} para ${home} tras un desvío en el área.`,
-      `${this.formatMinute(firstHalfMinutes.at(-1) ?? 22)} · Paradón del portero de ${away} para evitar el 2-0.`,
-      `25' · Descanso: ${home} ${Math.max(1, goalsHome - 1)} - ${Math.max(0, goalsAway - 1)} ${away}.`,
-      `${this.formatMinute(secondHalfMinutes[0] ?? 31)} · Segunda parte con ritmo loco y cambios constantes.`,
-      `${this.formatMinute(secondHalfMinutes[1] ?? 37)} · Expulsión de ${this.pickOne(['un defensa', 'el capitán', 'un alero', 'el cierre'])} de ${away}.`,
-      `${this.formatMinute(secondHalfMinutes.at(-1) ?? 46)} · Gol de ${this.pickOne(goalsAway > 0 ? awayScorers : homeScorers)} y final vibrante.`
-    ];
+    entries.push({
+      minute: 25,
+      text: `Descanso. Primera parte cerrada y mucha tensión en la pista.`,
+      homeScore,
+      awayScore
+    });
 
-    const finalEntries = entries
-      .sort((a, b) => this.extractMinute(a) - this.extractMinute(b))
-      .slice(0, 7);
+    entries.push({
+      minute: this.randomRange(28, 33),
+      text: `Arranca la segunda parte con posesiones largas y cambios constantes.`,
+      homeScore,
+      awayScore
+    });
+
+    if (Math.random() > 0.5) {
+      entries.push({
+        minute: this.randomRange(34, 40),
+        text: `Expulsión temporal en ${away} por una entrada dura en la zona neutra.`,
+        homeScore,
+        awayScore
+      });
+    } else {
+      entries.push({
+        minute: this.randomRange(34, 40),
+        text: `Expulsión temporal en ${home} y partido completamente abierto.`,
+        homeScore,
+        awayScore
+      });
+    }
+
+    if (Math.random() > 0.35) {
+      homeScore += 1;
+      entries.push({
+        minute: this.randomRange(41, 47),
+        text: `${home} vuelve a golpear con un remate de ${this.pickOne(homeScorers)} en el segundo palo.`,
+        homeScore,
+        awayScore
+      });
+    } else {
+      awayScore += 1;
+      entries.push({
+        minute: this.randomRange(41, 47),
+        text: `${away} culmina la remontada con un contraataque final de ${this.pickOne(awayScorers)}.`,
+        homeScore,
+        awayScore
+      });
+    }
+
+    entries.push({
+      minute: 50,
+      text: `Final del partido ficticio. Marcador cerrado mientras termina el workflow.`,
+      homeScore,
+      awayScore
+    });
 
     return {
-      matchup: `${home} vs ${away}`,
-      score: `${home} ${goalsHome} - ${goalsAway} ${away}`,
-      entries: finalEntries
+      home,
+      away,
+      entries: entries.sort((a, b) => a.minute - b.minute)
     };
   }
 
-  private extractMinute(entry: string): number {
-    const match = entry.match(/^(\d+)'/);
-    return match ? Number(match[1]) : 0;
-  }
-
-  private randomMinute(): number {
-    return 2 + Math.floor(Math.random() * 48);
-  }
-
-  private formatMinute(value: number): string {
-    return `${value}'`;
-  }
-
-  private pickUniqueMinutes(count: number, min: number, max: number): number[] {
-    const values = new Set<number>();
-
-    while (values.size < count) {
-      values.add(min + Math.floor(Math.random() * (max - min + 1)));
-    }
-
-    return [...values].sort((a, b) => a - b);
+  private randomRange(min: number, max: number): number {
+    return min + Math.floor(Math.random() * (max - min + 1));
   }
 
   private pickOne<T>(items: T[]): T {
     return items[Math.floor(Math.random() * items.length)];
-  }
-
-  private randomMinuteLabel(minute: number): string {
-    return `${this.formatMinute(minute)} · Transición rápida y disparo ajustado a la escuadra.`;
   }
 }

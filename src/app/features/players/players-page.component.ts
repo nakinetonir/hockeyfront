@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { PlayerAnalysisResponse, PlayerTotal } from '../../core/models/api.models';
 import { ApiService } from '../../core/services/api.service';
-import { isTeam360 } from '../../core/utils/team-branding';
+import { getTeamBrand, isTeam360 } from '../../core/utils/team-branding';
 import { PlayerAnalysisModalComponent } from '../../shared/components/player-analysis-modal/player-analysis-modal.component';
 import { AnalysisLoadingOverlayComponent } from '../../shared/components/analysis-loading-overlay/analysis-loading-overlay.component';
 import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.component';
@@ -51,7 +51,8 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
             <tr
               *ngFor="let item of players"
               [class.team-360-row]="is360(item.team)"
-              class="clickable-row"
+              [style.--team-logo-url]="getTeamLogoCss(item.team)"
+              class="clickable-row team-watermark-row"
               (click)="openAnalysis(item)"
             >
               <td [attr.data-label]="'Jugador'" class="primary-cell">{{ item.player }}</td>
@@ -73,6 +74,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
         [open]="loadingAnalysis"
         [title]="loadingTitle"
         [subtitle]="loadingSubtitle"
+        [teams]="teams"
       />
 
       <app-player-analysis-modal
@@ -157,6 +159,12 @@ export class PlayersPageComponent implements OnInit {
   closeModal(): void {
     this.analysisModalOpen = false;
     this.selectedAnalysis = null;
+  }
+
+
+  getTeamLogoCss(team?: string): string | null {
+    const logo = getTeamBrand(team)?.logo;
+    return logo ? `url("${logo}")` : null;
   }
 
   is360(team?: string): boolean {
