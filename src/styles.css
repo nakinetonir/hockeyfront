@@ -1051,3 +1051,87 @@ input, select {
     height: 52px;
   }
 }
+
+
+/* === Ajuste específico Club Tres60: logo de fondo visible y animado === */
+.team-watermark-row.team-360-row {
+  background-image:
+    linear-gradient(90deg, rgba(5, 12, 26, 0.95), rgba(5, 12, 26, 0.84)),
+    radial-gradient(circle at center, rgba(56, 189, 248, 0.14), rgba(34, 197, 94, 0.08) 34%, rgba(8, 15, 30, 0) 72%),
+    var(--team-logo-url);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: 0 0, center center, center center;
+  background-size: auto, 140% 140%, 54% auto;
+  animation:
+    team360-row-enter 0.85s ease both,
+    team360-row-pulse 2.4s ease-in-out infinite,
+    team360-watermark-breathe 3.8s ease-in-out infinite;
+}
+
+.team-watermark-row.team-360-row::before {
+  opacity: 0.92;
+}
+
+.team-watermark-row.team-360-row::after {
+  opacity: 0.3;
+}
+
+@keyframes team360-watermark-breathe {
+  0%, 100% {
+    background-size: auto, 140% 140%, 52% auto;
+    background-position: 0 0, center center, center center;
+    filter: saturate(1);
+  }
+  50% {
+    background-size: auto, 156% 156%, 58% auto;
+    background-position: 0 0, center center, center center;
+    filter: saturate(1.18);
+  }
+}
+
+@media (min-width: 721px) {
+  .team-watermark-row.team-360-row {
+    background-size: auto, 128% 128%, 38% auto;
+  }
+
+  @keyframes team360-watermark-breathe-desktop {
+    0%, 100% {
+      background-size: auto, 128% 128%, 36% auto;
+    }
+    50% {
+      background-size: auto, 144% 144%, 41% auto;
+    }
+  }
+
+  .team-watermark-row.team-360-row {
+    animation:
+      team360-row-enter 0.85s ease both,
+      team360-row-pulse 2.4s ease-in-out infinite,
+      team360-watermark-breathe-desktop 3.8s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 720px) {
+  .stats-table tr.team-watermark-row.team-360-row {
+    background-image:
+      linear-gradient(90deg, rgba(5, 12, 26, 0.94), rgba(5, 12, 26, 0.74)),
+      radial-gradient(circle at center, rgba(56, 189, 248, 0.18), rgba(34, 197, 94, 0.10) 36%, rgba(8, 15, 30, 0) 74%),
+      var(--team-logo-url);
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: 0 0, center center, center center;
+    background-size: auto, 155% 155%, 75% auto;
+    animation:
+      team360-row-enter 0.85s ease both,
+      team360-row-pulse 2.4s ease-in-out infinite,
+      team360-watermark-breathe-mobile 3.4s ease-in-out infinite;
+  }
+
+  @keyframes team360-watermark-breathe-mobile {
+    0%, 100% {
+      background-size: auto, 155% 155%, 72% auto;
+    }
+    50% {
+      background-size: auto, 170% 170%, 78% auto;
+    }
+  }
+}
