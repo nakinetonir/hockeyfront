@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
 
 interface MatchLogEntry {
   minute: number;
@@ -34,7 +34,7 @@ interface MatchLogScenario {
             {{ scenarioHome }} {{ visibleHomeScore }} - {{ visibleAwayScore }} {{ scenarioAway }}
           </div>
 
-          <div class="fun-match-log__list">
+          <div class="fun-match-log__list" #logList>
             <div
               class="fun-match-log__item"
               *ngFor="let entry of matchLog; let i = index"
@@ -201,6 +201,24 @@ interface MatchLogScenario {
       display: grid;
       gap: 7px;
       margin-top: 12px;
+      max-height: 320px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding-right: 4px;
+    }
+
+    .fun-match-log__list::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .fun-match-log__list::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.18);
+      border-radius: 999px;
+    }
+
+    .fun-match-log__list::-webkit-scrollbar-thumb {
+      background: rgba(125, 211, 252, 0.28);
+      border-radius: 999px;
     }
 
     .fun-match-log__item {
@@ -478,6 +496,10 @@ interface MatchLogScenario {
         margin: 0 0 16px;
       }
 
+      .fun-match-log__list {
+        max-height: 220px;
+      }
+
       .rink-scene {
         height: 200px;
       }
@@ -493,6 +515,9 @@ export class AnalysisLoadingOverlayComponent implements OnChanges, OnDestroy {
   @Input() title = 'Preparando análisis personalizado';
   @Input() subtitle = 'Estamos consultando el workflow y construyendo recomendaciones con estadísticas, ejercicios y vídeos.';
   @Input() teams: string[] = [];
+
+  @ViewChild('logList') private logList?: ElementRef<HTMLDivElement>;
+
 
   matchLog: MatchLogEntry[] = [];
   scenarioEntries: MatchLogEntry[] = [];
@@ -528,6 +553,28 @@ export class AnalysisLoadingOverlayComponent implements OnChanges, OnDestroy {
     return `${value}'`;
   }
 
+  private scrollLogToBottom(): void {
+    setTimeout(() => {
+      const element = this.logList?.nativeElement;
+      if (!element) {
+        return;
+      }
+
+      element.scrollTop = element.scrollHeight;
+    });
+  }
+
+  private scrollLogToTop(): void {
+    setTimeout(() => {
+      const element = this.logList?.nativeElement;
+      if (!element) {
+        return;
+      }
+
+      element.scrollTop = 0;
+    });
+  }
+
   private startFunLog(): void {
     this.buildScenario();
     this.stopTimers();
@@ -543,6 +590,7 @@ export class AnalysisLoadingOverlayComponent implements OnChanges, OnDestroy {
       const current = this.matchLog[this.activeLogIndex];
       this.visibleHomeScore = current.homeScore;
       this.visibleAwayScore = current.awayScore;
+      this.scrollLogToBottom();
     }, 1700);
 
     this.refreshTimer = setInterval(() => {
@@ -557,6 +605,7 @@ export class AnalysisLoadingOverlayComponent implements OnChanges, OnDestroy {
     this.scenarioEntries = [];
     this.visibleHomeScore = 0;
     this.visibleAwayScore = 0;
+    this.scrollLogToTop();
   }
 
   private stopTimers(): void {
@@ -580,6 +629,7 @@ export class AnalysisLoadingOverlayComponent implements OnChanges, OnDestroy {
     this.activeLogIndex = 0;
     this.visibleHomeScore = 0;
     this.visibleAwayScore = 0;
+    this.scrollLogToTop();
   }
 
   private generateScenario(): MatchLogScenario {

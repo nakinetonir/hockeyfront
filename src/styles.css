@@ -1019,11 +1019,11 @@ input, select {
   .stats-table tr.team-watermark-row {
     position: relative;
     background-image:
-      linear-gradient(90deg, rgba(10, 18, 36, 0.96), rgba(10, 18, 36, 0.78)),
+      linear-gradient(90deg, rgba(10, 18, 36, 0.94), rgba(10, 18, 36, 0.76)),
       var(--team-logo-url);
     background-repeat: no-repeat, no-repeat;
-    background-position: 0 0, right 14px center;
-    background-size: auto, 118px 118px;
+    background-position: 0 0, center center;
+    background-size: auto, 75% auto;
   }
 
   .stats-table tr.team-watermark-row td {
@@ -1033,7 +1033,7 @@ input, select {
   }
 
   .stats-table tr.team-watermark-row td.team-data-cell {
-    justify-content: flex-start;
+    display: none;
   }
 
   .stats-table tr.team-watermark-row .team-cell {
