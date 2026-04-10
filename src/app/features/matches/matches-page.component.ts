@@ -73,7 +73,7 @@ export class MatchesPageComponent implements OnInit {
 
   load(): void {
     this.api.getMatches({ search: this.search, team: this.team, page: 1, limit: 100 }).subscribe((data) => {
-      this.matches = data.items;
+      this.matches = [...data.items].sort((a, b) => this.getMatchTimestamp(b.date) - this.getMatchTimestamp(a.date));
       this.applyTeamFilter();
     });
   }
@@ -83,7 +83,24 @@ export class MatchesPageComponent implements OnInit {
       this.matches,
       (item) => `${item.home_team || ''} ${item.away_team || ''}`,
       this.teamSearch
-    );
+    ).sort((a, b) => this.getMatchTimestamp(b.date) - this.getMatchTimestamp(a.date));
+  }
+
+  private getMatchTimestamp(dateValue?: string | null): number {
+    if (!dateValue) {
+      return 0;
+    }
+
+    const normalized = dateValue.trim();
+    const ddmmyyyy = normalized.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2}))?$/);
+
+    if (ddmmyyyy) {
+      const [, day, month, year, hour = '0', minute = '0'] = ddmmyyyy;
+      return new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute)).getTime();
+    }
+
+    const parsed = Date.parse(normalized);
+    return Number.isNaN(parsed) ? 0 : parsed;
   }
 
   is360(team?: string): boolean {

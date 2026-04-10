@@ -972,7 +972,7 @@ input, select {
     var(--team-logo-url);
   background-repeat: no-repeat, no-repeat;
   background-position: 0 0, right 18px center;
-  background-size: auto, 92px 92px;
+  background-size: auto, 104px 104px;
 }
 
 @media (min-width: 721px) {
@@ -982,7 +982,7 @@ input, select {
 
   .team-watermark-row {
     background-position: 0 0, right 18px center;
-    background-size: auto, 76px 76px;
+    background-size: auto, 88px 88px;
   }
 }
 
@@ -1023,7 +1023,7 @@ input, select {
       var(--team-logo-url);
     background-repeat: no-repeat, no-repeat;
     background-position: 0 0, center center;
-    background-size: auto, 75% auto;
+    background-size: auto, 82% auto;
   }
 
   .stats-table tr.team-watermark-row td {
@@ -1149,7 +1149,7 @@ input, select {
       var(--team-logo-url) !important;
     background-repeat: no-repeat, no-repeat, no-repeat !important;
     background-position: 0 0, 50% 50%, 50% 50% !important;
-    background-size: auto, 172% 172%, 75% auto !important;
+    background-size: auto, 172% 172%, 82% auto !important;
     animation:
       team360-row-enter 0.85s ease both,
       team360-row-pulse 2.4s ease-in-out infinite,
@@ -1170,8 +1170,8 @@ input, select {
         rgba(34, 197, 94, 0.12) 56%,
         rgba(255,255,255,0) 74%
       ),
-      var(--team-logo-url) center center / 75% auto no-repeat !important;
-    opacity: 0.50 !important;
+      var(--team-logo-url) center center / 82% auto no-repeat !important;
+    opacity: 0.62 !important;
     mix-blend-mode: screen;
     transform-origin: center center;
     animation:
@@ -1208,11 +1208,11 @@ input, select {
 @keyframes team360-mobile-logo-float {
   0%, 100% {
     transform: scale(0.98) translate3d(0, 0, 0);
-    opacity: 0.46;
+    opacity: 0.56;
   }
   50% {
     transform: scale(1.04) translate3d(0, -1px, 0);
-    opacity: 0.62;
+    opacity: 0.72;
   }
 }
 
@@ -1292,7 +1292,7 @@ input, select {
       var(--team-logo-url);
     background-repeat: no-repeat, no-repeat;
     background-position: 0 0, center center;
-    background-size: auto, 72% auto;
+    background-size: auto, 80% auto;
   }
 
   .stats-table tr.team-stats-row.team-watermark-row td {
@@ -1348,6 +1348,17 @@ input, select {
       var(--team-logo-url) !important;
     background-repeat: no-repeat, no-repeat, no-repeat !important;
     background-position: 0 0, 50% 50%, 50% 50% !important;
-    background-size: auto, 172% 172%, 72% auto !important;
+    background-size: auto, 172% 172%, 80% auto !important;
+  }
+}
+
+
+@media (max-width: 720px) {
+  .stats-table tr.team-stats-row .team-shots-main-logo {
+    display: none;
+  }
+
+  .stats-table tr.team-stats-row .team-cell-mobile-centered {
+    min-height: 84px;
   }
 }

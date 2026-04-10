@@ -50,7 +50,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
             >
               <td [attr.data-label]="'Equipo'" class="team-data-cell">
                 <div class="team-cell team-cell-with-name team-cell-mobile-centered">
-                  <app-team-logo [team]="item.team" [animate360]="true"></app-team-logo>
+                  <app-team-logo class="team-shots-main-logo" [team]="item.team" [animate360]="true"></app-team-logo>
                   <span class="team-name-text">{{ item.team }}</span>
                 </div>
               </td>
