@@ -3,7 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../core/services/api.service';
 import { TeamSummary } from '../../core/models/api.models';
-import { isTeam360 } from '../../core/utils/team-branding';
+import { getTeamBrand, isTeam360 } from '../../core/utils/team-branding';
 import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.component';
 
 @Component({
@@ -42,11 +42,16 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of items" [class.team-360-row]="is360(item.team)">
+            <tr
+              *ngFor="let item of items"
+              [class.team-360-row]="is360(item.team)"
+              class="team-watermark-row team-stats-row"
+              [style.--team-logo-url]="getTeamLogoCss(item.team)"
+            >
               <td [attr.data-label]="'Equipo'" class="team-data-cell">
-                <div class="team-cell team-cell-with-name">
+                <div class="team-cell team-cell-with-name team-cell-mobile-centered">
                   <app-team-logo [team]="item.team" [animate360]="true"></app-team-logo>
-                  <span>{{ item.team }}</span>
+                  <span class="team-name-text">{{ item.team }}</span>
                 </div>
               </td>
               <td [attr.data-label]="'Partidos'">{{ item.matches || 0 }}</td>
@@ -80,6 +85,13 @@ export class TeamShotsPageComponent implements OnInit {
     this.api.getTeamStats({ team: this.team, page: 1, limit: 100 }).subscribe((data) => {
       this.items = data.items;
     });
+  }
+
+
+
+  getTeamLogoCss(team?: string): string | null {
+    const logo = getTeamBrand(team)?.logo;
+    return logo ? `url("${logo}")` : null;
   }
 
   is360(team?: string): boolean {

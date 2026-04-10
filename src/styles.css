@@ -1236,3 +1236,118 @@ input, select {
     transform: translate3d(0, -2px, 0);
   }
 }
+
+/* === Ajustes solicitados por el usuario === */
+
+/* Partidos en desktop con el mismo layout compacto que móvil */
+@media (min-width: 721px) {
+  .match-card {
+    padding: 14px;
+  }
+
+  .match-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 0;
+    margin-top: 8px;
+  }
+
+  .match-side-stack {
+    flex: 1 1 0;
+    min-width: 0;
+    gap: 10px;
+  }
+
+  .match-versus {
+    flex: 0 0 auto;
+    font-size: 0.74rem;
+    margin: 0;
+  }
+
+  .match-score {
+    font-size: 1.9rem;
+  }
+}
+
+/* Fila Tres60 sin líneas de separación en desktop */
+@media (min-width: 721px) {
+  .stats-table tbody tr.team-360-row > td,
+  .table-wrap table tbody tr.team-360-row > td {
+    border-bottom-color: transparent !important;
+    border-right: 0 !important;
+  }
+}
+
+/* Equipos en móvil: logo visible y nombre centrado */
+.team-name-text {
+  display: inline-block;
+}
+
+@media (max-width: 720px) {
+  .stats-table tr.team-stats-row.team-watermark-row {
+    background-image:
+      linear-gradient(90deg, rgba(10, 18, 36, 0.96), rgba(10, 18, 36, 0.78)),
+      var(--team-logo-url);
+    background-repeat: no-repeat, no-repeat;
+    background-position: 0 0, center center;
+    background-size: auto, 72% auto;
+  }
+
+  .stats-table tr.team-stats-row.team-watermark-row td {
+    background: transparent;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stats-table tr.team-stats-row td.team-data-cell {
+    display: flex !important;
+    justify-content: center !important;
+    padding: 16px 14px 10px;
+    text-align: center;
+  }
+
+  .stats-table tr.team-stats-row td.team-data-cell::before {
+    display: none !important;
+    content: '';
+  }
+
+  .stats-table tr.team-stats-row .team-cell-mobile-centered {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center !important;
+    gap: 10px;
+  }
+
+  .stats-table tr.team-stats-row .team-name-text {
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .stats-table tr.team-stats-row .team-logo-wrap {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+  }
+
+  .stats-table tr.team-stats-row .team-logo {
+    width: 52px;
+    height: 52px;
+  }
+
+  .stats-table tr.team-stats-row.team-360-row {
+    background-image:
+      linear-gradient(90deg, rgba(4, 11, 24, 0.96), rgba(4, 11, 24, 0.76)),
+      radial-gradient(circle at center, rgba(56, 189, 248, 0.22), rgba(34, 197, 94, 0.14) 36%, rgba(8, 15, 30, 0) 74%),
+      var(--team-logo-url) !important;
+    background-repeat: no-repeat, no-repeat, no-repeat !important;
+    background-position: 0 0, 50% 50%, 50% 50% !important;
+    background-size: auto, 172% 172%, 72% auto !important;
+  }
+}
