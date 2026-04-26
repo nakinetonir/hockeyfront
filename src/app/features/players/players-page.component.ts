@@ -108,7 +108,8 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
 
     .option-group {
       display: flex;
-      flex-direction: column
+      flex-direction: column;
+      gap:0.5rem;
     }
   `]
 })
