@@ -46,25 +46,6 @@ interface MenuCard {
             <a class="hero-secondary" routerLink="/equipos" [queryParams]="queryParams">Explorar equipos</a>
           </div>
         </div>
-
-        <div class="hero-visual" aria-hidden="true">
-          <div class="rink-card">
-            <span class="rink-line rink-line-v"></span>
-            <span class="rink-line rink-line-h"></span>
-            <span class="puck"></span>
-
-            <img
-              *ngFor="let logo of selectedLogos; let i = index"
-              class="floating-logo"
-              [class.logo-a]="i === 0"
-              [class.logo-b]="i === 1"
-              [class.logo-c]="i === 2"
-              [class.logo-d]="i === 3"
-              [src]="logo"
-              alt=""
-            />
-          </div>
-        </div>
       </header>
 
       <section class="stats-strip" *ngIf="summary as data">
