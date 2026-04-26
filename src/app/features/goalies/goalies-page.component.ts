@@ -26,7 +26,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       <p class="page-subtitle">Acumulado por portero de goles encajados, tiros recibidos y porcentaje de paradas. Haz clic en un portero para ver su análisis personalizado.</p>
 
       <div class="filters card filters-2">
-        <div>
+        <div class="option-group">
           <label class="small">Buscar portero</label>
           <input [(ngModel)]="search" (ngModelChange)="load()" placeholder="Nombre del portero" />
         </div>

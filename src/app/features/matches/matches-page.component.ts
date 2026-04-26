@@ -22,15 +22,15 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       <p class="page-subtitle">Histórico de partidos importados desde MongoDB. Haz clic en un partido para ver la ficha completa.</p>
 
       <div class="filters card filters-3">
-        <div>
+        <div class="option-group">
           <label class="small">Buscar general</label>
           <input [(ngModel)]="search" (ngModelChange)="load()" placeholder="Pista o fecha" />
         </div>
-        <div>
+        <div class="option-group">
           <label class="small">Buscar equipo</label>
           <input [(ngModel)]="teamSearch" (ngModelChange)="applyTeamFilter()" placeholder="Equipo local o visitante" />
         </div>
-        <div> class="option-group"
+        <div class="option-group"> 
           <label class="small">Equipo</label>
           <select [(ngModel)]="team" (ngModelChange)="load()">
             <option value="">Todos</option>

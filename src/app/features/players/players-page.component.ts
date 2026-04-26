@@ -26,7 +26,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       <p class="page-subtitle">Acumulado por jugador de goles, asistencias y puntos. Haz clic en un jugador para ver su análisis personalizado.</p>
 
       <div class="filters card filters-2">
-        <div>
+        <div class="option-group">
           <label class="small">Buscar jugador</label>
           <input [(ngModel)]="search" (ngModelChange)="load()" placeholder="Nombre del jugador" />
         </div>
