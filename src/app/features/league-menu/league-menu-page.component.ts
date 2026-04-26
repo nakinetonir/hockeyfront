@@ -40,11 +40,6 @@ interface MenuCard {
             Panel completo filtrado por competición. Consulta equipos, jugadores,
             porteros y partidos con una navegación rápida y visual.
           </p>
-
-          <div class="hero-actions">
-            <a class="hero-primary" routerLink="/partidos" [queryParams]="queryParams">Ver partidos</a>
-            <a class="hero-secondary" routerLink="/equipos" [queryParams]="queryParams">Explorar equipos</a>
-          </div>
         </div>
       </header>
 

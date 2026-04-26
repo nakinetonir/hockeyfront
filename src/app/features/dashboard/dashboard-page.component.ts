@@ -54,7 +54,6 @@ type HomeLeague = LeagueItem & {
           <span>Competiciones disponibles</span>
           <h2>Elige una liga</h2>
         </div>
-        <p>La selección abrirá el menú filtrado exclusivamente por esa liga.</p>
       </div>
 
       <div class="league-grid">
