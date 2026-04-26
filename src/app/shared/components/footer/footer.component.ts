@@ -32,11 +32,6 @@ import { RouterLink } from '@angular/router';
           </div>
         </section>
 
-        <nav class="footer-links-card" aria-label="Enlaces principales">
-          <h3>Navegación</h3>
-          <a routerLink="/">Inicio</a>
-          <a routerLink="/">Seleccionar liga</a>
-        </nav>
 
         <nav class="footer-links-card" aria-label="Enlaces de hockey">
           <h3>Links de hockey</h3>
