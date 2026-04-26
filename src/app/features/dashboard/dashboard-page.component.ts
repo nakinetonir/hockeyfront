@@ -49,12 +49,6 @@ type HomeLeague = LeagueItem & {
         </div>
       </header>
 
-      <div id="leagues" class="section-title">
-        <div>
-          <span>Competiciones disponibles</span>
-          <h2>Elige una liga</h2>
-        </div>
-      </div>
 
       <div class="league-grid">
         <a
