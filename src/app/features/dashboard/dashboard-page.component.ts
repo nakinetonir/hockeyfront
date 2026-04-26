@@ -9,7 +9,6 @@ type HomeLeague = LeagueItem & {
   shortLabel: string;
   description: string;
   accent: string;
-  logos: string[];
 };
 
 @Component({
@@ -78,18 +77,6 @@ type HomeLeague = LeagueItem & {
           [style.--card-accent]="league.accent"
         >
           <div class="card-shine"></div>
-
-          <div class="league-logo-cloud" aria-hidden="true">
-            <img
-              *ngFor="let logo of league.logos; let logoIndex = index"
-              class="league-bg-logo"
-              [class.logo-pos-0]="logoIndex === 0"
-              [class.logo-pos-1]="logoIndex === 1"
-              [class.logo-pos-2]="logoIndex === 2"
-              [src]="logo"
-              alt=""
-            />
-          </div>
 
           <div class="card-top">
             <span class="league-index">{{ i + 1 | number:'2.0-0' }}</span>
@@ -463,17 +450,6 @@ type HomeLeague = LeagueItem & {
       pointer-events: none;
     }
 
-    .league-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(90deg, rgba(15,23,42,0.98) 0%, rgba(15,23,42,0.92) 38%, rgba(15,23,42,0.58) 100%),
-        radial-gradient(circle at 84% 42%, color-mix(in srgb, var(--card-accent) 20%, transparent), transparent 36%);
-    }
-
     .card-shine {
       position: absolute;
       width: 180px;
@@ -485,79 +461,6 @@ type HomeLeague = LeagueItem & {
       filter: blur(6px);
       opacity: 0.42;
       pointer-events: none;
-    }
-
-
-    .league-logo-cloud {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .league-logo-cloud::before {
-      content: '';
-      position: absolute;
-      inset: 18px;
-      border-radius: 24px;
-      background:
-        radial-gradient(circle at 74% 38%, rgba(255,255,255,0.12), transparent 14%),
-        linear-gradient(180deg, rgba(226,232,240,0.05), transparent 58%);
-      opacity: 0.75;
-    }
-
-    .league-bg-logo {
-      position: absolute;
-      width: clamp(82px, 8.6vw, 132px);
-      height: clamp(82px, 8.6vw, 132px);
-      object-fit: contain;
-      padding: 10px;
-      border-radius: 26px;
-      background: rgba(248,250,252,0.9);
-      border: 1px solid rgba(255,255,255,0.68);
-      box-shadow:
-        0 18px 44px rgba(0,0,0,0.28),
-        inset 0 1px 0 rgba(255,255,255,0.65);
-      opacity: 0.34;
-      filter: saturate(1.04) contrast(1.04);
-      transform-origin: center;
-      transition: opacity .2s ease, transform .2s ease, filter .2s ease;
-    }
-
-    .logo-pos-0 {
-      right: 8%;
-      top: 14%;
-      transform: rotate(-9deg);
-    }
-
-    .logo-pos-1 {
-      right: 25%;
-      bottom: 6%;
-      transform: rotate(7deg);
-    }
-
-    .logo-pos-2 {
-      right: -5%;
-      bottom: 24%;
-      transform: rotate(12deg);
-    }
-
-    .league-card:hover .league-bg-logo {
-      opacity: 0.52;
-      filter: saturate(1.15) contrast(1.08) drop-shadow(0 0 18px color-mix(in srgb, var(--card-accent) 45%, transparent));
-    }
-
-    .league-card:hover .logo-pos-0 {
-      transform: translateY(-5px) rotate(-13deg) scale(1.04);
-    }
-
-    .league-card:hover .logo-pos-1 {
-      transform: translateY(4px) rotate(10deg) scale(1.04);
-    }
-
-    .league-card:hover .logo-pos-2 {
-      transform: translateX(-5px) rotate(15deg) scale(1.04);
     }
 
     .league-card:hover {
@@ -574,7 +477,7 @@ type HomeLeague = LeagueItem & {
     .card-body,
     .card-bottom {
       position: relative;
-      z-index: 2;
+      z-index: 1;
     }
 
     .card-top {
@@ -775,35 +678,6 @@ type HomeLeague = LeagueItem & {
         padding: 20px;
       }
 
-      .league-bg-logo {
-        width: 96px;
-        height: 96px;
-        padding: 8px;
-        border-radius: 22px;
-        opacity: 0.3;
-      }
-
-      .logo-pos-0 {
-        right: 6%;
-        top: 10%;
-      }
-
-      .logo-pos-1 {
-        right: 28%;
-        bottom: 4%;
-      }
-
-      .logo-pos-2 {
-        right: -9%;
-        bottom: 23%;
-      }
-
-      .league-card::after {
-        background:
-          linear-gradient(90deg, rgba(15,23,42,0.98) 0%, rgba(15,23,42,0.9) 50%, rgba(15,23,42,0.64) 100%),
-          radial-gradient(circle at 86% 48%, color-mix(in srgb, var(--card-accent) 22%, transparent), transparent 40%);
-      }
-
       .card-body h3 {
         margin-top: 26px;
       }
@@ -812,31 +686,6 @@ type HomeLeague = LeagueItem & {
 })
 export class DashboardPageComponent implements OnInit {
   private readonly api = inject(ApiService);
-
-  private readonly teamLogoPool = [
-    '/assets/teams/360.png',
-    '/assets/teams/cplm.png',
-    '/assets/teams/lasrozas.png',
-    '/assets/teams/lobos.png',
-    '/assets/teams/madridpatina.png',
-    '/assets/teams/mamuts.png',
-    '/assets/teams/pinguinos.png',
-    '/assets/teams/renos.png',
-    '/assets/teams/rolleybeers.png',
-    '/assets/teams/sobre8ruedas.png',
-    '/assets/teams/tirso.png',
-    '/assets/teams/trescantos.png',
-    '/assets/teams/vikings.png'
-  ];
-
-  private readonly leagueLogoGroups = [
-    ['/assets/teams/cplm.png', '/assets/teams/trescantos.png', '/assets/teams/sobre8ruedas.png'],
-    ['/assets/teams/360.png', '/assets/teams/lasrozas.png', '/assets/teams/lobos.png'],
-    ['/assets/teams/madridpatina.png', '/assets/teams/mamuts.png', '/assets/teams/pinguinos.png'],
-    ['/assets/teams/renos.png', '/assets/teams/rolleybeers.png', '/assets/teams/tirso.png'],
-    ['/assets/teams/vikings.png', '/assets/teams/cplm.png', '/assets/teams/360.png'],
-    ['/assets/teams/trescantos.png', '/assets/teams/sobre8ruedas.png', '/assets/teams/lasrozas.png']
-  ];
 
   private readonly leagueOrder = [
     'Liga Senior Femenina',
@@ -889,13 +738,8 @@ export class DashboardPageComponent implements OnInit {
       label: league.league_name,
       shortLabel: this.shortLabel(league.league_name),
       description: this.descriptions[league.league_name] || 'Accede al panel filtrado de esta competición.',
-      accent: this.accents[index % this.accents.length],
-      logos: this.leagueLogoGroups[index % this.leagueLogoGroups.length] || this.pickLogos(index)
+      accent: this.accents[index % this.accents.length]
     };
-  }
-
-  private pickLogos(index: number): string[] {
-    return [0, 1, 2].map((offset) => this.teamLogoPool[(index * 3 + offset) % this.teamLogoPool.length]);
   }
 
   private shortLabel(value: string): string {
