@@ -1441,3 +1441,33 @@ input, select {
     opacity: 0.58 !important;
   }
 }
+
+
+.nav-league-pill {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 10px;
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: 12px;
+  background: rgba(56, 189, 248, 0.08);
+  min-width: 180px;
+}
+
+.nav-league-pill span {
+  color: var(--muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav-league-pill strong {
+  font-size: 0.92rem;
+  line-height: 1.15;
+}
+
+@media (max-width: 720px) {
+  .nav-league-pill {
+    width: 100%;
+  }
+}
