@@ -1,0 +1,21 @@
+# Cambios home ligas con logos de equipos
+
+- Las tarjetas de selección de liga ahora usan un fondo visual con logos de equipos.
+- Se han usado todos los logos disponibles en `src/assets/teams` repartidos entre las ligas:
+  - 360
+  - CPLM
+  - Las Rozas
+  - Lobos
+  - Madrid Patina
+  - Mamuts
+  - Pinguinos
+  - Renos
+  - Rollybears
+  - Sobre 8 Ruedas
+  - Tirso
+  - Tres Cantos
+  - Vikings
+- Cada liga muestra una composición de 3 logos colocados con rotación, profundidad y transparencia.
+- El diseño funciona en desktop y móvil.
+- Se ha reforzado la legibilidad con overlay oscuro para que los textos no se pierdan sobre los logos.
+- Se mantienen los logos destacados en el hero inicial.
