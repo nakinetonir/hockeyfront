@@ -24,11 +24,7 @@ type HomeLeague = LeagueItem & {
 
       <header class="home-hero">
         <div class="hero-copy">
-          <div class="hero-kicker">
-            <span class="live-dot"></span>
-            Selecciona competición
-          </div>
-
+  
           <h1>
             Hockey Línea
             <span>Madrid</span>

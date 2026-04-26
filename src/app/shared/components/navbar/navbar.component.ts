@@ -10,7 +10,7 @@ import { filter } from 'rxjs/operators';
   template: `
     <header class="nav-shell" *ngIf="showNav">
       <div class="nav-inner">
-        <a class="nav-brand" routerLink="/">
+        <a class="nav-brand" routerLink="/" aria-label="Volver al inicio">
           <span class="brand-mark">HLM</span>
           <span class="brand-copy">
             <strong>Hockey Línea</strong>
@@ -75,8 +75,21 @@ import { filter } from 'rxjs/operators';
       align-items: center;
       gap: 12px;
       min-width: max-content;
+      padding: 8px 12px 8px 8px;
+      border-radius: 999px;
       text-decoration: none;
       color: #f8fafc;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(125,211,252,.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+
+    .nav-brand:hover {
+      transform: translateY(-1px);
+      border-color: rgba(125,211,252,.36);
+      background: rgba(125,211,252,.08);
+      box-shadow: 0 14px 34px rgba(14,165,233,.14);
     }
 
     .brand-mark {
@@ -218,33 +231,87 @@ import { filter } from 'rxjs/operators';
 
     @media (max-width: 860px) {
       .nav-inner {
-        min-height: 68px;
-        padding: 10px 16px;
-        flex-wrap: wrap;
+        min-height: 82px;
+        padding: 12px 16px;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .nav-brand {
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: calc(100% - 74px);
+        gap: 13px;
+        padding: 10px 14px 10px 10px;
+        border-radius: 22px;
+        background:
+          linear-gradient(135deg, rgba(14,165,233,.16), rgba(34,197,94,.09)),
+          rgba(255,255,255,.04);
+        border-color: rgba(125,211,252,.22);
+      }
+
+      .brand-mark {
+        width: 50px;
+        height: 50px;
+        border-radius: 18px;
+        font-size: .78rem;
+      }
+
+      .brand-copy {
+        min-width: 0;
+      }
+
+      .brand-copy strong {
+        font-size: 1.08rem;
+      }
+
+      .brand-copy small {
+        font-size: .76rem;
+        letter-spacing: .15em;
       }
 
       .nav-league-pill {
-        order: 3;
-        width: 100%;
-        max-width: none;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+        display: none;
       }
 
       .mobile-toggle {
-        display: block;
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        margin-left: 0;
+        width: 58px;
+        height: 58px;
+        border-radius: 20px;
+        border-color: rgba(125,211,252,.34);
+        background:
+          linear-gradient(145deg, rgba(15,23,42,.95), rgba(15,23,42,.72)),
+          radial-gradient(circle at 70% 10%, rgba(56,189,248,.22), transparent 45%);
+        box-shadow: 0 16px 34px rgba(2,6,23,.32), inset 0 1px 0 rgba(255,255,255,.06);
+      }
+
+      .mobile-toggle span {
+        width: 24px;
+        height: 2px;
+        margin: 3px auto;
       }
 
       .nav-links {
+        position: absolute;
         display: none;
-        order: 4;
-        width: 100%;
+        right: 16px;
+        top: calc(100% - 4px);
+        width: min(330px, calc(100vw - 32px));
         margin-left: 0;
-        border-radius: 22px;
-        padding: 8px;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        border-radius: 24px;
+        padding: 10px;
+        grid-template-columns: 1fr;
         gap: 8px;
+        background:
+          linear-gradient(145deg, rgba(8,18,34,.98), rgba(2,6,23,.96)),
+          radial-gradient(circle at 90% 0%, rgba(56,189,248,.16), transparent 40%);
+        border: 1px solid rgba(125,211,252,.22);
+        box-shadow: 0 24px 70px rgba(0,0,0,.48);
       }
 
       .nav-links.nav-links-open {
@@ -252,26 +319,49 @@ import { filter } from 'rxjs/operators';
       }
 
       .nav-links a {
-        justify-content: center;
-        min-height: 48px;
-        border-radius: 16px;
+        justify-content: flex-start;
+        min-height: 54px;
+        border-radius: 18px;
         background: rgba(255,255,255,.045);
+        padding: 0 14px;
+      }
+
+      .nav-icon {
+        width: 32px;
+        height: 32px;
       }
     }
 
     @media (max-width: 520px) {
+      .nav-shell {
+        border-bottom-color: rgba(125,211,252,.14);
+      }
+
+      .nav-inner {
+        min-height: 78px;
+        padding: 10px 14px;
+      }
+
+      .nav-brand {
+        max-width: calc(100% - 68px);
+        padding: 8px 11px 8px 8px;
+        gap: 10px;
+      }
+
       .brand-copy strong {
-        font-size: .92rem;
+        font-size: 1rem;
       }
 
       .brand-mark {
-        width: 38px;
-        height: 38px;
-        border-radius: 13px;
+        width: 46px;
+        height: 46px;
+        border-radius: 16px;
       }
 
-      .nav-links {
-        grid-template-columns: 1fr;
+      .mobile-toggle {
+        width: 54px;
+        height: 54px;
+        border-radius: 18px;
       }
     }
   `]

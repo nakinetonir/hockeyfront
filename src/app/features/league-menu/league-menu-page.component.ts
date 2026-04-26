@@ -30,22 +30,34 @@ interface MenuCard {
         </div>
       </header>
 
-      <section class="stats-strip" *ngIf="summary as data">
-        <article class="stat-card">
-          <span>Partidos</span>
-          <strong>{{ data.totalMatches }}</strong>
+      <section class="stats-strip" *ngIf="summary as data" aria-label="Resumen de la liga">
+        <article class="stat-card stat-card-matches">
+          <div class="stat-icon">🏒</div>
+          <div class="stat-copy">
+            <span>Partidos</span>
+            <strong>{{ data.totalMatches }}</strong>
+          </div>
         </article>
-        <article class="stat-card">
-          <span>Jugadores</span>
-          <strong>{{ data.totalPlayers }}</strong>
+        <article class="stat-card stat-card-players">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-copy">
+            <span>Jugadores</span>
+            <strong>{{ data.totalPlayers }}</strong>
+          </div>
         </article>
-        <article class="stat-card">
-          <span>Porteros</span>
-          <strong>{{ data.totalGoalies }}</strong>
+        <article class="stat-card stat-card-goalies">
+          <div class="stat-icon">🥅</div>
+          <div class="stat-copy">
+            <span>Porteros</span>
+            <strong>{{ data.totalGoalies }}</strong>
+          </div>
         </article>
-        <article class="stat-card">
-          <span>Equipos destacados</span>
-          <strong>{{ data.topTeams.length }}</strong>
+        <article class="stat-card stat-card-teams">
+          <div class="stat-icon">🛡️</div>
+          <div class="stat-copy">
+            <span>Equipos</span>
+            <strong>{{ data.topTeams.length }}</strong>
+          </div>
         </article>
       </section>
 
@@ -344,37 +356,80 @@ interface MenuCard {
     .stats-strip {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 22px;
+      gap: 14px;
+      margin-top: 18px;
     }
 
     .stat-card {
+      --stat-accent: #38bdf8;
       position: relative;
+      display: flex;
+      align-items: center;
+      gap: 16px;
       overflow: hidden;
-      min-height: 116px;
-      padding: 20px;
+      min-height: 104px;
+      padding: 18px;
       border-radius: 24px;
       background:
         linear-gradient(145deg, rgba(15,23,42,0.92), rgba(17,24,39,0.72)),
-        radial-gradient(circle at 80% 20%, rgba(56,189,248,0.14), transparent 42%);
-      border: 1px solid rgba(125,211,252,0.18);
-      box-shadow: 0 16px 44px rgba(2,6,23,0.28);
+        radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--stat-accent) 30%, transparent), transparent 48%);
+      border: 1px solid color-mix(in srgb, var(--stat-accent) 36%, rgba(148,163,184,.18));
+      box-shadow: 0 16px 44px rgba(2,6,23,0.28), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      right: -28px;
+      top: -28px;
+      width: 96px;
+      height: 96px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--stat-accent) 18%, transparent);
+      filter: blur(4px);
+      opacity: .8;
+    }
+
+    .stat-card-matches { --stat-accent: #38bdf8; }
+    .stat-card-players { --stat-accent: #22c55e; }
+    .stat-card-goalies { --stat-accent: #a78bfa; }
+    .stat-card-teams { --stat-accent: #fb923c; }
+
+    .stat-icon {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 48px;
+      height: 48px;
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--stat-accent) 20%, rgba(255,255,255,.04));
+      border: 1px solid color-mix(in srgb, var(--stat-accent) 38%, transparent);
+      box-shadow: 0 12px 26px color-mix(in srgb, var(--stat-accent) 20%, transparent);
+      font-size: 1.15rem;
+    }
+
+    .stat-copy {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
     }
 
     .stat-card span {
       display: block;
-      color: #a5b4c8;
-      font-size: .86rem;
-      font-weight: 800;
-      letter-spacing: .03em;
+      color: #bcd3ee;
+      font-size: .78rem;
+      font-weight: 950;
+      letter-spacing: .08em;
       text-transform: uppercase;
     }
 
     .stat-card strong {
       display: block;
-      margin-top: 12px;
+      margin-top: 7px;
       color: #fff;
-      font-size: clamp(2rem, 4vw, 3.1rem);
+      font-size: clamp(1.85rem, 3.3vw, 2.55rem);
       line-height: 1;
       letter-spacing: -0.06em;
     }
@@ -582,13 +637,45 @@ interface MenuCard {
       .logo-c { left: 27%; bottom: 6%; }
       .logo-d { right: 28%; bottom: 7%; }
 
-      .stats-strip,
-      .menu-grid {
-        grid-template-columns: 1fr;
+      .stats-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 14px;
       }
 
       .stat-card {
-        min-height: 96px;
+        min-height: 74px;
+        padding: 11px 12px;
+        gap: 10px;
+        border-radius: 18px;
+      }
+
+      .stat-card::after {
+        right: -38px;
+        top: -38px;
+        width: 82px;
+        height: 82px;
+      }
+
+      .stat-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 13px;
+        font-size: .92rem;
+      }
+
+      .stat-card span {
+        font-size: .61rem;
+        letter-spacing: .08em;
+      }
+
+      .stat-card strong {
+        margin-top: 5px;
+        font-size: 1.55rem;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
       }
 
       .menu-card {
