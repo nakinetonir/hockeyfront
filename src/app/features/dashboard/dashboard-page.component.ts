@@ -33,12 +33,6 @@ type HomeLeague = LeagueItem & {
             Hockey Línea
             <span>Madrid</span>
           </h1>
-
-          <p>
-            Explora estadísticas de equipos, jugadores, porteros y partidos por liga.
-            Elige una competición para desbloquear el panel completo.
-          </p>
-
         </div>
       </header>
 

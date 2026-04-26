@@ -18,10 +18,6 @@ import { filter } from 'rxjs/operators';
           </span>
         </a>
 
-        <div class="nav-league-pill" *ngIf="leagueName">
-          <span>Liga activa</span>
-          <strong>{{ leagueName }}</strong>
-        </div>
 
         <button class="mobile-toggle" type="button" (click)="mobileOpen = !mobileOpen" [attr.aria-expanded]="mobileOpen">
           <span></span>

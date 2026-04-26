@@ -122,7 +122,7 @@ interface MenuCard {
       grid-template-columns: minmax(0, 1.1fr) minmax(330px, 0.72fr);
       gap: clamp(24px, 5vw, 54px);
       align-items: center;
-      min-height: clamp(420px, 52vh, 600px);
+      min-height: clamp(260px, 38vh, 420px);      
       padding: clamp(26px, 5vw, 58px);
       overflow: hidden;
       border-radius: clamp(26px, 4vw, 42px);
