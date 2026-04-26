@@ -67,6 +67,34 @@ const TEAM_BRANDS: TeamBrand[] = [
     ]
   },
   {
+    key: 'tres-cantos',
+    name: 'Tres Cantos',
+    logo: '/assets/teams/trescantos.png',
+    aliases: [
+      'tres cantos', 'trescantos', 'tres cantos pc', 'hockey linea tres cantos',
+      'kamikaes', 'kamikazes', 'kamikaes hockey linea tres cantos',
+      'club tres cantos', 'cp tres cantos'
+    ]
+  },
+  {
+    key: 'sobre8ruedas',
+    name: 'Sobre 8 Ruedas',
+    logo: '/assets/teams/sobre8ruedas.png',
+    aliases: [
+      'sobre 8 ruedas', 'sobre8ruedas', 'sobre ocho ruedas', 'sobreochoruedas',
+      '8 ruedas', 'ocho ruedas', 's8r', 'sobre ruedas'
+    ]
+  },
+  {
+    key: 'cplm',
+    name: 'CPLM',
+    logo: '/assets/teams/cplm.png',
+    aliases: [
+      'cplm', 'cpl madrid', 'club patin linea madrid', 'club patín línea madrid',
+      'patin linea madrid', 'patín línea madrid', 'madrid cplm'
+    ]
+  },
+  {
     key: 'vikings',
     name: 'CPLG Vikings',
     logo: '/assets/teams/vikings.png',
