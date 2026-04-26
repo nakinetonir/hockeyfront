@@ -24,9 +24,7 @@ import { LeagueItem } from '../../core/models/api.models';
         >
           <div>
             <div class="league-card-title">{{ league.league_name }}</div>
-            <div class="league-card-subtitle">Ver menú de esta liga</div>
           </div>
-          <span class="league-card-arrow">→</span>
         </a>
       </div>
     </section>
@@ -54,8 +52,7 @@ import { LeagueItem } from '../../core/models/api.models';
       min-height: 128px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+      justify-content: left;
       text-decoration: none;
       color: inherit;
       border: 1px solid rgba(148, 163, 184, 0.18);
@@ -69,9 +66,8 @@ import { LeagueItem } from '../../core/models/api.models';
     }
 
     .league-card-title {
-      font-size: 1.14rem;
+      font-size: 1.74rem;
       font-weight: 900;
-      margin-bottom: 8px;
     }
 
     .league-card-subtitle {
