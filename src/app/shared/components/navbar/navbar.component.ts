@@ -16,9 +16,34 @@ import { filter } from 'rxjs/operators';
             <strong>Hockey Línea</strong>
             <small>Madrid</small>
           </span>
+          <button class="mobile-toggle" type="button" (click)="mobileOpen = !mobileOpen" [attr.aria-expanded]="mobileOpen">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         </a>
 
 
+        
+
+        <nav class="nav-links" [class.nav-links-open]="mobileOpen">
+          <a routerLink="/equipos" [queryParams]="leagueQueryParams" routerLinkActive="active" (click)="mobileOpen = false">
+            <span class="nav-icon">🛡️</span>
+            Equipos
+          </a>
+          <a routerLink="/jugadores" [queryParams]="leagueQueryParams" routerLinkActive="active" (click)="mobileOpen = false">
+            <span class="nav-icon">⚡</span>
+            Jugadores
+          </a>
+          <a routerLink="/porteros" [queryParams]="leagueQueryParams" routerLinkActive="active" (click)="mobileOpen = false">
+            <span class="nav-icon">🥅</span>
+            Porteros
+          </a>
+          <a routerLink="/partidos" [queryParams]="leagueQueryParams" routerLinkActive="active" (click)="mobileOpen = false">
+            <span class="nav-icon">🏒</span>
+            Partidos
+          </a>
+        </nav>
       </div>
     </header>
   `,
@@ -326,8 +351,8 @@ import { filter } from 'rxjs/operators';
 
       .nav-brand {
         max-width: none;
+        padding: 8px 11px 8px 8px;
         gap: 10px;
-        width: 100%;
       }
 
       .brand-copy strong {
