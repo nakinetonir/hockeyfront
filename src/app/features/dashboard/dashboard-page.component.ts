@@ -48,6 +48,17 @@ type HomeLeague = LeagueItem & {
           </div>
         </div>
 
+        <div class="hero-visual" aria-label="Equipos destacados">
+          <div class="ice-rink">
+            <span class="rink-line rink-line-a"></span>
+            <span class="rink-line rink-line-b"></span>
+            <span class="puck"></span>
+
+            <img class="team-logo team-logo-a" src="/assets/teams/trescantos.png" alt="Tres Cantos" />
+            <img class="team-logo team-logo-b" src="/assets/teams/sobre8ruedas.png" alt="Sobre 8 Ruedas" />
+            <img class="team-logo team-logo-c" src="/assets/teams/cplm.png" alt="CPLM" />
+          </div>
+        </div>
       </header>
 
       <div id="leagues" class="section-title">
@@ -55,6 +66,7 @@ type HomeLeague = LeagueItem & {
           <span>Competiciones disponibles</span>
           <h2>Elige una liga</h2>
         </div>
+        <p>La selección abrirá el menú filtrado exclusivamente por esa liga.</p>
       </div>
 
       <div class="league-grid">
