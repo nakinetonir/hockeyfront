@@ -683,6 +683,44 @@ interface MenuCard {
         border-radius: 24px;
       }
     }
+
+    /* Compact selected league hero on mobile */
+    @media (max-width: 640px) {
+      .league-hero {
+        min-height: 170px !important;
+        padding: 16px 18px !important;
+        border-radius: 24px !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+
+      .league-hero::after {
+        inset: 10px !important;
+        border-radius: 18px !important;
+      }
+
+      .hero-copy {
+        width: 100% !important;
+      }
+
+      h1 {
+        font-size: clamp(2.25rem, 12vw, 3.35rem) !important;
+        line-height: .92 !important;
+        letter-spacing: -0.07em !important;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .league-hero {
+        min-height: 150px !important;
+        padding: 14px 16px !important;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 11vw, 3rem) !important;
+      }
+    }
+
   `]
 })
 export class LeagueMenuPageComponent implements OnInit {

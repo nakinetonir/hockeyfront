@@ -231,18 +231,23 @@ import { filter } from 'rxjs/operators';
 
     @media (max-width: 860px) {
       .nav-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 58px;
         min-height: 76px;
         padding: 10px 14px;
         flex-wrap: nowrap;
-        justify-content: space-between;
+        justify-content: initial;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
+        width: 100%;
       }
 
       .nav-brand {
-        flex: 1 1 auto;
+        flex: none;
         min-width: 0;
-        max-width: none;
+        width: 100%;
+        max-width: 310px;
+        justify-self: start;
         gap: 12px;
         padding: 9px 13px 9px 9px;
         border-radius: 22px;
@@ -279,7 +284,8 @@ import { filter } from 'rxjs/operators';
       .mobile-toggle {
         display: grid;
         place-items: center;
-        flex: 0 0 auto;
+        flex: none;
+        justify-self: end;
         margin-left: 0;
         width: 58px;
         height: 58px;
@@ -300,10 +306,10 @@ import { filter } from 'rxjs/operators';
       .nav-links {
         position: absolute;
         display: none;
-        left: 12px;
-        right: 12px;
+        left: 0;
+        right: 0;
         top: calc(100% + 8px);
-        width: auto;
+        width: 100%;
         margin-left: 0;
         border-radius: 24px;
         padding: 12px;
@@ -343,13 +349,14 @@ import { filter } from 'rxjs/operators';
       }
 
       .nav-inner {
+        grid-template-columns: minmax(0, 1fr) 54px;
         min-height: 72px;
         padding: 9px 12px;
-        gap: 9px;
+        gap: 10px;
       }
 
       .nav-brand {
-        max-width: none;
+        max-width: calc(100vw - 88px);
         padding: 8px 11px 8px 8px;
         gap: 10px;
       }
@@ -370,6 +377,82 @@ import { filter } from 'rxjs/operators';
         border-radius: 18px;
       }
     }
+
+    /* Mobile navbar hard override: brand and hamburger always share one row */
+    @media (max-width: 860px) {
+      .nav-inner {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: nowrap !important;
+        width: 100% !important;
+        max-width: none !important;
+        min-height: 74px !important;
+        padding: 10px 14px !important;
+        gap: 10px !important;
+      }
+
+      .nav-brand {
+        width: auto !important;
+        max-width: calc(100vw - 92px) !important;
+        flex: 0 1 auto !important;
+        justify-self: auto !important;
+      }
+
+      .mobile-toggle {
+        display: grid !important;
+        flex: 0 0 54px !important;
+        width: 54px !important;
+        height: 54px !important;
+        margin-left: auto !important;
+        justify-self: auto !important;
+      }
+
+      .nav-links {
+        top: calc(100% + 0px) !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100vw !important;
+        max-width: none !important;
+        border-radius: 0 0 24px 24px !important;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav-inner {
+        padding: 8px 10px !important;
+      }
+
+      .nav-brand {
+        gap: 8px !important;
+        padding: 7px 9px 7px 7px !important;
+        max-width: calc(100vw - 78px) !important;
+      }
+
+      .brand-mark {
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 15px !important;
+      }
+
+      .brand-copy strong {
+        font-size: .94rem !important;
+      }
+
+      .brand-copy small {
+        font-size: .68rem !important;
+        letter-spacing: .14em !important;
+      }
+
+      .mobile-toggle {
+        flex-basis: 50px !important;
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 17px !important;
+      }
+    }
+
   `]
 })
 export class NavbarComponent implements OnInit {
