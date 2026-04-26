@@ -1374,6 +1374,11 @@ input, select {
   padding: 12px 16px;
   border-color: rgba(59, 130, 246, 0.35);
   background: rgba(59, 130, 246, 0.08);
+  margin-top: 1rem;
+  @media (max-width: 600px) {
+      width: 100%;
+      margin-top: 0rem;
+  }
 }
 
 .selected-league-header span {

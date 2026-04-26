@@ -30,7 +30,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
           <label class="small">Buscar portero</label>
           <input [(ngModel)]="search" (ngModelChange)="load()" placeholder="Nombre del portero" />
         </div>
-        <div>
+        <div class="option-group">
           <label class="small">Equipo</label>
           <select [(ngModel)]="team" (ngModelChange)="load()">
             <option value="">Todos</option>
@@ -106,6 +106,11 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       margin: 16px 0;
       color: #b91c1c;
       font-weight: 600;
+    }
+
+     .option-group {
+      display: flex;
+      flex-direction: column
     }
   `]
 })

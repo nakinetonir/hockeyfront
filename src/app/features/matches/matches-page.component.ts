@@ -30,7 +30,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
           <label class="small">Buscar equipo</label>
           <input [(ngModel)]="teamSearch" (ngModelChange)="applyTeamFilter()" placeholder="Equipo local o visitante" />
         </div>
-        <div>
+        <div> class="option-group"
           <label class="small">Equipo</label>
           <select [(ngModel)]="team" (ngModelChange)="load()">
             <option value="">Todos</option>
@@ -124,6 +124,11 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
 
     .match-card-inner {
       width: 100%;
+    }
+
+    .option-group {
+      display: flex;
+      flex-direction: column
     }
 
     .match-card-teams {

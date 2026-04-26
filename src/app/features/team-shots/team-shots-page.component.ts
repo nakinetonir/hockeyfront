@@ -22,7 +22,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       <p class="page-subtitle">Totales y medias de goles y tiros a favor y en contra por equipo.</p>
 
       <div class="filters card filters-2">
-        <div>
+        <div class="option-group">
           <label class="small">Equipo</label>
           <select [(ngModel)]="team" (ngModelChange)="load()">
             <option value="">Todos</option>
@@ -74,7 +74,28 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
         </table>
       </div>
     </section>
-  `
+  `,
+  styles: [`
+    .clickable-row {
+      cursor: pointer;
+    }
+
+    .clickable-row:hover {
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+
+    .analysis-error {
+      margin: 16px 0;
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
+    .option-group {
+      display: flex;
+      flex-direction: column
+    }
+  `]
 })
 export class TeamShotsPageComponent implements OnInit {
   private readonly api = inject(ApiService);
