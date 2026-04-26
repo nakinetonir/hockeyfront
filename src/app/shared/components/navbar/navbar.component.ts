@@ -231,24 +231,25 @@ import { filter } from 'rxjs/operators';
 
     @media (max-width: 860px) {
       .nav-inner {
-        min-height: 82px;
-        padding: 12px 16px;
+        min-height: 76px;
+        padding: 10px 14px;
         flex-wrap: nowrap;
         justify-content: space-between;
-        gap: 12px;
+        align-items: center;
+        gap: 10px;
       }
 
       .nav-brand {
         flex: 1 1 auto;
         min-width: 0;
-        max-width: calc(100% - 74px);
-        gap: 13px;
-        padding: 10px 14px 10px 10px;
+        max-width: none;
+        gap: 12px;
+        padding: 9px 13px 9px 9px;
         border-radius: 22px;
         background:
-          linear-gradient(135deg, rgba(14,165,233,.16), rgba(34,197,94,.09)),
-          rgba(255,255,255,.04);
-        border-color: rgba(125,211,252,.22);
+          linear-gradient(135deg, rgba(14,165,233,.18), rgba(34,197,94,.10)),
+          rgba(255,255,255,.045);
+        border-color: rgba(125,211,252,.26);
       }
 
       .brand-mark {
@@ -299,14 +300,15 @@ import { filter } from 'rxjs/operators';
       .nav-links {
         position: absolute;
         display: none;
-        right: 16px;
-        top: calc(100% - 4px);
-        width: min(330px, calc(100vw - 32px));
+        left: 12px;
+        right: 12px;
+        top: calc(100% + 8px);
+        width: auto;
         margin-left: 0;
         border-radius: 24px;
-        padding: 10px;
+        padding: 12px;
         grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 10px;
         background:
           linear-gradient(145deg, rgba(8,18,34,.98), rgba(2,6,23,.96)),
           radial-gradient(circle at 90% 0%, rgba(56,189,248,.16), transparent 40%);
@@ -320,10 +322,13 @@ import { filter } from 'rxjs/operators';
 
       .nav-links a {
         justify-content: flex-start;
-        min-height: 54px;
+        min-height: 58px;
         border-radius: 18px;
-        background: rgba(255,255,255,.045);
-        padding: 0 14px;
+        background:
+          linear-gradient(135deg, rgba(255,255,255,.065), rgba(255,255,255,.03));
+        border: 1px solid rgba(148,163,184,.12);
+        padding: 0 16px;
+        font-size: .98rem;
       }
 
       .nav-icon {
@@ -338,12 +343,13 @@ import { filter } from 'rxjs/operators';
       }
 
       .nav-inner {
-        min-height: 78px;
-        padding: 10px 14px;
+        min-height: 72px;
+        padding: 9px 12px;
+        gap: 9px;
       }
 
       .nav-brand {
-        max-width: calc(100% - 68px);
+        max-width: none;
         padding: 8px 11px 8px 8px;
         gap: 10px;
       }
