@@ -10,7 +10,7 @@ import { filter } from 'rxjs/operators';
   template: `
     <header class="nav" *ngIf="showNav">
       <div class="nav-inner">
-        <a class="nav-brand" routerLink="/">Hockey Línea Stats</a>
+        <a class="nav-brand" routerLink="/">Hockey Línea Madrid</a>
 
         <div class="nav-league-pill" *ngIf="leagueName">
           <span>Liga seleccionada</span>
@@ -22,7 +22,6 @@ import { filter } from 'rxjs/operators';
           <a routerLink="/jugadores" [queryParams]="leagueQueryParams" routerLinkActive="active">Jugadores</a>
           <a routerLink="/porteros" [queryParams]="leagueQueryParams" routerLinkActive="active">Porteros</a>
           <a routerLink="/partidos" [queryParams]="leagueQueryParams" routerLinkActive="active">Partidos</a>
-          <a routerLink="/" [queryParams]="{}" [replaceUrl]="true">Cambiar liga</a>
         </nav>
       </div>
     </header>

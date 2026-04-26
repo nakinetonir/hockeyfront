@@ -12,11 +12,7 @@ import { LeagueItem } from '../../core/models/api.models';
     <section class="home-league-selector">
       <div class="home-hero card">
         <div class="badge">Selecciona una liga</div>
-        <h1 class="page-title">Hockey Línea Stats</h1>
-        <p class="page-subtitle">
-          Elige una liga para acceder al menú de equipos, jugadores, porteros y partidos.
-          Al volver a esta pantalla se borra la selección y desaparece el menú.
-        </p>
+        <h1 class="page-title">Hockey Línea Madrid</h1>
       </div>
 
       <div class="league-grid">
