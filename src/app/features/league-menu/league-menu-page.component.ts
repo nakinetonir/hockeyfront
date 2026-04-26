@@ -30,36 +30,6 @@ interface MenuCard {
         </div>
       </header>
 
-      <section class="stats-strip" *ngIf="summary as data" aria-label="Resumen de la liga">
-        <article class="stat-card stat-card-matches">
-          <div class="stat-icon">🏒</div>
-          <div class="stat-copy">
-            <span>Partidos</span>
-            <strong>{{ data.totalMatches }}</strong>
-          </div>
-        </article>
-        <article class="stat-card stat-card-players">
-          <div class="stat-icon">⚡</div>
-          <div class="stat-copy">
-            <span>Jugadores</span>
-            <strong>{{ data.totalPlayers }}</strong>
-          </div>
-        </article>
-        <article class="stat-card stat-card-goalies">
-          <div class="stat-icon">🥅</div>
-          <div class="stat-copy">
-            <span>Porteros</span>
-            <strong>{{ data.totalGoalies }}</strong>
-          </div>
-        </article>
-        <article class="stat-card stat-card-teams">
-          <div class="stat-icon">🛡️</div>
-          <div class="stat-copy">
-            <span>Equipos</span>
-            <strong>{{ data.topTeams.length }}</strong>
-          </div>
-        </article>
-      </section>
 
       <section class="menu-section">
         <div class="section-heading">
