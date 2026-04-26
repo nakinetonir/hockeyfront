@@ -25,21 +25,8 @@ interface MenuCard {
 
       <header class="league-hero">
         <div class="hero-copy">
-          <a class="back-home" routerLink="/">
-            <span>←</span>
-            Cambiar liga
-          </a>
-
-          <div class="hero-kicker">
-            <span class="live-dot"></span>
-            Liga seleccionada
-          </div>
-
+         
           <h1>{{ leagueName }}</h1>
-          <p>
-            Panel completo filtrado por competición. Consulta equipos, jugadores,
-            porteros y partidos con una navegación rápida y visual.
-          </p>
         </div>
       </header>
 

@@ -39,13 +39,6 @@ type HomeLeague = LeagueItem & {
             Elige una competición para desbloquear el panel completo.
           </p>
 
-          <div class="hero-actions">
-            <a class="hero-primary" href="#leagues">Ver ligas</a>
-            <div class="hero-metric">
-              <strong>{{ leagues.length }}</strong>
-              <span>competiciones</span>
-            </div>
-          </div>
         </div>
       </header>
 
