@@ -16,15 +16,14 @@ import { filter } from 'rxjs/operators';
             <strong>Hockey Línea</strong>
             <small>Madrid</small>
           </span>
-          <button class="mobile-toggle" type="button" (click)="mobileOpen = !mobileOpen" [attr.aria-expanded]="mobileOpen">
+        </a>
+
+
+        <button class="mobile-toggle" type="button" (click)="mobileOpen = !mobileOpen" [attr.aria-expanded]="mobileOpen">
           <span></span>
           <span></span>
           <span></span>
         </button>
-        </a>
-
-
-        
 
         <nav class="nav-links" [class.nav-links-open]="mobileOpen">
           <a routerLink="/equipos" [queryParams]="leagueQueryParams" routerLinkActive="active" (click)="mobileOpen = false">
