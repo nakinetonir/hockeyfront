@@ -1,5 +1,12 @@
+export interface LeagueItem {
+  league_key: string;
+  league_name: string;
+}
+
 export interface PlayerTotal {
   _id?: string;
+  league_key?: string;
+  league_name?: string;
   player: string;
   team?: string;
   matches?: number;
@@ -10,6 +17,8 @@ export interface PlayerTotal {
 
 export interface GoalieTotal {
   _id?: string;
+  league_key?: string;
+  league_name?: string;
   goalie: string;
   team?: string;
   matches?: number;
@@ -21,6 +30,8 @@ export interface GoalieTotal {
 
 export interface TeamSummary {
   _id?: string;
+  league_key?: string;
+  league_name?: string;
   team: string;
   matches?: number;
   goals_for?: number;
@@ -37,6 +48,7 @@ export interface MatchItem {
   _id?: string;
   match_id?: string;
   title?: string;
+  league_key?: string;
   league_name?: string;
   season?: string;
   date?: string;

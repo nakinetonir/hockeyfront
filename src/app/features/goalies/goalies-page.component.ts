@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { GoalieTotal, PlayerAnalysisResponse } from '../../core/models/api.models';
@@ -16,6 +17,11 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
   imports: [CommonModule, FormsModule, TeamLogoComponent, PlayerAnalysisModalComponent, AnalysisLoadingOverlayComponent],
   template: `
     <section>
+      <div class="selected-league-header card" *ngIf="leagueName">
+        <span>Liga seleccionada</span>
+        <strong>{{ leagueName }}</strong>
+      </div>
+
       <h1 class="page-title">Porteros</h1>
       <p class="page-subtitle">Acumulado por portero de goles encajados, tiros recibidos y porcentaje de paradas. Haz clic en un portero para ver su análisis personalizado.</p>
 
@@ -105,10 +111,13 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
 })
 export class GoaliesPageComponent implements OnInit {
   private readonly api = inject(ApiService);
+  private readonly route = inject(ActivatedRoute);
   goalies: GoalieTotal[] = [];
   teams: string[] = [];
   search = '';
   team = '';
+  leagueKey = '';
+  leagueName = '';
   loadingAnalysis = false;
   analysisError = '';
   analysisModalOpen = false;
@@ -117,12 +126,16 @@ export class GoaliesPageComponent implements OnInit {
   loadingSubtitle = 'Estamos consultando el workflow y construyendo recomendaciones con estadísticas, ejercicios y vídeos.';
 
   ngOnInit(): void {
-    this.api.getTeams().subscribe((data) => (this.teams = data.items));
-    this.load();
+    this.route.queryParamMap.subscribe((params) => {
+      this.leagueKey = params.get('league_key') || '';
+      this.leagueName = params.get('league_name') || '';
+      this.api.getTeams(this.leagueKey ? { league_key: this.leagueKey } : {}).subscribe((data) => (this.teams = data.items));
+      this.load();
+    });
   }
 
   load(): void {
-    this.api.getGoalies({ search: this.search, team: this.team, page: 1, limit: 100 }).subscribe((data) => {
+    this.api.getGoalies({ search: this.search, team: this.team, page: 1, limit: 100, league_key: this.leagueKey }).subscribe((data) => {
       this.goalies = data.items;
     });
   }

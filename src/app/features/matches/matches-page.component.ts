@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatchItem } from '../../core/models/api.models';
 import { ApiService } from '../../core/services/api.service';
@@ -12,6 +13,11 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
   imports: [CommonModule, FormsModule, TeamLogoComponent],
   template: `
     <section>
+      <div class="selected-league-header card" *ngIf="leagueName">
+        <span>Liga seleccionada</span>
+        <strong>{{ leagueName }}</strong>
+      </div>
+
       <h1 class="page-title">Partidos</h1>
       <p class="page-subtitle">Histórico de partidos importados desde MongoDB, con búsqueda por equipo y logos en cada enfrentamiento.</p>
 
@@ -59,20 +65,27 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
 })
 export class MatchesPageComponent implements OnInit {
   private readonly api = inject(ApiService);
+  private readonly route = inject(ActivatedRoute);
   matches: MatchItem[] = [];
   filteredMatches: MatchItem[] = [];
   teams: string[] = [];
   search = '';
   teamSearch = '';
   team = '';
+  leagueKey = '';
+  leagueName = '';
 
   ngOnInit(): void {
-    this.api.getTeams().subscribe((data) => (this.teams = data.items));
-    this.load();
+    this.route.queryParamMap.subscribe((params) => {
+      this.leagueKey = params.get('league_key') || '';
+      this.leagueName = params.get('league_name') || '';
+      this.api.getTeams(this.leagueKey ? { league_key: this.leagueKey } : {}).subscribe((data) => (this.teams = data.items));
+      this.load();
+    });
   }
 
   load(): void {
-    this.api.getMatches({ search: this.search, team: this.team, page: 1, limit: 100 }).subscribe((data) => {
+    this.api.getMatches({ search: this.search, team: this.team, page: 1, limit: 100, league_key: this.leagueKey }).subscribe((data) => {
       this.matches = [...data.items].sort((a, b) => this.getMatchTimestamp(b.date) - this.getMatchTimestamp(a.date));
       this.applyTeamFilter();
     });

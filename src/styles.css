@@ -1362,3 +1362,82 @@ input, select {
     min-height: 84px;
   }
 }
+
+
+/* === League scoped UI === */
+.selected-league-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  border-color: rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.selected-league-header span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.selected-league-header strong {
+  font-size: 1rem;
+}
+
+/* Desktop: remove team watermark background images from players, goalies and team tables */
+@media (min-width: 721px) {
+  .team-watermark-row,
+  .team-watermark-row.team-360-row,
+  .stats-table tr.team-stats-row.team-watermark-row,
+  .stats-table tr.team-stats-row.team-360-row {
+    background-image: none !important;
+    animation: none !important;
+  }
+}
+
+/* Mobile: keep centered watermark, brighter and slightly smaller */
+@media (max-width: 720px) {
+  .stats-table tr.team-watermark-row {
+    background-image:
+      linear-gradient(90deg, rgba(10, 18, 36, 0.88), rgba(10, 18, 36, 0.58)),
+      var(--team-logo-url) !important;
+    background-position: 0 0, center center !important;
+    background-size: auto, 58% auto !important;
+    filter: brightness(1.08);
+  }
+
+  .stats-table tr.team-stats-row.team-watermark-row {
+    background-image:
+      linear-gradient(90deg, rgba(10, 18, 36, 0.88), rgba(10, 18, 36, 0.58)),
+      var(--team-logo-url) !important;
+    background-position: 0 0, center center !important;
+    background-size: auto, 58% auto !important;
+    filter: brightness(1.08);
+  }
+
+  .stats-table tr.team-watermark-row.team-360-row,
+  .stats-table tr.team-stats-row.team-watermark-row.team-360-row {
+    background-image:
+      linear-gradient(90deg, rgba(4, 11, 24, 0.88), rgba(4, 11, 24, 0.56)),
+      radial-gradient(circle at center, rgba(56, 189, 248, 0.20), rgba(34, 197, 94, 0.12) 36%, rgba(8, 15, 30, 0) 74%),
+      var(--team-logo-url) !important;
+    background-position: 0 0, center center, center center !important;
+    background-size: auto, 150% 150%, 60% auto !important;
+    filter: brightness(1.1);
+  }
+
+  .stats-table tr.team-watermark-row.team-360-row::before {
+    background:
+      linear-gradient(118deg,
+        rgba(255,255,255,0) 0%,
+        rgba(125, 211, 252, 0.10) 22%,
+        rgba(96, 165, 250, 0.24) 45%,
+        rgba(34, 197, 94, 0.10) 56%,
+        rgba(255,255,255,0) 74%
+      ),
+      var(--team-logo-url) center center / 60% auto no-repeat !important;
+    opacity: 0.58 !important;
+  }
+}
