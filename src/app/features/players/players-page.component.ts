@@ -121,10 +121,104 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
     .clickable-row { cursor: pointer; }
     .clickable-row:hover { background: rgba(59, 130, 246, 0.08); }
 
-    .desktop-player-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
+    .desktop-player-grid { display: none; }
+
+    .mobile-player-table {
+      display: block;
+      overflow: visible;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .mobile-player-table .stats-table thead { display: none; }
+
+    .mobile-player-table .stats-table,
+    .mobile-player-table .stats-table tbody,
+    .mobile-player-table .stats-table tr,
+    .mobile-player-table .stats-table td {
+      display: block;
+      width: 100%;
+    }
+
+    .mobile-player-table .stats-table tr.team-watermark-row {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 16px;
+      margin-bottom: 12px;
+      background-image:
+        linear-gradient(90deg, rgba(10, 18, 36, 0.76), rgba(10, 18, 36, 0.42)),
+        var(--team-logo-url) !important;
+      background-repeat: no-repeat, no-repeat !important;
+      background-position: 0 0, center center !important;
+      background-size: auto, 72% auto !important;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      filter: brightness(1.16) saturate(1.12) !important;
+    }
+
+    .mobile-player-table .stats-table tr.team-watermark-row.team-360-row {
+      background-image:
+        linear-gradient(90deg, rgba(4, 11, 24, 0.76), rgba(4, 11, 24, 0.40)),
+        radial-gradient(circle at center, rgba(56, 189, 248, 0.24), rgba(34, 197, 94, 0.16) 36%, rgba(8, 15, 30, 0) 74%),
+        var(--team-logo-url) !important;
+      background-position: 0 0, center center, center center !important;
+      background-size: auto, 158% 158%, 74% auto !important;
+      filter: brightness(1.18) saturate(1.18) !important;
+    }
+
+    .mobile-player-table .stats-table tr.team-watermark-row td {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+      background: transparent !important;
+      text-align: right;
+    }
+
+    .mobile-player-table .stats-table tr.team-watermark-row td:last-child { border-bottom: 0; }
+
+    .mobile-player-table .stats-table tr.team-watermark-row td::before {
+      content: attr(data-label);
+      flex: 0 0 42%;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    .mobile-player-table .stats-table tr.team-watermark-row td.primary-cell {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 6px;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 800;
+      text-align: left;
+      line-height: 1.2;
+    }
+
+    .mobile-player-table .stats-table tr.team-watermark-row td.primary-cell::before { flex: none; }
+
+    .mobile-player-table .stats-table tr.team-watermark-row td.team-data-cell { display: none; }
+
+    @media (min-width: 721px) {
+      .mobile-player-table .stats-table tbody {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+      }
+
+      .mobile-player-table .stats-table tr.team-watermark-row {
+        margin-bottom: 0;
+        min-height: 100%;
+      }
     }
 
     .person-card {
@@ -234,8 +328,6 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       line-height: 1;
     }
 
-    .mobile-player-table { display: none; }
-
     .analysis-error {
       margin: 16px 0;
       color: #b91c1c;
@@ -249,8 +341,6 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
     }
 
     @media (max-width: 720px) {
-      .desktop-player-grid { display: none; }
-      .mobile-player-table { display: block; }
     }
   `]
 })
