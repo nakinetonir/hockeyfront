@@ -30,37 +30,6 @@ interface MenuCard {
         </div>
       </header>
 
-      <section class="stats-strip" *ngIf="summary as data" aria-label="Resumen de la liga">
-        <article class="stat-card stat-card-matches">
-          <div class="stat-icon">🏒</div>
-          <div class="stat-copy">
-            <span>Partidos</span>
-            <strong>{{ data.totalMatches }}</strong>
-          </div>
-        </article>
-        <article class="stat-card stat-card-players">
-          <div class="stat-icon">⚡</div>
-          <div class="stat-copy">
-            <span>Jugadores</span>
-            <strong>{{ data.totalPlayers }}</strong>
-          </div>
-        </article>
-        <article class="stat-card stat-card-goalies">
-          <div class="stat-icon">🥅</div>
-          <div class="stat-copy">
-            <span>Porteros</span>
-            <strong>{{ data.totalGoalies }}</strong>
-          </div>
-        </article>
-        <article class="stat-card stat-card-teams">
-          <div class="stat-icon">🛡️</div>
-          <div class="stat-copy">
-            <span>Equipos</span>
-            <strong>{{ data.topTeams.length }}</strong>
-          </div>
-        </article>
-      </section>
-
       <section class="menu-section">
         <div class="section-heading">
           <span>Panel de navegación</span>
@@ -80,7 +49,13 @@ interface MenuCard {
               <span class="menu-icon">{{ card.icon }}</span>
               <span class="menu-label">{{ card.label }}</span>
             </div>
-            <h3>{{ card.title }}</h3>
+            <div class="menu-card-main">
+              <h3>{{ card.title }}</h3>
+              <div class="menu-card-metric" *ngIf="summary as data">
+                <span>Total</span>
+                <strong>{{ metricValue(card, data) }}</strong>
+              </div>
+            </div>
             <p>{{ card.description }}</p>
             <div class="menu-card-footer">
               <span>Entrar</span>
@@ -353,87 +328,6 @@ interface MenuCard {
     .logo-c { left: 30%; bottom: 7%; transform: rotate(7deg); }
     .logo-d { right: 28%; bottom: 10%; transform: rotate(-6deg); opacity: .92; }
 
-    .stats-strip {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .stat-card {
-      --stat-accent: #38bdf8;
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      overflow: hidden;
-      min-height: 104px;
-      padding: 18px;
-      border-radius: 24px;
-      background:
-        linear-gradient(145deg, rgba(15,23,42,0.92), rgba(17,24,39,0.72)),
-        radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--stat-accent) 30%, transparent), transparent 48%);
-      border: 1px solid color-mix(in srgb, var(--stat-accent) 36%, rgba(148,163,184,.18));
-      box-shadow: 0 16px 44px rgba(2,6,23,0.28), inset 0 1px 0 rgba(255,255,255,.05);
-    }
-
-    .stat-card::after {
-      content: '';
-      position: absolute;
-      right: -28px;
-      top: -28px;
-      width: 96px;
-      height: 96px;
-      border-radius: 999px;
-      background: color-mix(in srgb, var(--stat-accent) 18%, transparent);
-      filter: blur(4px);
-      opacity: .8;
-    }
-
-    .stat-card-matches { --stat-accent: #38bdf8; }
-    .stat-card-players { --stat-accent: #22c55e; }
-    .stat-card-goalies { --stat-accent: #a78bfa; }
-    .stat-card-teams { --stat-accent: #fb923c; }
-
-    .stat-icon {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      place-items: center;
-      flex: 0 0 auto;
-      width: 48px;
-      height: 48px;
-      border-radius: 18px;
-      background: color-mix(in srgb, var(--stat-accent) 20%, rgba(255,255,255,.04));
-      border: 1px solid color-mix(in srgb, var(--stat-accent) 38%, transparent);
-      box-shadow: 0 12px 26px color-mix(in srgb, var(--stat-accent) 20%, transparent);
-      font-size: 1.15rem;
-    }
-
-    .stat-copy {
-      position: relative;
-      z-index: 1;
-      min-width: 0;
-    }
-
-    .stat-card span {
-      display: block;
-      color: #bcd3ee;
-      font-size: .78rem;
-      font-weight: 950;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .stat-card strong {
-      display: block;
-      margin-top: 7px;
-      color: #fff;
-      font-size: clamp(1.85rem, 3.3vw, 2.55rem);
-      line-height: 1;
-      letter-spacing: -0.06em;
-    }
-
     .menu-section {
       margin-top: 34px;
     }
@@ -550,6 +444,39 @@ interface MenuCard {
       letter-spacing: -0.06em;
     }
 
+    .menu-card-main {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .menu-card-metric {
+      display: grid;
+      justify-items: end;
+      gap: 3px;
+      padding: 10px 12px;
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--card-accent) 14%, rgba(255,255,255,.04));
+      border: 1px solid color-mix(in srgb, var(--card-accent) 28%, transparent);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .menu-card-metric span {
+      color: color-mix(in srgb, var(--card-accent) 74%, #fff);
+      font-size: .64rem;
+      font-weight: 1000;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .menu-card-metric strong {
+      color: #fff;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      line-height: .9;
+      letter-spacing: -0.06em;
+    }
+
     .menu-card p {
       margin: 12px 0 0;
       color: #b8c5d8;
@@ -586,7 +513,6 @@ interface MenuCard {
         min-height: 300px;
       }
 
-      .stats-strip,
       .menu-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -637,43 +563,6 @@ interface MenuCard {
       .logo-c { left: 27%; bottom: 6%; }
       .logo-d { right: 28%; bottom: 7%; }
 
-      .stats-strip {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-        margin-top: 14px;
-      }
-
-      .stat-card {
-        min-height: 74px;
-        padding: 11px 12px;
-        gap: 10px;
-        border-radius: 18px;
-      }
-
-      .stat-card::after {
-        right: -38px;
-        top: -38px;
-        width: 82px;
-        height: 82px;
-      }
-
-      .stat-icon {
-        width: 34px;
-        height: 34px;
-        border-radius: 13px;
-        font-size: .92rem;
-      }
-
-      .stat-card span {
-        font-size: .61rem;
-        letter-spacing: .08em;
-      }
-
-      .stat-card strong {
-        margin-top: 5px;
-        font-size: 1.55rem;
-      }
-
       .menu-grid {
         grid-template-columns: 1fr;
       }
@@ -681,6 +570,14 @@ interface MenuCard {
       .menu-card {
         min-height: 220px;
         border-radius: 24px;
+      }
+
+      .menu-card-main {
+        align-items: flex-start;
+      }
+
+      .menu-card-metric {
+        padding: 8px 10px;
       }
     }
 
@@ -759,7 +656,8 @@ export class LeagueMenuPageComponent implements OnInit {
       description: 'Totales, medias, goles y tiros a favor y en contra por equipo.',
       route: '/equipos',
       accent: '#38bdf8',
-      icon: '🛡️'
+      icon: '🛡️',
+      metric: 'teams'
     },
     {
       title: 'Jugadores',
@@ -767,7 +665,8 @@ export class LeagueMenuPageComponent implements OnInit {
       description: 'Goles, asistencias, puntos y ranking individual de la competición.',
       route: '/jugadores',
       accent: '#22c55e',
-      icon: '⚡'
+      icon: '⚡',
+      metric: 'totalPlayers'
     },
     {
       title: 'Porteros',
@@ -775,7 +674,8 @@ export class LeagueMenuPageComponent implements OnInit {
       description: 'Paradas, tiros recibidos, goles encajados y porcentaje de parada.',
       route: '/porteros',
       accent: '#a78bfa',
-      icon: '🥅'
+      icon: '🥅',
+      metric: 'totalGoalies'
     },
     {
       title: 'Partidos',
@@ -783,7 +683,8 @@ export class LeagueMenuPageComponent implements OnInit {
       description: 'Resultados, enfrentamientos, sedes y detalle de cada encuentro.',
       route: '/partidos',
       accent: '#fb923c',
-      icon: '🏒'
+      icon: '🏒',
+      metric: 'totalMatches'
     }
   ];
 
@@ -802,6 +703,22 @@ export class LeagueMenuPageComponent implements OnInit {
       this.selectedLogos = this.pickLogos(this.leagueKey);
       this.api.getDashboardSummary({ league_key: this.leagueKey }).subscribe((data) => (this.summary = data));
     });
+  }
+
+
+  metricValue(card: MenuCard, data: DashboardSummary): number {
+    switch (card.metric) {
+      case 'totalMatches':
+        return data.totalMatches || 0;
+      case 'totalPlayers':
+        return data.totalPlayers || 0;
+      case 'totalGoalies':
+        return data.totalGoalies || 0;
+      case 'teams':
+        return data.topTeams?.length || 0;
+      default:
+        return 0;
+    }
   }
 
   private pickLogos(key: string): string[] {
