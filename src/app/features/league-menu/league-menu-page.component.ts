@@ -47,14 +47,13 @@ interface MenuCard {
             <div class="menu-card-glow"></div>
             <div class="menu-card-top">
               <span class="menu-icon">{{ card.icon }}</span>
-              <span class="menu-label">{{ card.label }}</span>
-            </div>
-            <div class="menu-card-main">
-              <h3>{{ card.title }}</h3>
               <div class="menu-card-metric" *ngIf="summary as data">
                 <span>Total</span>
                 <strong>{{ metricValue(card, data) }}</strong>
               </div>
+            </div>
+            <div class="menu-card-main">
+              <h3>{{ card.title }}</h3>
             </div>
             <p>{{ card.description }}</p>
             <div class="menu-card-footer">
@@ -425,19 +424,8 @@ interface MenuCard {
       font-size: 1.35rem;
     }
 
-    .menu-label {
-      padding: 8px 10px;
-      border-radius: 999px;
-      color: color-mix(in srgb, var(--card-accent) 82%, #fff);
-      background: color-mix(in srgb, var(--card-accent) 13%, transparent);
-      font-size: .72rem;
-      font-weight: 1000;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
     .menu-card h3 {
-      margin: 34px 0 0;
+      margin: 30px 0 0;
       color: #f8fafc;
       font-size: clamp(1.6rem, 2.2vw, 2.35rem);
       line-height: 1;
@@ -446,16 +434,19 @@ interface MenuCard {
 
     .menu-card-main {
       display: flex;
-      align-items: flex-end;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 14px;
     }
 
     .menu-card-metric {
       display: grid;
-      justify-items: end;
+      justify-items: start;
       gap: 3px;
-      padding: 10px 12px;
+      min-width: 58px;
+      min-height: 58px;
+      align-content: center;
+      padding: 8px 12px;
       border-radius: 18px;
       background: color-mix(in srgb, var(--card-accent) 14%, rgba(255,255,255,.04));
       border: 1px solid color-mix(in srgb, var(--card-accent) 28%, transparent);
@@ -472,7 +463,7 @@ interface MenuCard {
 
     .menu-card-metric strong {
       color: #fff;
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-size: clamp(1.55rem, 2.55vw, 2.15rem);
       line-height: .9;
       letter-spacing: -0.06em;
     }
@@ -577,7 +568,9 @@ interface MenuCard {
       }
 
       .menu-card-metric {
-        padding: 8px 10px;
+        min-width: 54px;
+        min-height: 54px;
+        padding: 7px 10px;
       }
     }
 
