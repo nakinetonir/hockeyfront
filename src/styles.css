@@ -1584,3 +1584,64 @@ input, select {
     line-height: 1.2;
   }
 }
+
+/* === Mejora visibilidad iconos de fondo en cards/tablas === */
+@media (max-width: 720px) {
+  .stats-table tr.team-watermark-row {
+    background-image:
+      linear-gradient(90deg, rgba(10, 18, 36, 0.76), rgba(10, 18, 36, 0.42)),
+      var(--team-logo-url) !important;
+    background-size: auto, 72% auto !important;
+    filter: brightness(1.16) saturate(1.12) !important;
+  }
+
+  .stats-table tr.team-stats-row.team-watermark-row {
+    background-image:
+      linear-gradient(90deg, rgba(10, 18, 36, 0.76), rgba(10, 18, 36, 0.42)),
+      var(--team-logo-url) !important;
+    background-size: auto, 72% auto !important;
+    filter: brightness(1.16) saturate(1.12) !important;
+  }
+
+  .stats-table tr.team-watermark-row.team-360-row,
+  .stats-table tr.team-stats-row.team-watermark-row.team-360-row {
+    background-image:
+      linear-gradient(90deg, rgba(4, 11, 24, 0.76), rgba(4, 11, 24, 0.40)),
+      radial-gradient(circle at center, rgba(56, 189, 248, 0.24), rgba(34, 197, 94, 0.16) 36%, rgba(8, 15, 30, 0) 74%),
+      var(--team-logo-url) !important;
+    background-size: auto, 158% 158%, 74% auto !important;
+    filter: brightness(1.18) saturate(1.18) !important;
+  }
+
+  .stats-table tr.team-watermark-row.team-360-row::before {
+    background:
+      linear-gradient(118deg,
+        rgba(255,255,255,0) 0%,
+        rgba(125, 211, 252, 0.14) 22%,
+        rgba(96, 165, 250, 0.28) 45%,
+        rgba(34, 197, 94, 0.14) 56%,
+        rgba(255,255,255,0) 74%
+      ),
+      var(--team-logo-url) center center / 74% auto no-repeat !important;
+    opacity: 0.72 !important;
+  }
+}
+
+@media (min-width: 721px) {
+  .team-shots-card-grid .stats-table tr.team-stats-row.team-watermark-row,
+  .team-shots-card-grid .stats-table tr.team-stats-row.team-watermark-row.team-360-row {
+    background-image:
+      linear-gradient(90deg, rgba(10, 18, 36, 0.82), rgba(10, 18, 36, 0.48)),
+      var(--team-logo-url) !important;
+    background-size: auto, 72% auto !important;
+    filter: brightness(1.12) saturate(1.12);
+  }
+
+  .team-shots-card-grid .stats-table tr.team-stats-row.team-watermark-row.team-360-row {
+    background-image:
+      linear-gradient(90deg, rgba(4, 11, 24, 0.82), rgba(4, 11, 24, 0.46)),
+      radial-gradient(circle at center, rgba(56, 189, 248, 0.24), rgba(34, 197, 94, 0.16) 36%, rgba(8, 15, 30, 0) 74%),
+      var(--team-logo-url) !important;
+    background-size: auto, 158% 158%, 74% auto !important;
+  }
+}
