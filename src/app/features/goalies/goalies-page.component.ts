@@ -133,7 +133,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
     .person-card {
       --team-logo-url: none;
       position: relative;
-      min-height: 205px;
+      min-height: 245px;
       overflow: hidden;
       border: 1px solid rgba(148, 163, 184, 0.22);
       border-radius: 24px;
@@ -151,7 +151,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       content: '';
       position: absolute;
       inset: 0;
-      background: var(--team-logo-url) right -18px top 4px / 230px auto no-repeat;
+      background: var(--team-logo-url) right -18px top 4px / 184px auto no-repeat;
       opacity: .66;
       filter: none;
       pointer-events: none;
@@ -184,7 +184,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       position: relative;
       z-index: 1;
       display: flex;
-      min-height: 205px;
+      min-height: 245px;
       flex-direction: column;
       justify-content: space-between;
       padding: 18px;
