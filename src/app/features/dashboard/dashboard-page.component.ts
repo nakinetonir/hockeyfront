@@ -79,7 +79,7 @@ type HomeLeague = LeagueItem & {
     }
 
     .home-shell {
-      position: flex;
+      display: flex;
       flex-direction: column;
       gap:1rem;
       padding: clamp(18px, 3vw, 34px) 0 64px;
