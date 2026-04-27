@@ -31,7 +31,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
         </div>
       </div>
 
-      <div class="card table-wrap responsive-table-card">
+      <div class="card table-wrap responsive-table-card team-shots-card-grid">
         <table class="stats-table">
           <thead>
             <tr>

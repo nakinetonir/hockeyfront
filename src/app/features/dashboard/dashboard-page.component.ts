@@ -66,7 +66,8 @@ type HomeLeague = LeagueItem & {
           </div>
 
           <div class="card-bottom">
-            <strong></strong>
+            <span>Entrar al panel</span>
+            <strong>→</strong>
           </div>
         </a>
       </div>
@@ -79,9 +80,9 @@ type HomeLeague = LeagueItem & {
     }
 
     .home-shell {
-      display: flex;
-      flex-direction: column;
-      gap:1rem;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
       padding: clamp(18px, 3vw, 34px) 0 64px;
     }
 
@@ -125,6 +126,7 @@ type HomeLeague = LeagueItem & {
       grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
       gap: clamp(24px, 4vw, 56px);
       align-items: center;
+      min-height: clamp(460px, 58vh, 640px);
       padding: clamp(28px, 5vw, 64px);
       border: 1px solid rgba(125, 211, 252, 0.24);
       border-radius: clamp(28px, 4vw, 44px);
