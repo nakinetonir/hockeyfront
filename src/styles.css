@@ -1645,3 +1645,46 @@ input, select {
     background-size: auto, 158% 158%, 74% auto !important;
   }
 }
+
+/* === Ajuste desktop: logos de fondo más nítidos en cards de jugadores/porteros/equipos === */
+@media (min-width: 721px) {
+  .desktop-player-grid .person-card {
+    background-image: linear-gradient(145deg, rgba(15, 23, 42, 0.88), rgba(17, 24, 39, 0.72)) !important;
+    filter: none !important;
+  }
+
+  .desktop-player-grid .person-card.team-360-card {
+    background-image:
+      linear-gradient(145deg, rgba(4, 11, 24, 0.88), rgba(9, 19, 35, 0.70)),
+      radial-gradient(circle at 86% 20%, rgba(56, 189, 248, .18), rgba(34,197,94,.10) 36%, transparent 66%) !important;
+  }
+
+  .desktop-player-grid .person-card::before {
+    background: var(--team-logo-url) right -18px top 4px / 230px auto no-repeat !important;
+    opacity: .66 !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+  }
+
+  .desktop-player-grid .person-card:hover::before {
+    opacity: .76 !important;
+  }
+
+  .team-shots-card-grid .stats-table tr.team-stats-row.team-watermark-row,
+  .team-shots-card-grid .stats-table tr.team-stats-row.team-watermark-row.team-360-row {
+    background-image:
+      linear-gradient(90deg, rgba(10, 18, 36, 0.74), rgba(10, 18, 36, 0.34)),
+      var(--team-logo-url) !important;
+    background-position: 0 0, center center !important;
+    background-size: auto, 82% auto !important;
+    filter: none !important;
+  }
+
+  .team-shots-card-grid .stats-table tr.team-stats-row.team-watermark-row.team-360-row {
+    background-image:
+      linear-gradient(90deg, rgba(4, 11, 24, 0.74), rgba(4, 11, 24, 0.32)),
+      radial-gradient(circle at center, rgba(56, 189, 248, 0.18), rgba(34, 197, 94, 0.12) 36%, rgba(8, 15, 30, 0) 74%),
+      var(--team-logo-url) !important;
+    background-size: auto, 150% 150%, 82% auto !important;
+  }
+}

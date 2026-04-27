@@ -57,7 +57,6 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
                 <span class="person-card-kicker">Portero</span>
                 <h3>{{ item.goalie }}</h3>
               </div>
-              <app-team-logo [team]="item.team" [animate360]="true"></app-team-logo>
             </div>
             <div class="person-card-stats goalie-stats">
               <span><small>Partidos</small><strong>{{ item.matches || 0 }}</strong></span>
@@ -143,8 +142,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       text-align: left;
       cursor: pointer;
       background:
-        linear-gradient(145deg, rgba(15, 23, 42, 0.86), rgba(17, 24, 39, 0.64)),
-        var(--team-logo-url) right -24px top 8px / 190px auto no-repeat;
+        linear-gradient(145deg, rgba(15, 23, 42, 0.88), rgba(17, 24, 39, 0.72));
       box-shadow: 0 18px 48px rgba(2, 6, 23, 0.28), inset 0 1px 0 rgba(255,255,255,.05);
       transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
@@ -153,10 +151,9 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.07) 44%, transparent 58%),
-        var(--team-logo-url) right -28px top 8px / 215px auto no-repeat;
-      opacity: .36;
+      background: var(--team-logo-url) right -18px top 4px / 230px auto no-repeat;
+      opacity: .66;
+      filter: none;
       pointer-events: none;
     }
 
@@ -168,9 +165,8 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
 
     .team-360-card {
       background:
-        linear-gradient(145deg, rgba(4, 11, 24, 0.86), rgba(9, 19, 35, 0.62)),
-        radial-gradient(circle at 86% 20%, rgba(56, 189, 248, .24), rgba(34,197,94,.14) 36%, transparent 66%),
-        var(--team-logo-url) right -24px top 8px / 190px auto no-repeat;
+        linear-gradient(145deg, rgba(4, 11, 24, 0.88), rgba(9, 19, 35, 0.70)),
+        radial-gradient(circle at 86% 20%, rgba(56, 189, 248, .18), rgba(34,197,94,.10) 36%, transparent 66%);
     }
 
     .person-card-bg {
