@@ -57,8 +57,7 @@ interface MenuCard {
             </div>
             <p>{{ card.description }}</p>
             <div class="menu-card-footer">
-              <span>Entrar</span>
-              <strong>→</strong>
+              <strong></strong>
             </div>
           </a>
         </div>

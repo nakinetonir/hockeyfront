@@ -66,8 +66,7 @@ type HomeLeague = LeagueItem & {
           </div>
 
           <div class="card-bottom">
-            <span>Entrar al panel</span>
-            <strong>→</strong>
+            <strong></strong>
           </div>
         </a>
       </div>
