@@ -973,7 +973,7 @@ input, select {
     var(--team-logo-url);
   background-repeat: no-repeat, no-repeat;
   background-position: 0 0, right 18px center;
-  background-size: auto, 104px 104px;
+  background-size: auto, 73px 73px;
 }
 
 @media (min-width: 721px) {
@@ -983,7 +983,7 @@ input, select {
 
   .team-watermark-row {
     background-position: 0 0, right 18px center;
-    background-size: auto, 88px 88px;
+    background-size: auto, 62px 62px;
   }
 }
 
@@ -1024,7 +1024,7 @@ input, select {
       var(--team-logo-url);
     background-repeat: no-repeat, no-repeat;
     background-position: 0 0, center center;
-    background-size: auto, 82% auto;
+    background-size: auto, 57.4% auto;
   }
 
   .stats-table tr.team-watermark-row td {
@@ -1120,7 +1120,7 @@ input, select {
       var(--team-logo-url);
     background-repeat: no-repeat, no-repeat, no-repeat;
     background-position: 0 0, center center, center center;
-    background-size: auto, 155% 155%, 75% auto;
+    background-size: auto, 108.5% 108.5%, 52.5% auto;
     animation:
       team360-row-enter 0.85s ease both,
       team360-row-pulse 2.4s ease-in-out infinite,
@@ -1129,10 +1129,10 @@ input, select {
 
   @keyframes team360-watermark-breathe-mobile {
     0%, 100% {
-      background-size: auto, 155% 155%, 72% auto;
+      background-size: auto, 108.5% 108.5%, 50.4% auto;
     }
     50% {
-      background-size: auto, 170% 170%, 78% auto;
+      background-size: auto, 119% 119%, 54.6% auto;
     }
   }
 }
@@ -1150,7 +1150,7 @@ input, select {
       var(--team-logo-url) !important;
     background-repeat: no-repeat, no-repeat, no-repeat !important;
     background-position: 0 0, 50% 50%, 50% 50% !important;
-    background-size: auto, 172% 172%, 82% auto !important;
+    background-size: auto, 120.4% 120.4%, 57.4% auto !important;
     animation:
       team360-row-enter 0.85s ease both,
       team360-row-pulse 2.4s ease-in-out infinite,
@@ -1171,7 +1171,7 @@ input, select {
         rgba(34, 197, 94, 0.12) 56%,
         rgba(255,255,255,0) 74%
       ),
-      var(--team-logo-url) center center / 82% auto no-repeat !important;
+      var(--team-logo-url) center center / 57.4% auto no-repeat !important;
     opacity: 0.62 !important;
     mix-blend-mode: screen;
     transform-origin: center center;
@@ -1443,7 +1443,7 @@ input, select {
         rgba(34, 197, 94, 0.10) 56%,
         rgba(255,255,255,0) 74%
       ),
-      var(--team-logo-url) center center / 60% auto no-repeat !important;
+      var(--team-logo-url) center center / 42% auto no-repeat !important;
     opacity: 0.58 !important;
   }
 }
@@ -1591,7 +1591,7 @@ input, select {
     background-image:
       linear-gradient(90deg, rgba(10, 18, 36, 0.76), rgba(10, 18, 36, 0.42)),
       var(--team-logo-url) !important;
-    background-size: auto, 72% auto !important;
+    background-size: auto, 50.4% auto !important;
     filter: brightness(1.16) saturate(1.12) !important;
   }
 
@@ -1599,7 +1599,7 @@ input, select {
     background-image:
       linear-gradient(90deg, rgba(10, 18, 36, 0.76), rgba(10, 18, 36, 0.42)),
       var(--team-logo-url) !important;
-    background-size: auto, 72% auto !important;
+    background-size: auto, 50.4% auto !important;
     filter: brightness(1.16) saturate(1.12) !important;
   }
 
@@ -1609,7 +1609,7 @@ input, select {
       linear-gradient(90deg, rgba(4, 11, 24, 0.76), rgba(4, 11, 24, 0.40)),
       radial-gradient(circle at center, rgba(56, 189, 248, 0.24), rgba(34, 197, 94, 0.16) 36%, rgba(8, 15, 30, 0) 74%),
       var(--team-logo-url) !important;
-    background-size: auto, 158% 158%, 74% auto !important;
+    background-size: auto, 110.6% 110.6%, 51.8% auto !important;
     filter: brightness(1.18) saturate(1.18) !important;
   }
 
@@ -1622,7 +1622,7 @@ input, select {
         rgba(34, 197, 94, 0.14) 56%,
         rgba(255,255,255,0) 74%
       ),
-      var(--team-logo-url) center center / 74% auto no-repeat !important;
+      var(--team-logo-url) center center / 51.8% auto no-repeat !important;
     opacity: 0.72 !important;
   }
 }
@@ -1633,7 +1633,7 @@ input, select {
     background-image:
       linear-gradient(90deg, rgba(10, 18, 36, 0.82), rgba(10, 18, 36, 0.48)),
       var(--team-logo-url) !important;
-    background-size: auto, 72% auto !important;
+    background-size: auto, 50.4% auto !important;
     filter: brightness(1.12) saturate(1.12);
   }
 
@@ -1642,7 +1642,7 @@ input, select {
       linear-gradient(90deg, rgba(4, 11, 24, 0.82), rgba(4, 11, 24, 0.46)),
       radial-gradient(circle at center, rgba(56, 189, 248, 0.24), rgba(34, 197, 94, 0.16) 36%, rgba(8, 15, 30, 0) 74%),
       var(--team-logo-url) !important;
-    background-size: auto, 158% 158%, 74% auto !important;
+    background-size: auto, 110.6% 110.6%, 51.8% auto !important;
   }
 }
 
@@ -1660,7 +1660,7 @@ input, select {
   }
 
   .desktop-player-grid .person-card::before {
-    background: var(--team-logo-url) right -18px top 4px / 230px auto no-repeat !important;
+    background: var(--team-logo-url) right -18px top 4px / 161px auto no-repeat !important;
     opacity: .66 !important;
     filter: none !important;
     mix-blend-mode: normal !important;
@@ -1676,7 +1676,7 @@ input, select {
       linear-gradient(90deg, rgba(10, 18, 36, 0.74), rgba(10, 18, 36, 0.34)),
       var(--team-logo-url) !important;
     background-position: 0 0, center center !important;
-    background-size: auto, 82% auto !important;
+    background-size: auto, 57.4% auto !important;
     filter: none !important;
   }
 
@@ -1685,6 +1685,6 @@ input, select {
       linear-gradient(90deg, rgba(4, 11, 24, 0.74), rgba(4, 11, 24, 0.32)),
       radial-gradient(circle at center, rgba(56, 189, 248, 0.18), rgba(34, 197, 94, 0.12) 36%, rgba(8, 15, 30, 0) 74%),
       var(--team-logo-url) !important;
-    background-size: auto, 150% 150%, 82% auto !important;
+    background-size: auto, 105% 105%, 57.4% auto !important;
   }
 }

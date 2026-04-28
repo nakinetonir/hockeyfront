@@ -156,7 +156,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
         var(--team-logo-url) !important;
       background-repeat: no-repeat, no-repeat !important;
       background-position: 0 0, center center !important;
-      background-size: auto, 72% auto !important;
+      background-size: auto, 50.4% auto !important;
       box-shadow: 0 8px 30px rgba(0,0,0,0.25);
       filter: brightness(1.16) saturate(1.12) !important;
     }
@@ -167,7 +167,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
         radial-gradient(circle at center, rgba(56, 189, 248, 0.24), rgba(34, 197, 94, 0.16) 36%, rgba(8, 15, 30, 0) 74%),
         var(--team-logo-url) !important;
       background-position: 0 0, center center, center center !important;
-      background-size: auto, 158% 158%, 74% auto !important;
+      background-size: auto, 110.6% 110.6%, 51.8% auto !important;
       filter: brightness(1.18) saturate(1.18) !important;
     }
 
@@ -245,7 +245,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       content: '';
       position: absolute;
       inset: 0;
-      background: var(--team-logo-url) right -18px top 4px / 184px auto no-repeat;
+      background: var(--team-logo-url) right -18px top 4px / 129px auto no-repeat;
       opacity: .66;
       filter: none;
       pointer-events: none;
