@@ -1,4 +1,15 @@
 :root {
+  color-scheme: light;
+  --bg: #f5f9ff;
+  --surface: rgba(255,255,255,0.92);
+  --surface-2: #eef6ff;
+  --border: rgba(30, 64, 175, 0.18);
+  --text: #0f172a;
+  --muted: #526071;
+  --accent: #0284c7;
+}
+
+body.theme-dark {
   color-scheme: dark;
   --bg: #0f172a;
   --surface: #111827;
@@ -13,10 +24,17 @@
 body {
   margin: 0;
   font-family: Inter, Arial, sans-serif;
-  background: linear-gradient(180deg, #020617, #0f172a);
+  background:
+    radial-gradient(circle at 18% -8%, rgba(14,165,233,.18), transparent 30%),
+    radial-gradient(circle at 90% 8%, rgba(34,197,94,.12), transparent 28%),
+    linear-gradient(180deg, #f8fbff, #eaf3ff 52%, #f8fbff);
   color: var(--text);
+  transition: background .25s ease, color .25s ease;
 }
 
+body.theme-dark {
+  background: linear-gradient(180deg, #020617, #0f172a);
+}
 a { color: inherit; text-decoration: none; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px 42px; }
 @media (max-width: 640px) { .container { padding: 0 16px 36px; } }
@@ -1686,5 +1704,211 @@ input, select {
       radial-gradient(circle at center, rgba(56, 189, 248, 0.18), rgba(34, 197, 94, 0.12) 36%, rgba(8, 15, 30, 0) 74%),
       var(--team-logo-url) !important;
     background-size: auto, 105% 105%, 57.4% auto !important;
+  }
+}
+
+
+/* === White theme + dark toggle overrides === */
+body:not(.theme-dark) .card {
+  background: rgba(255,255,255,.86) !important;
+  border-color: rgba(2,132,199,.16) !important;
+  box-shadow: 0 18px 48px rgba(15,23,42,.08) !important;
+}
+
+body:not(.theme-dark) input,
+body:not(.theme-dark) select {
+  background: rgba(255,255,255,.92) !important;
+  color: #0f172a !important;
+  border-color: rgba(2,132,199,.18) !important;
+}
+
+body:not(.theme-dark) th,
+body:not(.theme-dark) .small,
+body:not(.theme-dark) .page-subtitle,
+body:not(.theme-dark) .kpi-label {
+  color: #64748b !important;
+}
+
+body:not(.theme-dark) .nav-shell {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.88), rgba(239,246,255,.86)),
+    radial-gradient(circle at 18% 0%, rgba(14,165,233,.18), transparent 30%) !important;
+  border-bottom-color: rgba(2,132,199,.16) !important;
+  box-shadow: 0 18px 48px rgba(15,23,42,.08) !important;
+}
+
+body:not(.theme-dark) .nav-brand {
+  color: #0f172a !important;
+  background: rgba(255,255,255,.78) !important;
+  border-color: rgba(2,132,199,.20) !important;
+}
+
+body:not(.theme-dark) .brand-copy strong {
+  color: #0f172a !important;
+}
+
+body:not(.theme-dark) .nav-links {
+  background: rgba(255,255,255,.68) !important;
+  border-color: rgba(2,132,199,.14) !important;
+}
+
+body:not(.theme-dark) .nav-links a {
+  color: #475569 !important;
+}
+
+body:not(.theme-dark) .nav-links a:hover {
+  color: #0f172a !important;
+  background: rgba(14,165,233,.10) !important;
+}
+
+body:not(.theme-dark) .nav-links a.active {
+  color: #082f49 !important;
+}
+
+body:not(.theme-dark) .mobile-toggle {
+  background: rgba(255,255,255,.82) !important;
+  border-color: rgba(2,132,199,.22) !important;
+}
+
+body:not(.theme-dark) .mobile-toggle span {
+  background: #0f172a !important;
+}
+
+body:not(.theme-dark) .selected-league-header {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.90), rgba(224,242,254,.78)),
+    radial-gradient(circle at 88% 0%, rgba(14,165,233,.14), transparent 42%) !important;
+  border-color: rgba(2,132,199,.18) !important;
+}
+
+body:not(.theme-dark) .selected-league-header span {
+  color: #0284c7 !important;
+}
+
+body:not(.theme-dark) .stats-table tr.team-watermark-row,
+body:not(.theme-dark) .stats-table tr.team-stats-row.team-watermark-row {
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.93), rgba(255,255,255,.70)),
+    var(--team-logo-url) !important;
+}
+
+body:not(.theme-dark) .desktop-player-grid .person-card {
+  background-image:
+    linear-gradient(145deg, rgba(255,255,255,.92), rgba(239,246,255,.78)),
+    radial-gradient(circle at 90% 12%, rgba(14,165,233,.12), transparent 34%) !important;
+  border-color: rgba(2,132,199,.18) !important;
+  color: #0f172a !important;
+  box-shadow: 0 22px 52px rgba(15,23,42,.10) !important;
+}
+
+body:not(.theme-dark) .desktop-player-grid .person-card::before {
+  opacity: .22 !important;
+  filter: saturate(1.15) brightness(1.05) !important;
+}
+
+body:not(.theme-dark) .person-card-kicker,
+body:not(.theme-dark) .person-card-stats small {
+  color: #0284c7 !important;
+}
+
+body:not(.theme-dark) .person-card h3,
+body:not(.theme-dark) .person-card-stats strong,
+body:not(.theme-dark) .page-title,
+body:not(.theme-dark) td {
+  color: #0f172a !important;
+}
+
+/* Home white theme */
+body:not(.theme-dark) .home-hero {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.94), rgba(239,246,255,.90) 52%, rgba(224,242,254,.92)),
+    radial-gradient(circle at 72% 16%, rgba(14,165,233,.16), transparent 34%),
+    radial-gradient(circle at 15% 90%, rgba(34,197,94,.10), transparent 30%) !important;
+  border-color: rgba(2,132,199,.18) !important;
+  box-shadow: 0 34px 100px rgba(15,23,42,.12), inset 0 1px 0 rgba(255,255,255,.85) !important;
+}
+
+body:not(.theme-dark) .home-hero h1 {
+  color: #0f172a !important;
+}
+
+body:not(.theme-dark) .home-hero h1 span {
+  background: linear-gradient(90deg, #0f172a, #0284c7 48%, #22c55e) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+body:not(.theme-dark) .home-hero p,
+body:not(.theme-dark) .section-title p {
+  color: #475569 !important;
+}
+
+body:not(.theme-dark) .section-title h2,
+body:not(.theme-dark) .league-card h3 {
+  color: #0f172a !important;
+}
+
+body:not(.theme-dark) .league-card {
+  background:
+    linear-gradient(150deg, rgba(255,255,255,.92), rgba(239,246,255,.82)),
+    radial-gradient(circle at 16% 0%, color-mix(in srgb, var(--card-accent) 18%, transparent), transparent 40%) !important;
+  border-color: rgba(2,132,199,.14) !important;
+  box-shadow: 0 22px 54px rgba(15,23,42,.10) !important;
+}
+
+body:not(.theme-dark) .league-card::after {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.94) 0%, rgba(255,255,255,.86) 42%, rgba(255,255,255,.55) 100%),
+    radial-gradient(circle at 84% 42%, color-mix(in srgb, var(--card-accent) 18%, transparent), transparent 36%) !important;
+}
+
+body:not(.theme-dark) .league-card p,
+body:not(.theme-dark) .card-bottom {
+  color: #475569 !important;
+}
+
+body:not(.theme-dark) .league-chip {
+  color: #0369a1 !important;
+  background: rgba(14,165,233,.08) !important;
+  border-color: rgba(2,132,199,.16) !important;
+}
+
+@media (max-width: 860px) {
+  body:not(.theme-dark) .nav-links {
+    background:
+      linear-gradient(145deg, rgba(255,255,255,.98), rgba(239,246,255,.96)),
+      radial-gradient(circle at 90% 0%, rgba(56,189,248,.16), transparent 40%) !important;
+  }
+
+  body:not(.theme-dark) .nav-links a,
+  body:not(.theme-dark) .nav-links .theme-toggle {
+    color: #0f172a !important;
+    background: rgba(255,255,255,.78) !important;
+    border-color: rgba(2,132,199,.14) !important;
+  }
+}
+
+
+/* Pumas/Bisontes and all detected teams: visible branded backgrounds */
+@media (min-width: 721px) {
+  .desktop-player-grid .person-card::before {
+    background: var(--team-logo-url) right -20px top 8px / 148px auto no-repeat !important;
+    opacity: .34 !important;
+    filter: saturate(1.1) contrast(1.02) !important;
+  }
+
+  .team-shots-card-grid .stats-table tr.team-stats-row.team-watermark-row {
+    background-image:
+      linear-gradient(90deg, rgba(255,255,255,.94), rgba(255,255,255,.76)),
+      var(--team-logo-url) !important;
+    background-repeat: no-repeat, no-repeat !important;
+    background-position: 0 0, right 22px center !important;
+    background-size: auto, 86px 86px !important;
+  }
+
+  body.theme-dark .team-shots-card-grid .stats-table tr.team-stats-row.team-watermark-row {
+    background-image:
+      linear-gradient(90deg, rgba(8, 15, 30, 0.94), rgba(8, 15, 30, 0.72)),
+      var(--team-logo-url) !important;
   }
 }

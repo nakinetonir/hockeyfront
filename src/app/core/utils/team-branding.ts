@@ -95,6 +95,24 @@ const TEAM_BRANDS: TeamBrand[] = [
     ]
   },
   {
+    key: 'pumas',
+    name: 'Pumas Galapagar',
+    logo: '/assets/teams/pumas.png',
+    aliases: [
+      'pumas', 'pumas galapagar', 'galapagar', 'club pumas galapagar',
+      'pumas de galapagar', 'hl pumas galapagar'
+    ]
+  },
+  {
+    key: 'bisontes',
+    name: 'Bisontes',
+    logo: '/assets/teams/bisontes.png',
+    aliases: [
+      'bisontes', 'bisontes madrid', 'bisontes hockey', 'bisontes hl',
+      'bisonte', 'bisonte hockey'
+    ]
+  },
+  {
     key: 'vikings',
     name: 'CPLG Vikings',
     logo: '/assets/teams/vikings.png',

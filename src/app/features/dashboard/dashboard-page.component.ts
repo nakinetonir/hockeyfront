@@ -618,6 +618,60 @@ type HomeLeague = LeagueItem & {
       transform: translateX(5px);
     }
 
+
+    .hockey-photo-card {
+      position: relative;
+      width: min(100%, 460px);
+      min-height: 390px;
+      margin-left: auto;
+      border-radius: 38px;
+      overflow: hidden;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(14,165,233,.18);
+      box-shadow: 0 30px 90px rgba(15,23,42,.18);
+      isolation: isolate;
+    }
+
+    .hockey-photo-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 390px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .floating-logo {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      width: 118px;
+      height: 118px;
+      border-radius: 28px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(15,23,42,.08);
+      box-shadow: 0 22px 50px rgba(15,23,42,.18);
+      z-index: 2;
+    }
+
+    .floating-logo img {
+      width: 94px;
+      height: 94px;
+      min-height: auto;
+      object-fit: contain;
+    }
+
+    .floating-logo-a {
+      left: 8%;
+      bottom: 10%;
+      transform: rotate(-7deg);
+    }
+
+    .floating-logo-b {
+      right: 8%;
+      top: 10%;
+      transform: rotate(8deg);
+    }
+
     @media (max-width: 1100px) {
       .home-hero {
         grid-template-columns: 1fr;
@@ -693,7 +747,27 @@ type HomeLeague = LeagueItem & {
       }
 
       .hero-visual {
-        min-height: 240px;
+        min-height: 220px;
+      }
+
+      .hockey-photo-card {
+        min-height: 250px;
+        border-radius: 26px;
+      }
+
+      .hockey-photo-card img {
+        min-height: 250px;
+      }
+
+      .floating-logo {
+        width: 82px;
+        height: 82px;
+        border-radius: 20px;
+      }
+
+      .floating-logo img {
+        width: 64px;
+        height: 64px;
       }
 
       .ice-rink {
@@ -789,7 +863,9 @@ export class DashboardPageComponent implements OnInit {
     '/assets/teams/sobre8ruedas.png',
     '/assets/teams/tirso.png',
     '/assets/teams/trescantos.png',
-    '/assets/teams/vikings.png'
+    '/assets/teams/vikings.png',
+    '/assets/teams/pumas.png',
+    '/assets/teams/bisontes.png'
   ];
 
   private readonly leagueLogoGroups = [
@@ -798,7 +874,8 @@ export class DashboardPageComponent implements OnInit {
     ['/assets/teams/madridpatina.png', '/assets/teams/mamuts.png', '/assets/teams/pinguinos.png'],
     ['/assets/teams/renos.png', '/assets/teams/rolleybeers.png', '/assets/teams/tirso.png'],
     ['/assets/teams/vikings.png', '/assets/teams/cplm.png', '/assets/teams/360.png'],
-    ['/assets/teams/trescantos.png', '/assets/teams/sobre8ruedas.png', '/assets/teams/lasrozas.png']
+    ['/assets/teams/trescantos.png', '/assets/teams/sobre8ruedas.png', '/assets/teams/lasrozas.png'],
+    ['/assets/teams/pumas.png', '/assets/teams/bisontes.png', '/assets/teams/vikings.png']
   ];
 
   private readonly leagueOrder = [

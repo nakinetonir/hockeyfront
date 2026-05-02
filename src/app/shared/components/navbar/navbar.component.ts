@@ -42,6 +42,10 @@ import { filter } from 'rxjs/operators';
             <span class="nav-icon">🏒</span>
             Partidos
           </a>
+          <button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-label]="isDarkTheme ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'">
+            <span class="nav-icon">{{ isDarkTheme ? '☀️' : '🌙' }}</span>
+            {{ isDarkTheme ? 'Claro' : 'Dark' }}
+          </button>
         </nav>
       </div>
     </header>
@@ -208,6 +212,26 @@ import { filter } from 'rxjs/operators';
       background: rgba(3,21,37,.12);
     }
 
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 999px;
+      color: #0f172a;
+      background: linear-gradient(135deg, #fde68a, #7dd3fc);
+      font-size: .91rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(14,165,233,.18);
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+    }
+
     .mobile-toggle {
       display: none;
       margin-left: auto;
@@ -326,7 +350,8 @@ import { filter } from 'rxjs/operators';
         display: grid;
       }
 
-      .nav-links a {
+      .nav-links a,
+      .nav-links .theme-toggle {
         justify-content: flex-start;
         min-height: 58px;
         border-radius: 18px;
@@ -462,13 +487,32 @@ export class NavbarComponent implements OnInit {
   leagueKey = '';
   leagueName = '';
   leagueQueryParams: Record<string, string> = {};
+  isDarkTheme = false;
   mobileOpen = false;
 
   ngOnInit(): void {
+    this.loadTheme();
     this.updateFromUrl(this.router.url);
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event) => this.updateFromUrl(event.urlAfterRedirects));
+  }
+
+
+  toggleTheme(): void {
+    this.isDarkTheme = !this.isDarkTheme;
+    this.applyTheme();
+  }
+
+  private loadTheme(): void {
+    const stored = localStorage.getItem('hlm-theme');
+    this.isDarkTheme = stored === 'dark';
+    this.applyTheme();
+  }
+
+  private applyTheme(): void {
+    document.body.classList.toggle('theme-dark', this.isDarkTheme);
+    localStorage.setItem('hlm-theme', this.isDarkTheme ? 'dark' : 'light');
   }
 
   private updateFromUrl(url: string): void {
