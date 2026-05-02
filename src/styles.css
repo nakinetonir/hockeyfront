@@ -1912,3 +1912,397 @@ body:not(.theme-dark) .league-chip {
       var(--team-logo-url) !important;
   }
 }
+
+
+/* === 2026 Light/Dark polished theme overhaul === */
+:root {
+  --bg: #f4f8ff;
+  --surface: rgba(255,255,255,0.94);
+  --surface-2: rgba(239,247,255,0.92);
+  --border: rgba(15, 82, 126, 0.16);
+  --text: #0b1220;
+  --muted: #52627a;
+  --accent: #0284c7;
+  --accent-2: #22c55e;
+  --shadow-soft: 0 18px 60px rgba(15, 23, 42, .11);
+  --shadow-card: 0 16px 44px rgba(15, 23, 42, .10);
+}
+
+body:not(.theme-dark) {
+  background:
+    radial-gradient(circle at 14% -8%, rgba(14,165,233,.18), transparent 34%),
+    radial-gradient(circle at 88% 8%, rgba(34,197,94,.12), transparent 32%),
+    linear-gradient(180deg, #f8fcff 0%, #edf7ff 44%, #f7fbff 100%) !important;
+  color: var(--text) !important;
+}
+
+body.theme-dark {
+  --bg: #020617;
+  --surface: rgba(15,23,42,0.92);
+  --surface-2: rgba(17,24,39,0.86);
+  --border: rgba(125, 211, 252, 0.18);
+  --text: #f8fafc;
+  --muted: #9fb0c6;
+  --accent: #38bdf8;
+  --accent-2: #22c55e;
+}
+
+body:not(.theme-dark) .card,
+body:not(.theme-dark) .filters,
+body:not(.theme-dark) .table-wrap,
+body:not(.theme-dark) .selected-league-header {
+  color: #0b1220 !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.96), rgba(237,247,255,.88)) !important;
+  border-color: rgba(14, 116, 144, .16) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+body:not(.theme-dark) table,
+body:not(.theme-dark) th,
+body:not(.theme-dark) td {
+  color: #0b1220 !important;
+  border-color: rgba(15, 82, 126, .12) !important;
+}
+
+body:not(.theme-dark) th,
+body:not(.theme-dark) .small,
+body:not(.theme-dark) .page-subtitle,
+body:not(.theme-dark) .kpi-label {
+  color: #52627a !important;
+}
+
+body:not(.theme-dark) input,
+body:not(.theme-dark) select {
+  background: rgba(255,255,255,.96) !important;
+  color: #0b1220 !important;
+  border-color: rgba(14, 116, 144, .18) !important;
+}
+
+/* Home: premium light hero + hockey visual */
+body:not(.theme-dark) .home-shell {
+  color: #0b1220 !important;
+}
+
+body:not(.theme-dark) .home-hero {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.92), rgba(232,248,255,.86) 42%, rgba(247,252,255,.96)),
+    radial-gradient(circle at 80% 12%, rgba(14,165,233,.18), transparent 32%),
+    radial-gradient(circle at 6% 88%, rgba(34,197,94,.12), transparent 28%) !important;
+  border-color: rgba(14,116,144,.18) !important;
+  box-shadow: 0 34px 110px rgba(15, 23, 42, .12), inset 0 1px 0 rgba(255,255,255,.85) !important;
+}
+
+body:not(.theme-dark) .home-hero::before {
+  opacity: .38 !important;
+  background:
+    linear-gradient(120deg, transparent 0%, rgba(14,165,233,.10) 42%, transparent 55%),
+    repeating-linear-gradient(90deg, rgba(14,116,144,.06) 0 1px, transparent 1px 72px),
+    repeating-linear-gradient(0deg, rgba(14,116,144,.04) 0 1px, transparent 1px 72px) !important;
+}
+
+body:not(.theme-dark) .home-hero h1 {
+  color: #0b1220 !important;
+  text-shadow: 0 8px 22px rgba(15,23,42,.08) !important;
+}
+
+body:not(.theme-dark) .home-hero h1 span {
+  background: linear-gradient(90deg, #0b1220, #075985 38%, #0ea5e9 76%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+body:not(.theme-dark) .hero-copy p {
+  color: #40516a !important;
+}
+
+.hero-hockey-photo {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  align-self: stretch;
+  min-height: 380px;
+  border-radius: clamp(24px, 3vw, 38px);
+  overflow: hidden;
+  border: 1px solid rgba(14,116,144,.18);
+  background: linear-gradient(135deg, rgba(255,255,255,.88), rgba(224,242,254,.66));
+  box-shadow: 0 26px 82px rgba(15,23,42,.16);
+}
+
+.hero-hockey-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(14,165,233,.10) 100%),
+    radial-gradient(circle at 22% 18%, rgba(255,255,255,.50), transparent 26%);
+  pointer-events: none;
+}
+
+.hero-hockey-photo img {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.12) contrast(1.04);
+}
+
+body.theme-dark .hero-hockey-photo {
+  background: rgba(15,23,42,.82);
+  border-color: rgba(125,211,252,.18);
+  box-shadow: 0 30px 88px rgba(0,0,0,.34);
+}
+
+body:not(.theme-dark) .league-card {
+  color: #0b1220 !important;
+  background:
+    linear-gradient(150deg, rgba(255,255,255,.92), rgba(238,248,255,.84)),
+    radial-gradient(circle at 18% 0%, color-mix(in srgb, var(--card-accent) 24%, transparent), transparent 42%) !important;
+  border-color: rgba(14,116,144,.16) !important;
+  box-shadow: 0 18px 58px rgba(15,23,42,.11) !important;
+}
+
+body:not(.theme-dark) .league-card::after {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.88) 45%, rgba(255,255,255,.58) 100%),
+    radial-gradient(circle at 84% 42%, color-mix(in srgb, var(--card-accent) 16%, transparent), transparent 40%) !important;
+}
+
+body:not(.theme-dark) .league-chip {
+  color: #075985 !important;
+  background: rgba(224,242,254,.8) !important;
+  border-color: rgba(14,116,144,.18) !important;
+}
+
+body:not(.theme-dark) .card-body h3,
+body:not(.theme-dark) .section-title h2 {
+  color: #0b1220 !important;
+}
+
+body:not(.theme-dark) .card-body p,
+body:not(.theme-dark) .section-title p {
+  color: #52627a !important;
+}
+
+body:not(.theme-dark) .league-bg-logo {
+  opacity: .42 !important;
+  background: rgba(255,255,255,.94) !important;
+  filter: saturate(1.18) contrast(1.08) brightness(1.03) !important;
+  box-shadow: 0 16px 40px rgba(15,23,42,.13), inset 0 1px 0 rgba(255,255,255,.88) !important;
+}
+
+body:not(.theme-dark) .league-card:hover .league-bg-logo {
+  opacity: .62 !important;
+}
+
+/* Light versions for players, goalies and teams with visible team backgrounds */
+body:not(.theme-dark) .person-card {
+  color: #0b1220 !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.95), rgba(234,247,255,.88)) !important;
+  border-color: rgba(14,116,144,.16) !important;
+  box-shadow: 0 18px 48px rgba(15,23,42,.10) !important;
+}
+
+body:not(.theme-dark) .person-card::before {
+  opacity: .42 !important;
+  filter: saturate(1.24) contrast(1.08) brightness(1.04) !important;
+}
+
+body:not(.theme-dark) .person-card h3,
+body:not(.theme-dark) .person-card-stats strong {
+  color: #0b1220 !important;
+}
+
+body:not(.theme-dark) .person-card-kicker,
+body:not(.theme-dark) .person-card-stats small {
+  color: #0369a1 !important;
+}
+
+body:not(.theme-dark) .person-card-stats span {
+  background: rgba(255,255,255,.76) !important;
+  border-color: rgba(14,116,144,.12) !important;
+}
+
+body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row,
+body:not(.theme-dark) .team-watermark-row {
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.92), rgba(255,255,255,.64)),
+    var(--team-logo-url) !important;
+  background-position: 0 0, center center !important;
+  background-size: auto, 46% auto !important;
+  border-color: rgba(14,116,144,.16) !important;
+  box-shadow: 0 10px 30px rgba(15,23,42,.08) !important;
+  filter: saturate(1.18) contrast(1.04) !important;
+}
+
+body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row td {
+  color: #0b1220 !important;
+}
+
+body:not(.theme-dark) .team-name-text,
+body:not(.theme-dark) .primary-cell {
+  color: #0b1220 !important;
+}
+
+/* Navbar light + radio */
+body:not(.theme-dark) .nav-shell {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.92), rgba(237,247,255,.86)),
+    radial-gradient(circle at 18% 0%, rgba(14,165,233,.12), transparent 30%) !important;
+  border-bottom-color: rgba(14,116,144,.14) !important;
+  box-shadow: 0 14px 38px rgba(15,23,42,.08) !important;
+}
+
+body:not(.theme-dark) .nav-brand {
+  color: #0b1220 !important;
+  background: rgba(255,255,255,.74) !important;
+  border-color: rgba(14,116,144,.16) !important;
+}
+
+body:not(.theme-dark) .brand-copy strong {
+  color: #0b1220 !important;
+}
+
+body:not(.theme-dark) .nav-links {
+  background: rgba(255,255,255,.72) !important;
+  border-color: rgba(14,116,144,.13) !important;
+}
+
+body:not(.theme-dark) .nav-links a {
+  color: #475569 !important;
+}
+
+body:not(.theme-dark) .nav-links a:hover,
+body:not(.theme-dark) .nav-links a.active {
+  color: #031525 !important;
+}
+
+@media (max-width: 720px) {
+  .home-hero {
+    min-height: calc(100svh - 24px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    gap: 20px !important;
+    padding: 22px !important;
+  }
+
+  .hero-hockey-photo {
+    min-height: 42svh !important;
+    flex: 1 1 auto !important;
+    border-radius: 24px !important;
+  }
+
+  .hero-hockey-photo img {
+    min-height: 42svh !important;
+  }
+
+  .home-hero h1 {
+    font-size: clamp(3.1rem, 16.5vw, 5rem) !important;
+  }
+
+  .hero-copy p {
+    font-size: .98rem !important;
+    line-height: 1.55 !important;
+    margin-top: 16px !important;
+  }
+
+  .hero-actions {
+    display: none !important;
+  }
+
+  #ligas {
+    scroll-margin-top: 88px;
+  }
+
+  body:not(.theme-dark) .league-bg-logo {
+    opacity: .5 !important;
+  }
+
+  body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row {
+    background-size: auto, 54% auto !important;
+  }
+}
+
+
+/* Header switch placement: always outside the menu */
+@media (max-width: 860px) {
+  .nav-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+
+  .nav-brand {
+    flex: 1 1 auto !important;
+    max-width: calc(100vw - 176px) !important;
+    min-width: 0 !important;
+  }
+
+  .theme-radio {
+    order: 2 !important;
+    margin-left: auto !important;
+    flex: 0 0 auto !important;
+  }
+
+  .mobile-toggle {
+    order: 3 !important;
+    flex: 0 0 52px !important;
+  }
+
+  .nav-links {
+    order: 4 !important;
+  }
+
+  .theme-radio-track {
+    width: 78px !important;
+    height: 42px !important;
+    padding: 4px !important;
+  }
+
+  .theme-radio-thumb {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .theme-radio-dark .theme-radio-thumb {
+    transform: translateX(36px) !important;
+  }
+
+  .theme-radio-label {
+    width: 34px !important;
+    font-size: 0 !important;
+  }
+
+  .theme-radio-label.light::after {
+    content: '☀';
+    font-size: 1rem;
+  }
+
+  .theme-radio-label.dark::after {
+    content: '🌙';
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .nav-brand {
+    max-width: calc(100vw - 156px) !important;
+  }
+
+  .theme-radio-track {
+    width: 70px !important;
+  }
+
+  .theme-radio-thumb {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .theme-radio-dark .theme-radio-thumb {
+    transform: translateX(32px) !important;
+  }
+}

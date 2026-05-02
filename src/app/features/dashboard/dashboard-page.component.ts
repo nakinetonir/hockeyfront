@@ -24,16 +24,25 @@ type HomeLeague = LeagueItem & {
 
       <header class="home-hero">
         <div class="hero-copy">
-  
+          <span class="hero-kicker"><span class="live-dot"></span> Hockey Línea Madrid</span>
           <h1>
             Hockey Línea
             <span>Madrid</span>
           </h1>
+          <p>Explora competiciones, equipos, jugadores, porteros y partidos con un panel visual pensado para hockey línea.</p>
+          <div class="hero-actions">
+            <a class="hero-primary" href="#ligas">Ver ligas</a>
+            <span class="hero-metric"><strong>6</strong><span>competiciones</span></span>
+          </div>
         </div>
+
+        <figure class="hero-hockey-photo" aria-label="Imagen de hockey línea">
+          <img src="/assets/hockey-hero.svg" alt="Jugador de hockey línea en pista" />
+        </figure>
       </header>
 
 
-      <div class="league-grid">
+      <div id="ligas" class="league-grid">
         <a
           class="league-card"
           *ngFor="let league of leagues; let i = index"

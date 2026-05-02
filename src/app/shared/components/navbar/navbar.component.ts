@@ -18,13 +18,6 @@ import { filter } from 'rxjs/operators';
           </span>
         </a>
 
-
-        <button class="mobile-toggle" type="button" (click)="mobileOpen = !mobileOpen" [attr.aria-expanded]="mobileOpen">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
         <nav class="nav-links" [class.nav-links-open]="mobileOpen">
           <a routerLink="/equipos" [queryParams]="leagueQueryParams" routerLinkActive="active" (click)="mobileOpen = false">
             <span class="nav-icon">🛡️</span>
@@ -42,11 +35,22 @@ import { filter } from 'rxjs/operators';
             <span class="nav-icon">🏒</span>
             Partidos
           </a>
-          <button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-label]="isDarkTheme ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'">
-            <span class="nav-icon">{{ isDarkTheme ? '☀️' : '🌙' }}</span>
-            {{ isDarkTheme ? 'Claro' : 'Dark' }}
-          </button>
         </nav>
+
+        <label class="theme-radio" [class.theme-radio-dark]="isDarkTheme" title="Cambiar tema">
+          <input type="checkbox" [checked]="isDarkTheme" (change)="toggleTheme()" />
+          <span class="theme-radio-track">
+            <span class="theme-radio-thumb"></span>
+            <span class="theme-radio-label light">Light</span>
+            <span class="theme-radio-label dark">Dark</span>
+          </span>
+        </label>
+
+        <button class="mobile-toggle" type="button" (click)="mobileOpen = !mobileOpen" [attr.aria-expanded]="mobileOpen">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </header>
   `,
@@ -251,6 +255,72 @@ import { filter } from 'rxjs/operators';
       margin: 4px auto;
       border-radius: 999px;
       background: #dbeafe;
+    }
+
+
+    .theme-radio {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+      margin-left: 4px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .theme-radio input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .theme-radio-track {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 126px;
+      height: 46px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(14,165,233,.28);
+      background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(224,242,254,.72));
+      box-shadow: 0 16px 36px rgba(15,23,42,.14), inset 0 1px 0 rgba(255,255,255,.76);
+    }
+
+    .theme-radio-thumb {
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 58px;
+      height: 36px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
+      box-shadow: 0 10px 26px rgba(14,165,233,.25);
+      transition: transform .22s ease;
+    }
+
+    .theme-radio-dark .theme-radio-thumb {
+      transform: translateX(60px);
+      background: linear-gradient(135deg, #111827, #38bdf8);
+    }
+
+    .theme-radio-label {
+      position: relative;
+      z-index: 1;
+      width: 52px;
+      text-align: center;
+      font-size: .72rem;
+      font-weight: 1000;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: #0f172a;
+      transition: color .22s ease;
+    }
+
+    .theme-radio:not(.theme-radio-dark) .theme-radio-label.light,
+    .theme-radio-dark .theme-radio-label.dark {
+      color: #ffffff;
     }
 
     @media (max-width: 860px) {
