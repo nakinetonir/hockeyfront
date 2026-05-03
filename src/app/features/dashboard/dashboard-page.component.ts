@@ -23,22 +23,78 @@ type HomeLeague = LeagueItem & {
       <div class="home-bg home-bg-c"></div>
 
       <header class="home-hero">
+      <div class="hero-div">
         <div class="hero-copy">
-          <span class="hero-kicker"><span class="live-dot"></span> Hockey Línea Madrid</span>
+          
           <h1>
             Hockey Línea
             <span>Madrid</span>
           </h1>
-          <p>Explora competiciones, equipos, jugadores, porteros y partidos con un panel visual pensado para hockey línea.</p>
-          <div class="hero-actions">
-            <a class="hero-primary" href="#ligas">Ver ligas</a>
-            <span class="hero-metric"><strong>6</strong><span>competiciones</span></span>
-          </div>
         </div>
 
-        <figure class="hero-hockey-photo" aria-label="Imagen de hockey línea">
-          <img src="/assets/hockey-hero.svg" alt="Jugador de hockey línea en pista" />
-        </figure>
+        <svg xmlns="http://www.w3.org/2000/svg" class="svg-light" viewBox="0 0 980 980" role="img" aria-label="Jugador de hockey línea">
+            <g fill="currentColor">
+              <path d="M 867 245 L 841 214 L 834 210 L 796 201 L 756 176 L 731 169 L 702 166 L 705 122 L 697 116 L 687 92 L 672 73 L 659 77 L 626 75 L 617 69 L 608 70 L 594 89 L 586 109 L 577 118 L 580 168 L 577 171 L 545 179 L 514 196 L 496 214 L 485 236 L 472 278 L 468 306 L 467 390 L 472 409 L 449 429 L 380 524 L 378 533 L 383 545 L 368 548 L 356 555 L 332 583 L 305 597 L 289 613 L 231 709 L 231 720 L 206 733 L 181 739 L 168 748 L 164 756 L 164 763 L 169 780 L 156 798 L 156 804 L 163 806 L 182 796 L 211 796 L 264 769 L 284 745 L 321 723 L 320 716 L 312 711 L 316 705 L 359 680 L 370 669 L 379 651 L 388 641 L 415 627 L 427 616 L 437 594 L 456 600 L 465 599 L 485 570 L 504 550 L 534 528 L 549 522 L 554 532 L 539 552 L 533 581 L 528 586 L 507 595 L 494 606 L 462 652 L 459 652 L 451 642 L 443 643 L 420 678 L 389 712 L 388 726 L 364 768 L 364 778 L 369 793 L 356 817 L 363 821 L 382 804 L 403 807 L 420 800 L 432 787 L 441 760 L 458 730 L 468 728 L 491 712 L 561 675 L 576 660 L 589 636 L 610 630 L 626 614 L 707 798 L 731 845 L 753 861 L 785 869 L 817 871 L 842 869 L 853 865 L 860 856 L 863 843 L 862 833 L 856 822 L 840 820 L 809 825 L 778 824 L 754 816 L 736 800 L 645 606 L 642 591 L 697 515 L 706 499 L 710 484 L 717 475 L 744 451 L 748 451 L 756 461 L 767 463 L 783 448 L 808 439 L 818 430 L 821 422 L 821 400 L 833 389 L 849 364 L 841 344 L 852 326 L 865 294 L 871 263 Z"/><path d="M 37 815 L 37 829 L 45 843 L 62 857 L 92 871 L 158 888 L 253 899 L 378 901 L 491 894 L 616 877 L 710 856 L 560 875 L 418 883 L 286 880 L 211 871 L 160 860 L 124 846 L 110 837 L 95 819 L 95 799 L 109 778 L 133 758 L 168 737 L 216 716 L 152 736 L 86 766 L 57 786 L 45 799 Z"/><path d="M 870 882 L 870 902 L 880 908 L 920 910 L 937 906 L 942 902 L 942 882 L 934 877 L 920 874 L 892 874 L 874 878 Z"/>
+            </g>
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" class="svg-dark" role="img" aria-label="Jugador de Hockey Línea dorado">
+            
+
+            <defs>
+              <linearGradient id="goldFill" x1="160" y1="120" x2="900" y2="900" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#FFF4C2"/>
+                <stop offset="0.32" stop-color="#F7D66B"/>
+                <stop offset="0.58" stop-color="#DFA928"/>
+                <stop offset="0.82" stop-color="#B87812"/>
+                <stop offset="1" stop-color="#FFE08A"/>
+              </linearGradient>
+
+              <linearGradient id="goldStroke" x1="120" y1="80" x2="920" y2="920" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#FFF7D1"/>
+                <stop offset="0.5" stop-color="#E6B63A"/>
+                <stop offset="1" stop-color="#9A5D08"/>
+              </linearGradient>
+
+              <filter id="goldGlow" x="-25%" y="-25%" width="150%" height="150%">
+                <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#DFA928" flood-opacity="0.22"/>
+                <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#FFF1B6" flood-opacity="0.28"/>
+              </filter>
+            </defs>
+
+            <style>
+              .hockey-shadow {
+                fill: rgba(76, 43, 0, .22);
+                transform: translate(14px, 18px);
+              }
+
+              .hockey-main {
+                fill: url(#goldFill);
+                filter: url(#goldGlow);
+              }
+
+              .hockey-edge {
+                fill: none;
+                stroke: url(#goldStroke);
+                stroke-width: 3;
+                stroke-opacity: .65;
+                stroke-linejoin: round;
+              }
+            </style>
+
+            <g class="hockey-shadow">
+              <path d="M 867 245 L 841 214 L 834 210 L 796 201 L 756 176 L 731 169 L 702 166 L 705 122 L 697 116 L 687 92 L 672 73 L 659 77 L 626 75 L 617 69 L 608 70 L 594 89 L 586 109 L 577 118 L 580 168 L 577 171 L 545 179 L 514 196 L 496 214 L 485 236 L 472 278 L 468 306 L 467 390 L 472 409 L 449 429 L 380 524 L 378 533 L 383 545 L 368 548 L 356 555 L 332 583 L 305 597 L 289 613 L 231 709 L 231 720 L 206 733 L 181 739 L 168 748 L 164 756 L 164 763 L 169 780 L 156 798 L 156 804 L 163 806 L 182 796 L 211 796 L 264 769 L 284 745 L 321 723 L 320 716 L 312 711 L 316 705 L 359 680 L 370 669 L 379 651 L 388 641 L 415 627 L 427 616 L 437 594 L 456 600 L 465 599 L 485 570 L 504 550 L 534 528 L 549 522 L 554 532 L 539 552 L 533 581 L 528 586 L 507 595 L 494 606 L 462 652 L 459 652 L 451 642 L 443 643 L 420 678 L 389 712 L 388 726 L 364 768 L 364 778 L 369 793 L 356 817 L 363 821 L 382 804 L 403 807 L 420 800 L 432 787 L 441 760 L 458 730 L 468 728 L 491 712 L 561 675 L 576 660 L 589 636 L 610 630 L 626 614 L 707 798 L 731 845 L 753 861 L 785 869 L 817 871 L 842 869 L 853 865 L 860 856 L 863 843 L 862 833 L 856 822 L 840 820 L 809 825 L 778 824 L 754 816 L 736 800 L 645 606 L 642 591 L 697 515 L 706 499 L 710 484 L 717 475 L 744 451 L 748 451 L 756 461 L 767 463 L 783 448 L 808 439 L 818 430 L 821 422 L 821 400 L 833 389 L 849 364 L 841 344 L 852 326 L 865 294 L 871 263 Z"/><path d="M 37 815 L 37 829 L 45 843 L 62 857 L 92 871 L 158 888 L 253 899 L 378 901 L 491 894 L 616 877 L 710 856 L 560 875 L 418 883 L 286 880 L 211 871 L 160 860 L 124 846 L 110 837 L 95 819 L 95 799 L 109 778 L 133 758 L 168 737 L 216 716 L 152 736 L 86 766 L 57 786 L 45 799 Z"/><path d="M 870 882 L 870 902 L 880 908 L 920 910 L 937 906 L 942 902 L 942 882 L 934 877 L 920 874 L 892 874 L 874 878 Z"/>
+            </g>
+
+            <g class="hockey-main">
+              <path d="M 867 245 L 841 214 L 834 210 L 796 201 L 756 176 L 731 169 L 702 166 L 705 122 L 697 116 L 687 92 L 672 73 L 659 77 L 626 75 L 617 69 L 608 70 L 594 89 L 586 109 L 577 118 L 580 168 L 577 171 L 545 179 L 514 196 L 496 214 L 485 236 L 472 278 L 468 306 L 467 390 L 472 409 L 449 429 L 380 524 L 378 533 L 383 545 L 368 548 L 356 555 L 332 583 L 305 597 L 289 613 L 231 709 L 231 720 L 206 733 L 181 739 L 168 748 L 164 756 L 164 763 L 169 780 L 156 798 L 156 804 L 163 806 L 182 796 L 211 796 L 264 769 L 284 745 L 321 723 L 320 716 L 312 711 L 316 705 L 359 680 L 370 669 L 379 651 L 388 641 L 415 627 L 427 616 L 437 594 L 456 600 L 465 599 L 485 570 L 504 550 L 534 528 L 549 522 L 554 532 L 539 552 L 533 581 L 528 586 L 507 595 L 494 606 L 462 652 L 459 652 L 451 642 L 443 643 L 420 678 L 389 712 L 388 726 L 364 768 L 364 778 L 369 793 L 356 817 L 363 821 L 382 804 L 403 807 L 420 800 L 432 787 L 441 760 L 458 730 L 468 728 L 491 712 L 561 675 L 576 660 L 589 636 L 610 630 L 626 614 L 707 798 L 731 845 L 753 861 L 785 869 L 817 871 L 842 869 L 853 865 L 860 856 L 863 843 L 862 833 L 856 822 L 840 820 L 809 825 L 778 824 L 754 816 L 736 800 L 645 606 L 642 591 L 697 515 L 706 499 L 710 484 L 717 475 L 744 451 L 748 451 L 756 461 L 767 463 L 783 448 L 808 439 L 818 430 L 821 422 L 821 400 L 833 389 L 849 364 L 841 344 L 852 326 L 865 294 L 871 263 Z"/><path d="M 37 815 L 37 829 L 45 843 L 62 857 L 92 871 L 158 888 L 253 899 L 378 901 L 491 894 L 616 877 L 710 856 L 560 875 L 418 883 L 286 880 L 211 871 L 160 860 L 124 846 L 110 837 L 95 819 L 95 799 L 109 778 L 133 758 L 168 737 L 216 716 L 152 736 L 86 766 L 57 786 L 45 799 Z"/><path d="M 870 882 L 870 902 L 880 908 L 920 910 L 937 906 L 942 902 L 942 882 L 934 877 L 920 874 L 892 874 L 874 878 Z"/>
+            </g>
+
+            <g class="hockey-edge">
+              <path d="M 867 245 L 841 214 L 834 210 L 796 201 L 756 176 L 731 169 L 702 166 L 705 122 L 697 116 L 687 92 L 672 73 L 659 77 L 626 75 L 617 69 L 608 70 L 594 89 L 586 109 L 577 118 L 580 168 L 577 171 L 545 179 L 514 196 L 496 214 L 485 236 L 472 278 L 468 306 L 467 390 L 472 409 L 449 429 L 380 524 L 378 533 L 383 545 L 368 548 L 356 555 L 332 583 L 305 597 L 289 613 L 231 709 L 231 720 L 206 733 L 181 739 L 168 748 L 164 756 L 164 763 L 169 780 L 156 798 L 156 804 L 163 806 L 182 796 L 211 796 L 264 769 L 284 745 L 321 723 L 320 716 L 312 711 L 316 705 L 359 680 L 370 669 L 379 651 L 388 641 L 415 627 L 427 616 L 437 594 L 456 600 L 465 599 L 485 570 L 504 550 L 534 528 L 549 522 L 554 532 L 539 552 L 533 581 L 528 586 L 507 595 L 494 606 L 462 652 L 459 652 L 451 642 L 443 643 L 420 678 L 389 712 L 388 726 L 364 768 L 364 778 L 369 793 L 356 817 L 363 821 L 382 804 L 403 807 L 420 800 L 432 787 L 441 760 L 458 730 L 468 728 L 491 712 L 561 675 L 576 660 L 589 636 L 610 630 L 626 614 L 707 798 L 731 845 L 753 861 L 785 869 L 817 871 L 842 869 L 853 865 L 860 856 L 863 843 L 862 833 L 856 822 L 840 820 L 809 825 L 778 824 L 754 816 L 736 800 L 645 606 L 642 591 L 697 515 L 706 499 L 710 484 L 717 475 L 744 451 L 748 451 L 756 461 L 767 463 L 783 448 L 808 439 L 818 430 L 821 422 L 821 400 L 833 389 L 849 364 L 841 344 L 852 326 L 865 294 L 871 263 Z"/><path d="M 37 815 L 37 829 L 45 843 L 62 857 L 92 871 L 158 888 L 253 899 L 378 901 L 491 894 L 616 877 L 710 856 L 560 875 L 418 883 L 286 880 L 211 871 L 160 860 L 124 846 L 110 837 L 95 819 L 95 799 L 109 778 L 133 758 L 168 737 L 216 716 L 152 736 L 86 766 L 57 786 L 45 799 Z"/><path d="M 870 882 L 870 902 L 880 908 L 920 910 L 937 906 L 942 902 L 942 882 L 934 877 L 920 874 L 892 874 L 874 878 Z"/>
+            </g>
+          </svg>
+        </div>
       </header>
 
 
@@ -74,9 +130,7 @@ type HomeLeague = LeagueItem & {
             <p>{{ league.description }}</p>
           </div>
 
-          <div class="card-bottom">
-            <strong></strong>
-          </div>
+        
         </a>
       </div>
     </section>
@@ -127,51 +181,18 @@ type HomeLeague = LeagueItem & {
       background: radial-gradient(circle, rgba(125,211,252,0.16), transparent 70%);
     }
 
-    .home-hero {
-      position: relative;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
-      gap: clamp(24px, 4vw, 56px);
-      align-items: center;
-      min-height: clamp(460px, 58vh, 640px);
-      padding: clamp(28px, 5vw, 64px);
-      border: 1px solid rgba(125, 211, 252, 0.24);
-      border-radius: clamp(28px, 4vw, 44px);
-      background:
-        linear-gradient(135deg, rgba(8, 18, 34, 0.92), rgba(15, 23, 42, 0.98) 45%, rgba(2, 6, 23, 0.98)),
-        radial-gradient(circle at 70% 20%, rgba(14,165,233,0.22), transparent 30%),
-        radial-gradient(circle at 15% 90%, rgba(59,130,246,0.20), transparent 28%);
-      box-shadow:
-        0 34px 100px rgba(2, 6, 23, 0.66),
-        inset 0 1px 0 rgba(255,255,255,0.08);
-    }
 
-    .home-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.09) 42%, transparent 55%),
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 72px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.026) 0 1px, transparent 1px 72px);
-      opacity: 0.42;
-      pointer-events: none;
-    }
 
-    .home-hero::after {
-      content: '';
-      position: absolute;
-      inset: 18px;
-      border-radius: calc(clamp(28px, 4vw, 44px) - 10px);
-      border: 1px solid rgba(255,255,255,0.06);
-      pointer-events: none;
-    }
+    
 
     .hero-copy,
     .hero-visual {
       position: relative;
       z-index: 1;
+    }
+
+    .hero-copy {
+      padding: 1rem;
     }
 
     .hero-kicker {
@@ -403,6 +424,11 @@ type HomeLeague = LeagueItem & {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
+      padding: clamp(28px, 5vw, 64px);
+    }
+
+    .hero-div {
+      display: flex;
     }
 
     .league-card {
@@ -714,10 +740,10 @@ type HomeLeague = LeagueItem & {
         padding: 10px 0 38px;
       }
 
-      .home-hero {
-        padding: 24px;
-        border-radius: 28px;
+      .hero-div {
+        flex-direction: column;
       }
+   
 
       .home-hero::after {
         inset: 10px;
@@ -813,6 +839,7 @@ type HomeLeague = LeagueItem & {
       .league-grid {
         grid-template-columns: 1fr;
         gap: 14px;
+        padding: clamp(18px, 5vw, 24px) !important;
       }
 
       .league-card {

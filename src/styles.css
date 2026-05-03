@@ -1781,6 +1781,10 @@ body:not(.theme-dark) .selected-league-header {
   border-color: rgba(2,132,199,.18) !important;
 }
 
+body:not(.theme-dark) .svg-dark {
+  display: none;
+}
+
 body:not(.theme-dark) .selected-league-header span {
   color: #0284c7 !important;
 }
@@ -1819,14 +1823,7 @@ body:not(.theme-dark) td {
 }
 
 /* Home white theme */
-body:not(.theme-dark) .home-hero {
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.94), rgba(239,246,255,.90) 52%, rgba(224,242,254,.92)),
-    radial-gradient(circle at 72% 16%, rgba(14,165,233,.16), transparent 34%),
-    radial-gradient(circle at 15% 90%, rgba(34,197,94,.10), transparent 30%) !important;
-  border-color: rgba(2,132,199,.18) !important;
-  box-shadow: 0 34px 100px rgba(15,23,42,.12), inset 0 1px 0 rgba(255,255,255,.85) !important;
-}
+
 
 body:not(.theme-dark) .home-hero h1 {
   color: #0f172a !important;
@@ -1929,10 +1926,6 @@ body:not(.theme-dark) .league-chip {
 }
 
 body:not(.theme-dark) {
-  background:
-    radial-gradient(circle at 14% -8%, rgba(14,165,233,.18), transparent 34%),
-    radial-gradient(circle at 88% 8%, rgba(34,197,94,.12), transparent 32%),
-    linear-gradient(180deg, #f8fcff 0%, #edf7ff 44%, #f7fbff 100%) !important;
   color: var(--text) !important;
 }
 
@@ -1984,14 +1977,7 @@ body:not(.theme-dark) .home-shell {
   color: #0b1220 !important;
 }
 
-body:not(.theme-dark) .home-hero {
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.92), rgba(232,248,255,.86) 42%, rgba(247,252,255,.96)),
-    radial-gradient(circle at 80% 12%, rgba(14,165,233,.18), transparent 32%),
-    radial-gradient(circle at 6% 88%, rgba(34,197,94,.12), transparent 28%) !important;
-  border-color: rgba(14,116,144,.18) !important;
-  box-shadow: 0 34px 110px rgba(15, 23, 42, .12), inset 0 1px 0 rgba(255,255,255,.85) !important;
-}
+
 
 body:not(.theme-dark) .home-hero::before {
   opacity: .38 !important;
@@ -2021,7 +2007,7 @@ body:not(.theme-dark) .hero-copy p {
   z-index: 2;
   margin: 0;
   align-self: stretch;
-  min-height: 380px;
+  min-height: 180px;
   border-radius: clamp(24px, 3vw, 38px);
   overflow: hidden;
   border: 1px solid rgba(14,116,144,.18);
@@ -2180,14 +2166,7 @@ body:not(.theme-dark) .nav-links a.active {
 }
 
 @media (max-width: 720px) {
-  .home-hero {
-    min-height: calc(100svh - 24px) !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-    gap: 20px !important;
-    padding: 22px !important;
-  }
+
 
   .hero-hockey-photo {
     min-height: 42svh !important;
@@ -2475,6 +2454,10 @@ body.theme-dark .nav-brand {
   box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 12px 32px rgba(37,99,235,.14) !important;
 }
 
+body.theme-dark .svg-light {
+  display: none;
+}
+
 .brand-mark {
   background: linear-gradient(135deg, #fde68a, #f59e0b) !important;
   color: #2b1700 !important;
@@ -2534,14 +2517,7 @@ body.theme-dark .home-bg-a { background: radial-gradient(circle, rgba(56,189,248
 body.theme-dark .home-bg-b { background: radial-gradient(circle, rgba(37,99,235,.22), transparent 66%) !important; }
 body.theme-dark .home-bg-c { background: radial-gradient(circle, rgba(96,165,250,.16), transparent 70%) !important; }
 
-.home-hero {
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, .92), rgba(255, 244, 205, .80) 48%, rgba(255, 252, 235, .95)),
-    radial-gradient(circle at 80% 14%, rgba(245,158,11,.20), transparent 34%),
-    radial-gradient(circle at 10% 88%, rgba(250,204,21,.22), transparent 30%) !important;
-  border-color: rgba(245, 158, 11, .22) !important;
-  box-shadow: 0 34px 110px rgba(120, 72, 6, .15), inset 0 1px 0 rgba(255,255,255,.82) !important;
-}
+
 
 body.theme-dark .home-hero {
   background:
@@ -2654,9 +2630,7 @@ body.theme-dark .league-bg-logo {
 
 .league-hero {
   min-height: clamp(190px, 28vh, 340px) !important;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, .94), rgba(255, 246, 214, .86)),
-    radial-gradient(circle at 76% 18%, rgba(245, 158, 11, .18), transparent 34%) !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 244, 200, 0.85)), radial-gradient(circle at 65% 25%, rgba(255, 170, 0, 0.3), transparent 35%) !important;
   border-color: rgba(245,158,11,.20) !important;
   box-shadow: 0 24px 70px rgba(120,72,6,.13) !important;
 }
@@ -2809,17 +2783,7 @@ body.theme-dark .site-footer {
     padding-top: 10px !important;
   }
 
-  .home-hero {
-    width: 100% !important;
-    min-height: 100svh !important;
-    max-height: none !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    gap: clamp(14px, 3.8vh, 24px) !important;
-    padding: clamp(18px, 5vw, 24px) !important;
-    border-radius: clamp(24px, 8vw, 34px) !important;
-  }
+
 
   .home-hero h1 {
     font-size: clamp(3.0rem, 15vw, 4.65rem) !important;
@@ -2865,6 +2829,7 @@ body.theme-dark .site-footer {
 
   .league-grid {
     gap: 14px !important;
+
   }
 
   .league-card {
@@ -2935,11 +2900,7 @@ body.theme-dark .site-footer {
 }
 
 @media (max-width: 390px) {
-  .home-hero {
-    min-height: 100svh !important;
-    padding: 16px !important;
-    gap: 12px !important;
-  }
+
 
   .home-hero h1 {
     font-size: clamp(2.72rem, 14.2vw, 4.1rem) !important;

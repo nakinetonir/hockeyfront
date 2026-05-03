@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
       <div class="footer-glow footer-glow-b"></div>
 
       <div class="footer-inner">
-        <section class="footer-brand-card" aria-label="Información de Hockey Línea Madrid">
+        <!--<section class="footer-brand-card" aria-label="Información de Hockey Línea Madrid">
           <a class="footer-brand" routerLink="/">
             <span class="footer-mark">HLM</span>
             <span>
@@ -30,7 +30,7 @@ import { RouterLink } from '@angular/router';
             <span>Partidos</span>
             <span>Rendimiento</span>
           </div>
-        </section>
+        </section>-->
 
 
         <nav class="footer-links-card" aria-label="Enlaces de hockey">

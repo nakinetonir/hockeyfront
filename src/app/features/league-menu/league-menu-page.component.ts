@@ -31,10 +31,7 @@ interface MenuCard {
       </header>
 
       <section class="menu-section">
-        <div class="section-heading">
-          <span>Panel de navegación</span>
-          <h2>Elige qué quieres analizar</h2>
-        </div>
+       
 
         <div class="menu-grid">
           <a
@@ -56,9 +53,6 @@ interface MenuCard {
               <h3>{{ card.title }}</h3>
             </div>
             <p>{{ card.description }}</p>
-            <div class="menu-card-footer">
-              <strong></strong>
-            </div>
           </a>
         </div>
       </section>
@@ -511,6 +505,7 @@ interface MenuCard {
     @media (max-width: 640px) {
       .league-shell {
         padding-top: 12px;
+        padding: 1rem;
       }
 
       .league-hero {
