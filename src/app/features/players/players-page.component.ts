@@ -142,31 +142,6 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       width: 100%;
     }
 
-    .mobile-player-table .stats-table tr.team-watermark-row {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      border-radius: 16px;
-      margin-bottom: 12px;
-      background-image:
-        linear-gradient(90deg, rgba(10, 18, 36, 0.76), rgba(10, 18, 36, 0.42)),
-        var(--team-logo-url) !important;
-      background-repeat: no-repeat, no-repeat !important;
-      background-position: 0 0, center center !important;
-      background-size: auto, 50.4% auto !important;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-      filter: brightness(1.16) saturate(1.12) !important;
-    }
-
-    .mobile-player-table .stats-table tr.team-watermark-row.team-360-row {
-      background-image:
-        linear-gradient(90deg, rgba(4, 11, 24, 0.76), rgba(4, 11, 24, 0.40)),
-        radial-gradient(circle at center, rgba(56, 189, 248, 0.24), rgba(34, 197, 94, 0.16) 36%, rgba(8, 15, 30, 0) 74%),
-        var(--team-logo-url) !important;
-      background-position: 0 0, center center, center center !important;
-      background-size: auto, 110.6% 110.6%, 51.8% auto !important;
-      filter: brightness(1.18) saturate(1.18) !important;
-    }
 
     .mobile-player-table .stats-table tr.team-watermark-row td {
       position: relative;
