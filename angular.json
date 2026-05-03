@@ -33,7 +33,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "hockeylinea-frontend:build"
+            "buildTarget": "hockeylinea-frontend:build",
+            "proxyConfig": "proxy.conf.json"
           }
         }
       }

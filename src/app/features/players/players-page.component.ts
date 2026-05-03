@@ -372,6 +372,7 @@ export class PlayersPageComponent implements OnInit {
   load(): void {
     this.api.getPlayers({ search: this.search, team: this.team, page: 1, limit: 100, league_key: this.leagueKey }).subscribe((data) => {
       this.players = data.items;
+      console.log(this.players)
     });
   }
 
