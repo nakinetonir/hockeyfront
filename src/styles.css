@@ -2933,3 +2933,226 @@ body.theme-dark .site-footer {
     min-height: 190px !important;
   }
 }
+
+/* === User requested UI polish: light cards, gold labels, larger team watermarks, clean mobile menu === */
+:root {
+  --hlm-gold: #b7791f;
+  --hlm-gold-strong: #d69e2e;
+  --hlm-gold-soft: rgba(214, 158, 46, .16);
+}
+
+/* Jugadores / Porteros: white cards in light theme with gold labels */
+body:not(.theme-dark) .person-card,
+body:not(.theme-dark) .desktop-player-grid .person-card,
+body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row {
+  color: #111827 !important;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.96), rgba(255,255,255,.86)),
+    var(--team-logo-url) !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-position: 0 0, center center !important;
+  background-size: auto, clamp(148px, 46%, 230px) auto !important;
+  border: 1px solid rgba(183, 121, 31, .22) !important;
+  box-shadow: 0 18px 46px rgba(120,72,6,.12) !important;
+}
+
+body:not(.theme-dark) .person-card::before,
+body:not(.theme-dark) .desktop-player-grid .person-card::before {
+  background: var(--team-logo-url) center center / clamp(150px, 58%, 240px) auto no-repeat !important;
+  opacity: .18 !important;
+  filter: saturate(1.12) contrast(1.04) !important;
+}
+
+body:not(.theme-dark) .person-card-kicker,
+body:not(.theme-dark) .person-card-stats small,
+body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row td::before {
+  color: var(--hlm-gold) !important;
+}
+
+body:not(.theme-dark) .person-card h3,
+body:not(.theme-dark) .person-card-stats strong,
+body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row td,
+body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row td.primary-cell {
+  color: #111827 !important;
+}
+
+body:not(.theme-dark) .person-card-stats span {
+  background: rgba(255,255,255,.66) !important;
+  border-color: rgba(183, 121, 31, .14) !important;
+}
+
+body.theme-dark .mobile-player-table .stats-table tr.team-watermark-row,
+body.theme-dark .desktop-player-grid .person-card {
+  background-position: 0 0, center center !important;
+  background-size: auto, clamp(150px, 48%, 240px) auto !important;
+}
+
+/* Equipos: bigger, centered background image and cleaner light cards */
+body:not(.theme-dark) .team-shots-card-grid .stats-table tr.team-stats-row.team-watermark-row,
+body:not(.theme-dark) .stats-table tr.team-stats-row.team-watermark-row {
+  color: #111827 !important;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.95), rgba(255,255,255,.78)),
+    var(--team-logo-url) !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-position: 0 0, center center !important;
+  background-size: auto, clamp(170px, 54%, 270px) auto !important;
+  border-color: rgba(183, 121, 31, .24) !important;
+  box-shadow: 0 18px 46px rgba(120,72,6,.12) !important;
+}
+
+body:not(.theme-dark) .team-shots-card-grid .stats-table tr.team-stats-row.team-watermark-row td,
+body:not(.theme-dark) .stats-table tr.team-stats-row.team-watermark-row td {
+  color: #111827 !important;
+  background: transparent !important;
+}
+
+body:not(.theme-dark) .team-shots-card-grid .stats-table tr.team-stats-row.team-watermark-row td::before,
+body:not(.theme-dark) .stats-table tr.team-stats-row.team-watermark-row td::before,
+body:not(.theme-dark) .team-name-text {
+  color: var(--hlm-gold) !important;
+}
+
+body.theme-dark .team-shots-card-grid .stats-table tr.team-stats-row.team-watermark-row,
+body.theme-dark .stats-table tr.team-stats-row.team-watermark-row {
+  background-position: 0 0, center center !important;
+  background-size: auto, clamp(170px, 52%, 270px) auto !important;
+}
+
+/* League menu cards: correct contrast in both themes */
+body:not(.theme-dark) .league-hero {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.95), rgba(255,248,230,.86)),
+    radial-gradient(circle at 18% 0%, rgba(250,204,21,.28), transparent 36%),
+    radial-gradient(circle at 90% 12%, rgba(245,158,11,.16), transparent 32%) !important;
+  border-color: rgba(183,121,31,.22) !important;
+  box-shadow: 0 22px 60px rgba(120,72,6,.13) !important;
+}
+
+body:not(.theme-dark) .league-hero h1 {
+  color: #111827 !important;
+  text-shadow: none !important;
+}
+
+body:not(.theme-dark) .menu-card {
+  color: #111827 !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.97), rgba(255,249,232,.90)),
+    radial-gradient(circle at 84% 12%, color-mix(in srgb, var(--card-accent) 16%, transparent), transparent 42%) !important;
+  border-color: rgba(183,121,31,.18) !important;
+  box-shadow: 0 18px 46px rgba(120,72,6,.12) !important;
+}
+
+body:not(.theme-dark) .menu-card::before {
+  opacity: .34 !important;
+  background:
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,.70) 44%, transparent 58%),
+    repeating-linear-gradient(90deg, rgba(183,121,31,.045) 0 1px, transparent 1px 54px) !important;
+}
+
+body:not(.theme-dark) .menu-card h3,
+body:not(.theme-dark) .menu-card-metric strong {
+  color: #111827 !important;
+}
+
+body:not(.theme-dark) .menu-card p {
+  color: #5f4b2a !important;
+}
+
+body:not(.theme-dark) .menu-icon,
+body:not(.theme-dark) .menu-card-metric {
+  background: rgba(255,255,255,.82) !important;
+  border-color: rgba(183,121,31,.16) !important;
+}
+
+body:not(.theme-dark) .menu-card-metric span {
+  color: var(--hlm-gold) !important;
+}
+
+body.theme-dark .menu-card {
+  background:
+    linear-gradient(145deg, rgba(15,23,42,.96), rgba(8,18,34,.88)),
+    radial-gradient(circle at 84% 12%, color-mix(in srgb, var(--card-accent) 22%, transparent), transparent 44%) !important;
+  border-color: rgba(125,211,252,.18) !important;
+}
+
+body.theme-dark .menu-card h3,
+body.theme-dark .menu-card-metric strong {
+  color: #f8fafc !important;
+}
+
+body.theme-dark .menu-card p {
+  color: #b8c5d8 !important;
+}
+
+/* Navbar / mobile menu: fix readability in light and dark */
+body:not(.theme-dark) .nav-shell {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,248,230,.90)),
+    radial-gradient(circle at 12% 0%, rgba(250,204,21,.20), transparent 34%) !important;
+  border-bottom-color: rgba(183,121,31,.18) !important;
+}
+
+body:not(.theme-dark) .nav-brand,
+body:not(.theme-dark) .nav-links,
+body:not(.theme-dark) .mobile-toggle {
+  background: rgba(255,255,255,.82) !important;
+  border-color: rgba(183,121,31,.20) !important;
+}
+
+body:not(.theme-dark) .brand-copy strong,
+body:not(.theme-dark) .nav-links a,
+body:not(.theme-dark) .nav-links .theme-toggle {
+  color: #111827 !important;
+}
+
+body:not(.theme-dark) .brand-copy small,
+body:not(.theme-dark) .nav-league-pill span {
+  color: var(--hlm-gold) !important;
+}
+
+body:not(.theme-dark) .nav-links a.active,
+body:not(.theme-dark) .nav-links a:hover {
+  color: #111827 !important;
+  background: var(--hlm-gold-soft) !important;
+}
+
+body.theme-dark .nav-links a,
+body.theme-dark .nav-links .theme-toggle {
+  color: #e5f3ff !important;
+}
+
+body.theme-dark .nav-links a.active,
+body.theme-dark .nav-links a:hover {
+  color: #ffffff !important;
+  background: rgba(56,189,248,.14) !important;
+}
+
+@media (max-width: 860px) {
+  body:not(.theme-dark) .nav-links {
+    background:
+      linear-gradient(145deg, rgba(255,255,255,.99), rgba(255,249,232,.97)),
+      radial-gradient(circle at 90% 0%, rgba(250,204,21,.22), transparent 40%) !important;
+    border-color: rgba(183,121,31,.22) !important;
+    box-shadow: 0 24px 60px rgba(120,72,6,.18) !important;
+  }
+
+  body.theme-dark .nav-links {
+    background:
+      linear-gradient(145deg, rgba(8,18,34,.99), rgba(2,6,23,.97)),
+      radial-gradient(circle at 90% 0%, rgba(56,189,248,.18), transparent 40%) !important;
+    border-color: rgba(125,211,252,.20) !important;
+  }
+
+  body:not(.theme-dark) .nav-links a,
+  body:not(.theme-dark) .nav-links .theme-toggle {
+    background: rgba(255,255,255,.86) !important;
+    border-color: rgba(183,121,31,.16) !important;
+  }
+
+  body.theme-dark .nav-links a,
+  body.theme-dark .nav-links .theme-toggle {
+    background: rgba(15,23,42,.76) !important;
+    border-color: rgba(125,211,252,.14) !important;
+  }
+}
