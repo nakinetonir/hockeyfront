@@ -3398,3 +3398,159 @@ body:not(.theme-dark) .card {
     border: 0 !important;
   }
 }
+
+
+/* DARK align labels left and values right */
+.theme-dark .person-card-stats span,
+.theme-dark .goalie-stats span {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center;
+}
+
+.theme-dark .person-card-stats small,
+.theme-dark .goalie-stats small {
+  text-align: left !important;
+}
+
+.theme-dark .person-card-stats strong,
+.theme-dark .goalie-stats strong {
+  text-align: right !important;
+}
+
+
+/* Premium hover + glass effect */
+.person-card,
+.team-card,
+.player-card,
+.goalie-card,
+.card.table-wrap,
+.responsive-table-card {
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease,
+    border-color .22s ease,
+    background-color .22s ease,
+    filter .22s ease !important;
+  will-change: transform;
+}
+
+.person-card:hover,
+.team-card:hover,
+.player-card:hover,
+.goalie-card:hover {
+  transform: translateY(-4px) scale(1.01) !important;
+}
+
+/* Light premium glass */
+body:not(.theme-dark) .person-card,
+body:not(.theme-dark) .team-card,
+body:not(.theme-dark) .player-card,
+body:not(.theme-dark) .goalie-card {
+  backdrop-filter: blur(16px) saturate(1.12);
+  -webkit-backdrop-filter: blur(16px) saturate(1.12);
+  background-color: rgba(255, 255, 250, .76) !important;
+  box-shadow:
+    0 12px 34px rgba(120, 72, 6, .12),
+    inset 0 1px 0 rgba(255, 255, 255, .70) !important;
+}
+
+body:not(.theme-dark) .person-card:hover,
+body:not(.theme-dark) .team-card:hover,
+body:not(.theme-dark) .player-card:hover,
+body:not(.theme-dark) .goalie-card:hover {
+  box-shadow:
+    0 18px 46px rgba(120, 72, 6, .18),
+    0 0 0 1px rgba(250, 204, 21, .20),
+    inset 0 1px 0 rgba(255, 255, 255, .85) !important;
+  filter: saturate(1.08) brightness(1.02) !important;
+}
+
+/* Dark premium glass */
+.theme-dark .person-card,
+.theme-dark .team-card,
+.theme-dark .player-card,
+.theme-dark .goalie-card {
+  backdrop-filter: blur(18px) saturate(1.16);
+  -webkit-backdrop-filter: blur(18px) saturate(1.16);
+  background-color: rgba(7, 17, 38, .76) !important;
+  box-shadow:
+    0 14px 38px rgba(0, 0, 0, .34),
+    inset 0 1px 0 rgba(148, 197, 255, .13) !important;
+}
+
+.theme-dark .person-card:hover,
+.theme-dark .team-card:hover,
+.theme-dark .player-card:hover,
+.theme-dark .goalie-card:hover {
+  box-shadow:
+    0 22px 56px rgba(0, 0, 0, .42),
+    0 0 0 1px rgba(96, 165, 250, .22),
+    0 0 28px rgba(56, 189, 248, .12),
+    inset 0 1px 0 rgba(148, 197, 255, .18) !important;
+  filter: saturate(1.08) brightness(1.03) !important;
+}
+
+/* Smooth watermark movement */
+.person-card-bg,
+.team-card::before,
+.player-card::before,
+.goalie-card::before,
+.team-watermark-row {
+  transition:
+    background-size .25s ease,
+    background-position .25s ease,
+    filter .25s ease,
+    opacity .25s ease !important;
+}
+
+/* Bigger, cleaner logo on hover */
+body:not(.theme-dark) .person-card:hover .person-card-bg,
+body:not(.theme-dark) .team-card:hover::before,
+body:not(.theme-dark) .player-card:hover::before,
+body:not(.theme-dark) .goalie-card:hover::before {
+  filter: saturate(1.2) brightness(1.05) !important;
+}
+
+.theme-dark .person-card:hover .person-card-bg,
+.theme-dark .team-card:hover::before,
+.theme-dark .player-card:hover::before,
+.theme-dark .goalie-card:hover::before {
+  filter: saturate(1.18) brightness(1.08) !important;
+}
+
+/* Table-card hover, mobile cards */
+.stats-table tr.team-watermark-row {
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease,
+    filter .22s ease,
+    background-size .22s ease !important;
+}
+
+.stats-table tr.team-watermark-row:hover {
+  transform: translateY(-3px) !important;
+}
+
+body:not(.theme-dark) .stats-table tr.team-watermark-row:hover {
+  box-shadow:
+    0 16px 40px rgba(120, 72, 6, .18),
+    inset 0 1px 0 rgba(255, 255, 255, .72) !important;
+  filter: saturate(1.08) brightness(1.02) !important;
+}
+
+.theme-dark .stats-table tr.team-watermark-row:hover {
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, .42),
+    0 0 24px rgba(56, 189, 248, .10) !important;
+  filter: saturate(1.08) brightness(1.04) !important;
+}
+
+/* Better active/click feel */
+.person-card:active,
+.team-card:active,
+.player-card:active,
+.goalie-card:active,
+.stats-table tr.team-watermark-row:active {
+  transform: translateY(-1px) scale(.995) !important;
+}
