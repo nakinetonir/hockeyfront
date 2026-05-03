@@ -1045,10 +1045,38 @@ input, select {
     background-size: auto, 57.4% auto;
   }
 
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row {
+    position: relative;
+
+    background-image:
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 250, 0.96),
+        rgba(255, 236, 171, 0.68)
+      ),
+      var(--team-logo-url) !important;
+
+    background-repeat: no-repeat, no-repeat !important;
+    background-position: 0 0, center center !important;
+    background-size: auto, 62% auto !important;
+
+    border: 1px solid rgba(180, 122, 18, 0.18);
+    box-shadow: 0 10px 28px rgba(120, 72, 6, 0.13);
+  }
   .stats-table tr.team-watermark-row td {
     background: transparent;
     position: relative;
     z-index: 1;
+  }
+
+    body:not(.theme-dark) .stats-table tr.team-watermark-row td {
+    color: #1c1405 !important;
+    background: transparent !important;
+  }
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row td::before {
+    color: #b87812 !important;
   }
 
   .stats-table tr.team-watermark-row td.team-data-cell {
@@ -1423,6 +1451,33 @@ input, select {
 
 /* Mobile: keep centered watermark, brighter and slightly smaller */
 @media (max-width: 720px) {
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row td {
+    color: #1c1405 !important;
+    background: transparent !important;
+  }
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row td::before {
+    color: #b87812 !important;
+  }
+  body:not(.theme-dark) .stats-table tr.team-watermark-row {
+    position: relative;
+
+    background-image:
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 250, 0.96),
+        rgba(255, 236, 171, 0.68)
+      ),
+      var(--team-logo-url) !important;
+
+    background-repeat: no-repeat, no-repeat !important;
+    background-position: 0 0, center center !important;
+    background-size: auto, 62% auto !important;
+
+    border: 1px solid rgba(180, 122, 18, 0.18);
+    box-shadow: 0 10px 28px rgba(120, 72, 6, 0.13);
+  }
   .stats-table tr.team-watermark-row {
     background-image:
       linear-gradient(90deg, rgba(10, 18, 36, 0.88), rgba(10, 18, 36, 0.58)),
@@ -1605,6 +1660,34 @@ input, select {
 
 /* === Mejora visibilidad iconos de fondo en cards/tablas === */
 @media (max-width: 720px) {
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row {
+    position: relative;
+
+    background-image:
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 250, 0.96),
+        rgba(255, 236, 171, 0.68)
+      ),
+      var(--team-logo-url) !important;
+
+    background-repeat: no-repeat, no-repeat !important;
+    background-position: 0 0, center center !important;
+    background-size: auto, 62% auto !important;
+
+    border: 1px solid rgba(180, 122, 18, 0.18);
+    box-shadow: 0 10px 28px rgba(120, 72, 6, 0.13);
+  }
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row td {
+    color: #1c1405 !important;
+    background: transparent !important;
+  }
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row td::before {
+    color: #b87812 !important;
+  }
   .stats-table tr.team-watermark-row {
     background-image:
       linear-gradient(90deg, rgba(10, 18, 36, 0.76), rgba(10, 18, 36, 0.42)),
