@@ -576,14 +576,7 @@ input, select {
     padding: 12px 14px;
   }
 
-  body:not(.theme-dark) .stats-table td {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    text-align: right;
-    padding: 12px 14px;
-  }
+  body:not(.theme-dark) 
 
   .stats-table td:last-child {
     border-bottom: 0;
@@ -1621,49 +1614,11 @@ input, select {
     justify-content: space-between;
     width: 100%;
     padding: 12px 16px;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.16) ;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.16) !important;
     background: transparent;
     text-align: right;
   }
 
-
-  body:not(.theme-dark) .team-shots-card-grid .stats-table tr.team-stats-row td {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 12px 16px;
-    background: transparent;
-    text-align: right;
-  }
-
-  .mobile-player-table .stats-table tr.team-watermark-row td {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
-      background: transparent !important;
-      text-align: right;
-    }
-
-
-  body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row td {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      background: transparent !important;
-      text-align: right;
-    }
   .team-shots-card-grid .stats-table tr.team-stats-row td:last-child {
     border-bottom: 0 !important;
   }
