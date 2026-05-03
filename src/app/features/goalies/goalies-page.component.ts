@@ -147,29 +147,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
 
 
 
-   body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(180, 122, 18, 0.18) !important;
-  border-radius: 16px;
-  margin-bottom: 12px;
-
-  background-image:
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 250, 0.95),
-      rgba(255, 236, 171, 0.62)
-    ),
-    var(--team-logo-url) !important;
-
-  background-repeat: no-repeat, no-repeat !important;
-  background-position: 0 0, center center !important;
-  background-size: auto, 62% auto !important;
-
-  box-shadow: 0 10px 28px rgba(120, 72, 6, 0.13) !important;
-  filter: saturate(1.04) !important;
-}
-
+  
 
 
     .mobile-player-table .stats-table tr.team-watermark-row td {
