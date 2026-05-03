@@ -161,40 +161,37 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       filter: brightness(1.16) saturate(1.12) !important;
     }
 
-   body:not(.theme-dark) .stats-table tr.team-watermark-row,
-    {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(180, 122, 18, 0.18);
-      border-radius: 16px;
-      margin-bottom: 12px;
+   body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(180, 122, 18, 0.18) !important;
+  border-radius: 16px;
+  margin-bottom: 12px;
 
-      background-image:
-        linear-gradient(
-          90deg,
-          rgba(255, 255, 250, 0.95),
-          rgba(255, 236, 171, 0.62)
-        ),
-        var(--team-logo-url) !important;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 250, 0.95),
+      rgba(255, 236, 171, 0.62)
+    ),
+    var(--team-logo-url) !important;
 
-      background-repeat: no-repeat, no-repeat !important;
-      background-position: 0 0, center center !important;
-      background-size: auto, 62% auto !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-position: 0 0, center center !important;
+  background-size: auto, 62% auto !important;
 
-      box-shadow: 0 10px 28px rgba(120, 72, 6, 0.13);
-      filter: saturate(1.04) !important;
-    }
+  box-shadow: 0 10px 28px rgba(120, 72, 6, 0.13) !important;
+  filter: saturate(1.04) !important;
+}
 
+body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row td {
+  color: #1c1405 !important;
+  background: transparent !important;
+}
 
-        
-    body:not(.theme-dark)  .stats-table tr.team-watermark-row td {
-      color: #1c1405 !important;
-    }
-
-   
-    body:not(.theme-dark) .stats-table tr.team-watermark-row .stat-label {
-      color: #b87812 !important;
-    }
+body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row td::before {
+  color: #b87812 !important;
+}
 
     .mobile-player-table .stats-table tr.team-watermark-row.team-360-row {
       background-image:
