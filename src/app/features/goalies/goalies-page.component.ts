@@ -161,8 +161,8 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
       filter: brightness(1.16) saturate(1.12) !important;
     }
 
-   body:not(.theme-dark) .mobile-goalie-table .stats-table tr.team-watermark-row,
-    body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row {
+   body:not(.theme-dark) .stats-table tr.team-watermark-row,
+    {
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(180, 122, 18, 0.18);
@@ -186,13 +186,13 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
     }
 
 
-        body:not(.theme-dark) .mobile-goalie-table .stats-table tr.team-watermark-row td,
-    body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row td {
+        
+    body:not(.theme-dark)  .stats-table tr.team-watermark-row td {
       color: #1c1405 !important;
     }
 
-    body:not(.theme-dark) .mobile-goalie-table .stats-table tr.team-watermark-row .stat-label,
-    body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row .stat-label {
+   
+    body:not(.theme-dark) .stats-table tr.team-watermark-row .stat-label {
       color: #b87812 !important;
     }
 
@@ -216,7 +216,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
     }
 
 
-    body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row.team-360-row {
+    body:not(.theme-dark) .stats-table tr.team-watermark-row.team-360-row {
       background-image:
         linear-gradient(
           90deg,
