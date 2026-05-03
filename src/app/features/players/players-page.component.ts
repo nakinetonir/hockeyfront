@@ -143,18 +143,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
     }
 
 
-    .mobile-player-table .stats-table tr.team-watermark-row td {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
-      background: transparent !important;
-      text-align: right;
-    }
+
 
     .mobile-player-table .stats-table tr.team-watermark-row td:last-child { border-bottom: 0; }
 
