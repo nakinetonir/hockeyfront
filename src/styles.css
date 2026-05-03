@@ -3732,3 +3732,37 @@ body:not(.theme-dark) .stats-table tr.team-watermark-row:hover {
     0 0 0 1px rgba(96, 165, 250, 0.24),
     0 0 28px rgba(56, 189, 248, 0.10) !important;
 }
+
+
+/* Standings page polish */
+.standings-row .team-cell-with-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+body:not(.theme-dark) .standings-row .points-cell strong,
+body:not(.theme-dark) .standings-row td::before {
+  color: #b87812 !important;
+}
+
+.theme-dark .standings-row .points-cell strong {
+  color: #f5a400 !important;
+}
+
+@media (min-width: 721px) {
+  .standings-row.team-watermark-row {
+    background-image: none !important;
+  }
+
+  .standings-row .team-logo-wrap {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+
+  .standings-row .team-logo {
+    width: 34px;
+    height: 34px;
+  }
+}

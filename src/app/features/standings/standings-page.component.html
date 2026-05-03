@@ -1,0 +1,71 @@
+<section>
+  <div class="selected-league-header card" *ngIf="leagueName">
+    <span>Liga seleccionada</span>
+    <strong>{{ leagueName }}</strong>
+  </div>
+
+  <h1 class="page-title">Clasificación</h1>
+  <p class="page-subtitle">Tabla de clasificación por liga con puntos, partidos, victorias, empates, derrotas y goles.</p>
+
+  <div class="filters card filters-2">
+    <div class="option-group">
+      <label class="small">Buscar equipo</label>
+      <input [(ngModel)]="search" (ngModelChange)="load()" placeholder="Nombre o abreviatura" />
+    </div>
+    <div class="option-group">
+      <label class="small">Equipo</label>
+      <select [(ngModel)]="team" (ngModelChange)="load()">
+        <option value="">Todos</option>
+        <option *ngFor="let item of teams" [value]="item">{{ item }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="card table-wrap responsive-table-card standings-card-grid">
+    <table class="stats-table standings-table">
+      <thead>
+        <tr>
+          <th>Pos</th>
+          <th>Equipo</th>
+          <th>Ptos</th>
+          <th>PJ</th>
+          <th>PG</th>
+          <th>PE</th>
+          <th>PP</th>
+          <th>GF</th>
+          <th>GC</th>
+          <th>Dif</th>
+          <th>PEN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of items; trackBy: trackByTeam"
+          class="team-watermark-row standings-row"
+          [class.team-360-row]="is360(item.team)"
+          [style.--team-logo-url]="getTeamLogoCss(item.team)"
+        >
+          <td data-label="Pos" class="standing-position">
+            <span class="position-pill">{{ item.position }}</span>
+          </td>
+          <td data-label="Equipo" class="team-data-cell primary-cell">
+            <div class="team-cell team-cell-with-name team-cell-mobile-centered">
+              <app-team-logo class="standings-main-logo" [team]="item.team" [animate360]="true"></app-team-logo>
+              <span class="team-name-text">{{ item.team }}</span>
+              <small *ngIf="item.short_name">{{ item.short_name }}</small>
+            </div>
+          </td>
+          <td data-label="Ptos" class="points-cell"><strong>{{ item.points || 0 }}</strong></td>
+          <td data-label="PJ">{{ item.matches || 0 }}</td>
+          <td data-label="PG">{{ item.wins || 0 }}</td>
+          <td data-label="PE">{{ item.draws || 0 }}</td>
+          <td data-label="PP">{{ item.losses || 0 }}</td>
+          <td data-label="GF">{{ item.goals_for || 0 }}</td>
+          <td data-label="GC">{{ item.goals_against || 0 }}</td>
+          <td data-label="Dif" [class.negative]="(item.goal_difference || 0) < 0">{{ item.goal_difference || 0 }}</td>
+          <td data-label="PEN">{{ item.penalty_points || 0 }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

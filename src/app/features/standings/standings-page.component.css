@@ -1,0 +1,129 @@
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.standings-table th,
+.standings-table td {
+  text-align: center;
+}
+
+.standings-table th:nth-child(2),
+.standings-table td:nth-child(2) {
+  text-align: left;
+}
+
+.position-pill {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  font-weight: 900;
+  color: #f8fbff;
+  background: linear-gradient(135deg, #0ea5e9, #22c55e);
+  box-shadow: 0 10px 24px rgba(14, 165, 233, .22);
+}
+
+body:not(.theme-dark) .position-pill {
+  color: #1c1405;
+  background: linear-gradient(135deg, #facc15, #f59e0b);
+  box-shadow: 0 10px 24px rgba(180, 122, 18, .18);
+}
+
+.points-cell strong {
+  font-size: 1.12rem;
+  color: var(--accent);
+}
+
+.negative {
+  color: #ef4444 !important;
+  font-weight: 800;
+}
+
+.team-cell small {
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 720px) {
+  .standings-card-grid {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .standings-table tbody {
+    display: grid;
+    gap: 12px;
+  }
+
+  .standings-table tr.standings-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .standings-table tr.standings-row td {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 42px;
+    padding: 11px 14px;
+    text-align: right;
+    background: transparent !important;
+  }
+
+  .standings-table tr.standings-row td::before {
+    content: attr(data-label);
+    flex: 0 0 42%;
+    text-align: left;
+    color: var(--muted);
+    font-size: .76rem;
+    font-weight: 900;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  .standings-table tr.standings-row td.team-data-cell {
+    display: flex !important;
+    justify-content: center !important;
+    padding: 16px 14px 12px;
+  }
+
+  .standings-table tr.standings-row td.team-data-cell::before {
+    display: none !important;
+  }
+
+  .standings-table .team-cell-mobile-centered {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .standings-table .team-name-text {
+    width: 100%;
+    text-align: center;
+    font-weight: 900;
+    line-height: 1.15;
+  }
+
+  .standings-main-logo .team-logo-wrap {
+    width: 72px;
+    height: 72px;
+  }
+
+  .standings-main-logo .team-logo {
+    width: 52px;
+    height: 52px;
+  }
+}

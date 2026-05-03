@@ -5,6 +5,7 @@ import { GoaliesPageComponent } from './features/goalies/goalies-page.component'
 import { MatchesPageComponent } from './features/matches/matches-page.component';
 import { TeamShotsPageComponent } from './features/team-shots/team-shots-page.component';
 import { LeagueMenuPageComponent } from './features/league-menu/league-menu-page.component';
+import { StandingsPageComponent } from './features/standings/standings-page.component';
 
 export const routes: Routes = [
   { path: '', component: DashboardPageComponent },
@@ -12,6 +13,7 @@ export const routes: Routes = [
   { path: 'jugadores', component: PlayersPageComponent },
   { path: 'porteros', component: GoaliesPageComponent },
   { path: 'partidos', component: MatchesPageComponent },
+  { path: 'clasificacion', component: StandingsPageComponent },
   { path: 'equipos', component: TeamShotsPageComponent },
   { path: 'tiros-equipos', redirectTo: 'equipos' },
   { path: '**', redirectTo: '' }

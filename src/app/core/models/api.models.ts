@@ -44,6 +44,31 @@ export interface TeamSummary {
   avg_shots_against?: number | null;
 }
 
+
+export interface StandingItem {
+  _id?: string;
+  league_id: string;
+  league_key: string;
+  league_name: string;
+  league_url: string;
+  logo_url: string;
+  team: string;
+  short_name: string;
+  position: number;
+  points: number;
+  matches: number;
+  wins: number;
+  draws: number;
+  losses: number;
+  goals_for: number;
+  goals_against: number;
+  goal_difference: number;
+  penalty_points: number;
+  notes: string;
+  scraped_at: string;
+  bonus_points?: number;
+}
+
 export interface MatchItem {
   _id?: string;
   match_id?: string;

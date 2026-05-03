@@ -10,7 +10,8 @@ import {
   PaginationResult,
   PlayerAnalysisResponse,
   PlayerTotal,
-  TeamSummary
+  TeamSummary,
+  StandingItem
 } from '../models/api.models';
 
 @Injectable({ providedIn: 'root' })
@@ -44,6 +45,10 @@ export class ApiService {
 
   getTeams(filters: Record<string, string | number> = {}): Observable<{ items: string[] }> {
     return this.http.get<{ items: string[] }>(`${this.baseUrl}/teams`, { params: this.toParams(filters) });
+  }
+
+  getStandings(filters: Record<string, string | number>): Observable<PaginationResult<StandingItem>> {
+    return this.http.get<PaginationResult<StandingItem>>(`${this.baseUrl}/standings`, { params: this.toParams(filters) });
   }
 
   getPlayerAnalysis(payload: {

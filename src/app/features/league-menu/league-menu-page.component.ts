@@ -86,6 +86,15 @@ export class LeagueMenuPageComponent implements OnInit {
       accent: '#fb923c',
       icon: '🏒',
       metric: 'totalMatches'
+    },
+    {
+      title: 'Clasificación',
+      label: 'Ranking',
+      description: 'Posiciones, puntos, victorias, derrotas y diferencia de goles por equipo.',
+      route: '/clasificacion',
+      accent: '#f5a400',
+      icon: '🏆',
+      metric: 'teams'
     }
   ];
 

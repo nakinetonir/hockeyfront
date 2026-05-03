@@ -25,6 +25,10 @@
             <span class="nav-icon">🏒</span>
             Partidos
           </a>
+          <a routerLink="/clasificacion" [queryParams]="leagueQueryParams" routerLinkActive="active" (click)="mobileOpen = false">
+            <span class="nav-icon">🏆</span>
+            Clasificación
+          </a>
         </nav>
 
         <label class="theme-radio" [class.theme-radio-dark]="isDarkTheme" title="Cambiar tema">
