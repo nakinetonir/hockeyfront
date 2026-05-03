@@ -1,0 +1,104 @@
+    <section>
+      <div class="selected-league-header card" *ngIf="leagueName">
+        <span>Liga seleccionada</span>
+        <strong>{{ leagueName }}</strong>
+      </div>
+
+      <h1 class="page-title">Porteros</h1>
+      <p class="page-subtitle">Acumulado por portero de goles encajados, tiros recibidos y porcentaje de paradas. Haz clic en un portero para ver su análisis personalizado.</p>
+
+      <div class="filters card filters-2">
+        <div class="option-group">
+          <label class="small">Buscar portero</label>
+          <input [(ngModel)]="search" (ngModelChange)="load()" placeholder="Nombre del portero" />
+        </div>
+        <div class="option-group">
+          <label class="small">Equipo</label>
+          <select [(ngModel)]="team" (ngModelChange)="load()">
+            <option value="">Todos</option>
+            <option *ngFor="let item of teams" [value]="item">{{ item }}</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="analysis-error" *ngIf="analysisError">{{ analysisError }}</p>
+
+      <div class="desktop-player-grid" aria-label="Listado de porteros en tarjetas">
+        <button
+          type="button"
+          *ngFor="let item of goalies"
+          class="person-card"
+          [class.team-360-card]="is360(item.team)"
+          [style.--team-logo-url]="getTeamLogoCss(item.team)"
+          (click)="openAnalysis(item)"
+        >
+          <div class="person-card-bg"></div>
+          <div class="person-card-content">
+            <div class="person-card-header">
+              <div>
+                <span class="person-card-kicker">Portero</span>
+                <h3>{{ item.goalie }}</h3>
+              </div>
+            </div>
+            <div class="person-card-stats goalie-stats">
+              <span><small>Partidos</small><strong>{{ item.matches || 0 }}</strong></span>
+              <span><small>GC</small><strong>{{ item.goals_allowed || 0 }}</strong></span>
+              <span><small>Tiros</small><strong>{{ item.shots || 0 }}</strong></span>
+              <span><small>Paradas</small><strong>{{ item.saves || ((item.shots || 0) - (item.goals_allowed || 0)) }}</strong></span>
+              <span><small>SV%</small><strong>{{ item.save_pct || 0 | number:'1.0-2' }}</strong></span>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="card table-wrap responsive-table-card mobile-player-table">
+        <table class="stats-table clickable-table">
+          <thead>
+            <tr>
+              <th>Portero</th>
+              <th>Equipo</th>
+              <th>Partidos</th>
+              <th>GC</th>
+              <th>Tiros</th>
+              <th>Paradas</th>
+              <th>SV%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of goalies"
+              [class.team-360-row]="is360(item.team)"
+              [style.--team-logo-url]="getTeamLogoCss(item.team)"
+              class="clickable-row team-watermark-row"
+              (click)="openAnalysis(item)"
+            >
+              <td [attr.data-label]="'Portero'" class="primary-cell">{{ item.goalie }}</td>
+              <td [attr.data-label]="'Equipo'" class="team-data-cell">
+                <div class="team-cell team-cell-logo-only">
+                  <app-team-logo [team]="item.team" [animate360]="true"></app-team-logo>
+                </div>
+              </td>
+              <td [attr.data-label]="'Partidos'">{{ item.matches || 0 }}</td>
+              <td [attr.data-label]="'GC'">{{ item.goals_allowed || 0 }}</td>
+              <td [attr.data-label]="'Tiros'">{{ item.shots || 0 }}</td>
+              <td [attr.data-label]="'Paradas'">{{ item.saves || ((item.shots || 0) - (item.goals_allowed || 0)) }}</td>
+              <td [attr.data-label]="'SV%'">{{ item.save_pct || 0 | number:'1.0-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <app-analysis-loading-overlay
+        [open]="loadingAnalysis"
+        [title]="loadingTitle"
+        [subtitle]="loadingSubtitle"
+        [teams]="teams"
+      />
+
+      <app-player-analysis-modal
+        [open]="analysisModalOpen"
+        [analysis]="selectedAnalysis"
+        (close)="closeModal()"
+      />
+    </section>
+  

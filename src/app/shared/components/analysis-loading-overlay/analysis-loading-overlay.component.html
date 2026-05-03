@@ -1,0 +1,65 @@
+    <div class="analysis-loader-backdrop" *ngIf="open" aria-live="polite" aria-busy="true">
+      <div class="analysis-loader-card">
+        <div class="ice-glow"></div>
+
+        <div class="loader-topline">Analizando rendimiento</div>
+        <h2>{{ title }}</h2>
+        <p class="loader-subtitle">{{ subtitle }}</p>
+
+        <div class="fun-match-log" *ngIf="scenarioHome && scenarioAway" aria-label="Bitácora ficticia de espera">
+          <div class="fun-match-log__eyebrow">Partido ficticio mientras espera</div>
+          <div class="fun-match-log__match">{{ scenarioHome }} vs {{ scenarioAway }}</div>
+          <div class="fun-match-log__score">
+            {{ scenarioHome }} {{ visibleHomeScore }} - {{ visibleAwayScore }} {{ scenarioAway }}
+          </div>
+
+          <div class="fun-match-log__list" #logList>
+            <div
+              class="fun-match-log__item"
+              *ngFor="let entry of matchLog; let i = index"
+              [class.fun-match-log__item--active]="i === activeLogIndex"
+            >
+              {{ formatMinute(entry.minute) }} · {{ entry.text }}
+            </div>
+
+            <div class="fun-match-log__item fun-match-log__item--pending" *ngIf="matchLog.length < scenarioEntries.length">
+              {{ nextMinuteLabel }} · El partido sigue avanzando...
+            </div>
+          </div>
+        </div>
+
+        <div class="rink-scene" aria-hidden="true">
+          <div class="ice-track"></div>
+          <div class="ice-lines ice-lines-top"></div>
+          <div class="ice-lines ice-lines-bottom"></div>
+
+          <div class="goal goal-left">
+            <span></span><span></span><span></span>
+          </div>
+
+          <div class="goal goal-right">
+            <span></span><span></span><span></span>
+          </div>
+
+          <div class="player player-one">
+            <div class="stick"></div>
+          </div>
+          <div class="player player-two">
+            <div class="stick"></div>
+          </div>
+          <div class="player player-three">
+            <div class="stick"></div>
+          </div>
+
+          <div class="puck-trail"></div>
+          <div class="puck"></div>
+        </div>
+
+        <div class="loader-steps">
+          <div class="step active"><span></span><label>Consultando workflow</label></div>
+          <div class="step active delayed-1"><span></span><label>Procesando estadísticas</label></div>
+          <div class="step active delayed-2"><span></span><label>Preparando recomendaciones</label></div>
+        </div>
+      </div>
+    </div>
+  

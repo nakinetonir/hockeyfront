@@ -1,0 +1,95 @@
+    <section>
+      <div class="selected-league-header card" *ngIf="leagueName">
+        <span>Liga seleccionada</span>
+        <strong>{{ leagueName }}</strong>
+      </div>
+
+      <h1 class="page-title">Partidos</h1>
+      <p class="page-subtitle">Histórico de partidos importados desde MongoDB. Haz clic en un partido para ver la ficha completa.</p>
+
+      <div class="filters card filters-3">
+        <div class="option-group">
+          <label class="small">Buscar general</label>
+          <input [(ngModel)]="search" (ngModelChange)="load()" placeholder="Pista o fecha" />
+        </div>
+        <div class="option-group">
+          <label class="small">Buscar equipo</label>
+          <input [(ngModel)]="teamSearch" (ngModelChange)="applyTeamFilter()" placeholder="Equipo local o visitante" />
+        </div>
+        <div class="option-group"> 
+          <label class="small">Equipo</label>
+          <select [(ngModel)]="team" (ngModelChange)="load()">
+            <option value="">Todos</option>
+            <option *ngFor="let item of teams" [value]="item">{{ item }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid matches-grid" style="gap: 12px">
+        <button
+          type="button"
+          class="card match-card match-card-button"
+          *ngFor="let item of filteredMatches"
+          [class.team-360-card]="is360(item.home_team) || is360(item.away_team)"
+          (click)="openMatch(item)"
+        >
+          <div class="match-card-inner">
+            <div class="badge">{{ item.status || 'Finalizado' }}</div>
+            <div class="match-header">
+              <div class="match-side match-side-stack" [attr.title]="item.home_team || 'Equipo local'">
+                <app-team-logo [team]="item.home_team" size="lg" [animate360]="true"></app-team-logo>
+                <span class="match-score">{{ item.home_score ?? '-' }}</span>
+              </div>
+              <div class="match-versus">vs</div>
+              <div class="match-side match-side-stack" [attr.title]="item.away_team || 'Equipo visitante'">
+                <app-team-logo [team]="item.away_team" size="lg" [animate360]="true"></app-team-logo>
+                <span class="match-score">{{ item.away_score ?? '-' }}</span>
+              </div>
+            </div>
+            <div class="match-card-teams">
+              <strong>{{ item.home_team || 'Local' }}</strong>
+              <span>vs</span>
+              <strong>{{ item.away_team || 'Visitante' }}</strong>
+            </div>
+            <div class="small">{{ item.date || 'Sin fecha' }} · {{ item.venue || 'Sin pista' }}</div>
+          </div>
+        </button>
+      </div>
+
+      <div class="modal-backdrop" *ngIf="selectedMatch" (click)="closeMatch()">
+        <div class="modal-card match-modal-card" (click)="$event.stopPropagation()">
+          <button class="modal-close" type="button" (click)="closeMatch()">×</button>
+
+          <div class="badge">{{ selectedMatch.status || 'Finalizado' }}</div>
+          <h2 class="match-modal-title">{{ selectedMatch.home_team || 'Local' }} vs {{ selectedMatch.away_team || 'Visitante' }}</h2>
+
+          <div class="match-modal-score">
+            <div class="match-modal-team">
+              <app-team-logo [team]="selectedMatch.home_team" size="lg" [animate360]="true"></app-team-logo>
+              <strong>{{ selectedMatch.home_team || 'Local' }}</strong>
+              <span>{{ selectedMatch.home_score ?? '-' }}</span>
+            </div>
+            <div class="match-versus">vs</div>
+            <div class="match-modal-team">
+              <app-team-logo [team]="selectedMatch.away_team" size="lg" [animate360]="true"></app-team-logo>
+              <strong>{{ selectedMatch.away_team || 'Visitante' }}</strong>
+              <span>{{ selectedMatch.away_score ?? '-' }}</span>
+            </div>
+          </div>
+
+          <div class="match-detail-grid">
+            <div><span>Fecha</span><strong>{{ selectedMatch.date || '-' }}</strong></div>
+            <div><span>Pista</span><strong>{{ selectedMatch.venue || '-' }}</strong></div>
+            <div><span>Liga</span><strong>{{ selectedMatch.league_name || leagueName || '-' }}</strong></div>
+            <div><span>ID partido</span><strong>{{ selectedMatch.match_id || selectedMatch._id || '-' }}</strong></div>
+            <div><span>Temporada</span><strong>{{ selectedMatch.season || '-' }}</strong></div>
+            <div><span>Estado</span><strong>{{ selectedMatch.status || 'Finalizado' }}</strong></div>
+          </div>
+
+          <a *ngIf="selectedMatch.detail_url" class="match-detail-link" [href]="selectedMatch.detail_url" target="_blank" rel="noopener">
+            Abrir ficha original
+          </a>
+        </div>
+      </div>
+    </section>
+  

@@ -1,0 +1,18 @@
+    <div class="team-logo-wrap" [class.team-logo-360]="animate360 && is360Team" [class.team-logo-wrap-large]="size === 'lg'" [attr.title]="resolvedName">
+      <img
+        *ngIf="logo && !hasImageError; else fallback"
+        class="team-logo"
+        [class.team-logo-large]="size === 'lg'"
+        [src]="logo"
+        [alt]="resolvedName"
+        loading="lazy"
+        decoding="async"
+        (error)="handleImageError()"
+      />
+      <ng-template #fallback>
+        <div class="team-logo team-logo-fallback" [class.team-logo-large]="size === 'lg'">
+          {{ initials }}
+        </div>
+      </ng-template>
+    </div>
+  

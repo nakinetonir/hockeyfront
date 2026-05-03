@@ -6,25 +6,8 @@ import { getTeamBrand, isTeam360 } from '../../../core/utils/team-branding';
   selector: 'app-team-logo',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="team-logo-wrap" [class.team-logo-360]="animate360 && is360Team" [class.team-logo-wrap-large]="size === 'lg'" [attr.title]="resolvedName">
-      <img
-        *ngIf="logo && !hasImageError; else fallback"
-        class="team-logo"
-        [class.team-logo-large]="size === 'lg'"
-        [src]="logo"
-        [alt]="resolvedName"
-        loading="lazy"
-        decoding="async"
-        (error)="handleImageError()"
-      />
-      <ng-template #fallback>
-        <div class="team-logo team-logo-fallback" [class.team-logo-large]="size === 'lg'">
-          {{ initials }}
-        </div>
-      </ng-template>
-    </div>
-  `
+  templateUrl: './team-logo.component.html',
+  styleUrl: './team-logo.component.css',
 })
 export class TeamLogoComponent implements OnChanges {
   @Input() team?: string | null;

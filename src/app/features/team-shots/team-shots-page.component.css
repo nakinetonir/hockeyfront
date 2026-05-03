@@ -1,0 +1,21 @@
+    .clickable-row {
+      cursor: pointer;
+    }
+
+    .clickable-row:hover {
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+
+    .analysis-error {
+      margin: 16px 0;
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
+    .option-group {
+      display: flex;
+      flex-direction: column;
+      gap:0.5rem;
+    }
+  

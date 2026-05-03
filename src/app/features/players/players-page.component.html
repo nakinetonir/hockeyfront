@@ -1,0 +1,101 @@
+    <section>
+      <div class="selected-league-header card" *ngIf="leagueName">
+        <span>Liga seleccionada</span>
+        <strong>{{ leagueName }}</strong>
+      </div>
+
+      <h1 class="page-title">Jugadores</h1>
+      <p class="page-subtitle">Acumulado por jugador de goles, asistencias y puntos. Haz clic en un jugador para ver su análisis personalizado.</p>
+
+      <div class="filters card filters-2">
+        <div class="option-group">
+          <label class="small">Buscar jugador</label>
+          <input [(ngModel)]="search" (ngModelChange)="load()" placeholder="Nombre del jugador" />
+        </div>
+        <div class="option-group">
+          <label class="small">Equipo</label>
+          <select [(ngModel)]="team" (ngModelChange)="load()">
+            <option value="">Todos</option>
+            <option *ngFor="let item of teams" [value]="item">{{ item }}</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="analysis-error" *ngIf="analysisError">{{ analysisError }}</p>
+
+      <div class="desktop-player-grid" aria-label="Listado de jugadores en tarjetas">
+        <button
+          type="button"
+          *ngFor="let item of players"
+          class="person-card"
+          [class.team-360-card]="is360(item.team)"
+          [style.--team-logo-url]="getTeamLogoCss(item.team)"
+          (click)="openAnalysis(item)"
+        >
+          <div class="person-card-bg"></div>
+          <div class="person-card-content">
+            <div class="person-card-header">
+              <div>
+                <span class="person-card-kicker">Jugador</span>
+                <h3>{{ item.player }}</h3>
+              </div>
+            </div>
+            <div class="person-card-stats">
+              <span><small>Partidos</small><strong>{{ item.matches || 0 }}</strong></span>
+              <span><small>Goles</small><strong>{{ item.goals || 0 }}</strong></span>
+              <span><small>Asist.</small><strong>{{ item.assists || 0 }}</strong></span>
+              <span><small>Puntos</small><strong>{{ item.points || ((item.goals || 0) + (item.assists || 0)) }}</strong></span>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="card table-wrap responsive-table-card mobile-player-table">
+        <table class="stats-table clickable-table">
+          <thead>
+            <tr>
+              <th>Jugador</th>
+              <th>Equipo</th>
+              <th>Partidos</th>
+              <th>Goles</th>
+              <th>Asistencias</th>
+              <th>Puntos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of players"
+              [class.team-360-row]="is360(item.team)"
+              [style.--team-logo-url]="getTeamLogoCss(item.team)"
+              class="clickable-row team-watermark-row"
+              (click)="openAnalysis(item)"
+            >
+              <td [attr.data-label]="'Jugador'" class="primary-cell">{{ item.player }}</td>
+              <td [attr.data-label]="'Equipo'" class="team-data-cell">
+                <div class="team-cell team-cell-logo-only">
+                  <app-team-logo [team]="item.team" [animate360]="true"></app-team-logo>
+                </div>
+              </td>
+              <td [attr.data-label]="'Partidos'">{{ item.matches || 0 }}</td>
+              <td [attr.data-label]="'Goles'">{{ item.goals || 0 }}</td>
+              <td [attr.data-label]="'Asistencias'">{{ item.assists || 0 }}</td>
+              <td [attr.data-label]="'Puntos'">{{ item.points || ((item.goals || 0) + (item.assists || 0)) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <app-analysis-loading-overlay
+        [open]="loadingAnalysis"
+        [title]="loadingTitle"
+        [subtitle]="loadingSubtitle"
+        [teams]="teams"
+      />
+
+      <app-player-analysis-modal
+        [open]="analysisModalOpen"
+        [analysis]="selectedAnalysis"
+        (close)="closeModal()"
+      />
+    </section>
+  

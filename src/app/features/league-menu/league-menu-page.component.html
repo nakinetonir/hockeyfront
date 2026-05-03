@@ -1,0 +1,39 @@
+    <section class="league-shell">
+      <div class="league-bg league-bg-one"></div>
+      <div class="league-bg league-bg-two"></div>
+
+      <header class="league-hero">
+        <div class="hero-copy">
+         
+          <h1>{{ leagueName }}</h1>
+        </div>
+      </header>
+
+      <section class="menu-section">
+       
+
+        <div class="menu-grid">
+          <a
+            *ngFor="let card of cards"
+            class="menu-card"
+            [routerLink]="card.route"
+            [queryParams]="queryParams"
+            [style.--card-accent]="card.accent"
+          >
+            <div class="menu-card-glow"></div>
+            <div class="menu-card-top">
+              <span class="menu-icon">{{ card.icon }}</span>
+              <div class="menu-card-metric" *ngIf="summary as data">
+                <span>Total</span>
+                <strong>{{ metricValue(card, data) }}</strong>
+              </div>
+            </div>
+            <div class="menu-card-main">
+              <h3>{{ card.title }}</h3>
+            </div>
+            <p>{{ card.description }}</p>
+          </a>
+        </div>
+      </section>
+    </section>
+  

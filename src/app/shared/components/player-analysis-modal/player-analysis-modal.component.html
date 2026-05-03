@@ -1,0 +1,69 @@
+    <div class="analysis-backdrop" *ngIf="open" (click)="close.emit()">
+      <div class="analysis-modal card" (click)="$event.stopPropagation()">
+        <button class="analysis-close" type="button" (click)="close.emit()" aria-label="Cerrar modal">×</button>
+
+        <ng-container *ngIf="analysis as item">
+          <div class="analysis-header">
+            <div>
+              <h2>{{ item.nombre }}</h2>
+              <p class="muted">{{ item.equipo }}</p>
+            </div>
+          </div>
+
+          <section class="analysis-section">
+            <h3>Análisis</h3>
+            <p>{{ item.analisis }}</p>
+          </section>
+
+          <section class="analysis-section" *ngIf="item.puntos_mejora?.length">
+            <h3>Puntos de mejora</h3>
+            <ul>
+              <li *ngFor="let punto of item.puntos_mejora">{{ punto }}</li>
+            </ul>
+          </section>
+
+          <section class="analysis-section" *ngIf="item.ejercicios?.length">
+            <h3>Ejercicios recomendados</h3>
+            <article class="exercise-card" *ngFor="let ejercicio of item.ejercicios">
+              <h4>{{ ejercicio.nombre }}</h4>
+              <p><strong>Descripción:</strong> {{ ejercicio.descripcion }}</p>
+              <p><strong>Objetivo:</strong> {{ ejercicio.objetivo }}</p>
+            </article>
+          </section>
+
+          <section class="analysis-section" *ngIf="item.videos?.length">
+            <h3>Vídeos</h3>
+            <article class="video-card" *ngFor="let video of item.videos; let i = index">
+              <button type="button" class="video-toggle" (click)="toggleVideo(i)">
+                {{ video.titulo }}
+              </button>
+
+              <div class="video-content" *ngIf="openedVideoIndex === i">
+                <ng-container *ngIf="getYoutubeEmbedUrl(video.url) as embedUrl; else openLinkOnly">
+                  <iframe
+                    width="100%"
+                    height="315"
+                    [src]="embedUrl"
+                    title="Video de YouTube"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                  ></iframe>
+                </ng-container>
+
+                <ng-template #openLinkOnly>
+                  <a [href]="video.url" target="_blank" rel="noopener noreferrer">Abrir vídeo en YouTube</a>
+                </ng-template>
+              </div>
+            </article>
+          </section>
+
+          <section class="analysis-section" *ngIf="item.conclusion">
+            <h3>Conclusión</h3>
+            <p>{{ item.conclusion.resumen }}</p>
+            <p><strong>Nivel:</strong> {{ item.conclusion.nivel }}</p>
+          </section>
+        </ng-container>
+      </div>
+    </div>
+  
