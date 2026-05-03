@@ -3290,3 +3290,15 @@ body.theme-dark .nav-links a:hover {
     border-color: rgba(125,211,252,.14) !important;
   }
 }
+
+
+/* LIGHT - remove borders from cards */
+body:not(.theme-dark) .person-card,
+body:not(.theme-dark) .player-card,
+body:not(.theme-dark) .goalie-card,
+body:not(.theme-dark) .team-card,
+body:not(.theme-dark) .card {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
