@@ -3554,3 +3554,181 @@ body:not(.theme-dark) .stats-table tr.team-watermark-row:hover {
 .stats-table tr.team-watermark-row:active {
   transform: translateY(-1px) scale(.995) !important;
 }
+
+
+/* DARK - cards like light layout, respecting dark theme */
+.theme-dark .person-card,
+.theme-dark .player-card,
+.theme-dark .goalie-card,
+.theme-dark .team-card,
+.theme-dark .stats-table tr.team-watermark-row {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(96, 165, 250, 0.22) !important;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(6, 17, 38, 0.96),
+      rgba(13, 35, 68, 0.82)
+    ),
+    var(--team-logo-url) !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-position: 0 0, center center !important;
+  background-size: auto, 62% auto !important;
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.34) !important;
+  filter: none !important;
+}
+
+/* Keep background watermark on desktop cards too */
+.theme-dark .person-card .person-card-bg {
+  inset: 0 !important;
+  background-image:
+    radial-gradient(circle at center, rgba(96, 165, 250, 0.10), transparent 58%),
+    var(--team-logo-url) !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 62% auto !important;
+  opacity: 0.26 !important;
+  filter: saturate(1.12) brightness(1.08) !important;
+}
+
+/* Put content above watermark */
+.theme-dark .person-card-content,
+.theme-dark .team-card > *,
+.theme-dark .player-card > *,
+.theme-dark .goalie-card > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Player/goalie desktop stats: labels left, values right */
+.theme-dark .person-card-stats,
+.theme-dark .goalie-stats {
+  display: grid !important;
+  gap: 0 !important;
+}
+
+.theme-dark .person-card-stats span,
+.theme-dark .goalie-stats span {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  min-height: 42px !important;
+  padding: 0 16px !important;
+  border-top: 1px solid rgba(96, 165, 250, 0.14) !important;
+}
+
+.theme-dark .person-card-stats small,
+.theme-dark .goalie-stats small {
+  color: #f5a400 !important;
+  text-align: left !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.045em !important;
+  font-weight: 700 !important;
+}
+
+.theme-dark .person-card-stats strong,
+.theme-dark .goalie-stats strong {
+  color: #eef6ff !important;
+  text-align: right !important;
+  font-weight: 800 !important;
+}
+
+/* Header spacing similar to light */
+.theme-dark .person-card-header {
+  padding: 16px 16px 12px !important;
+  border-bottom: 1px solid rgba(96, 165, 250, 0.14) !important;
+}
+
+.theme-dark .person-card-kicker {
+  color: #f5a400 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.055em !important;
+}
+
+.theme-dark .person-card h3 {
+  color: #f8fbff !important;
+}
+
+/* Mobile table cards: same structure as light, dark colors */
+.theme-dark .mobile-player-table .stats-table tr.team-watermark-row {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  border-radius: 16px !important;
+  margin-bottom: 12px !important;
+}
+
+.theme-dark .mobile-player-table .stats-table tr.team-watermark-row td {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  min-height: 42px !important;
+  padding: 0 14px !important;
+  color: #eef6ff !important;
+  background: transparent !important;
+  border-top: 1px solid rgba(96, 165, 250, 0.14) !important;
+}
+
+.theme-dark .mobile-player-table .stats-table tr.team-watermark-row td:first-child {
+  border-top: none !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  color: #f8fbff !important;
+  font-weight: 900 !important;
+  text-align: right !important;
+}
+
+.theme-dark .mobile-player-table .stats-table tr.team-watermark-row td::before {
+  content: attr(data-label) !important;
+  color: #f5a400 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.045em !important;
+  font-weight: 800 !important;
+  text-align: left !important;
+  margin-right: 12px !important;
+}
+
+/* Hide logo-only team column on card layout, keep watermark instead */
+.theme-dark .mobile-player-table .stats-table tr.team-watermark-row .team-data-cell {
+  display: none !important;
+}
+
+/* Teams cards in dark: same clean rows as light */
+.theme-dark .team-card .team-card-stat,
+.theme-dark .team-card .team-stat,
+.theme-dark .team-card li,
+.theme-dark .team-card .stat-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  color: #eef6ff !important;
+  border-top: 1px solid rgba(96, 165, 250, 0.14) !important;
+}
+
+.theme-dark .team-card .team-card-stat small,
+.theme-dark .team-card .team-stat small,
+.theme-dark .team-card .stat-label {
+  color: #f5a400 !important;
+  text-align: left !important;
+}
+
+.theme-dark .team-card .team-card-stat strong,
+.theme-dark .team-card .team-stat strong,
+.theme-dark .team-card .stat-value {
+  color: #eef6ff !important;
+  text-align: right !important;
+}
+
+/* Dark hover stays premium but cleaner */
+.theme-dark .person-card:hover,
+.theme-dark .player-card:hover,
+.theme-dark .goalie-card:hover,
+.theme-dark .team-card:hover,
+.theme-dark .stats-table tr.team-watermark-row:hover {
+  transform: translateY(-3px) !important;
+  box-shadow:
+    0 22px 56px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(96, 165, 250, 0.24),
+    0 0 28px rgba(56, 189, 248, 0.10) !important;
+}
