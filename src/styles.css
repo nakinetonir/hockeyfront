@@ -576,6 +576,15 @@ input, select {
     padding: 12px 14px;
   }
 
+  body:not(.theme-dark) .stats-table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    text-align: right;
+    padding: 12px 14px;
+  }
+
   .stats-table td:last-child {
     border-bottom: 0;
   }
