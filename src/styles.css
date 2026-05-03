@@ -575,8 +575,7 @@ input, select {
     text-align: right;
     padding: 12px 14px;
   }
-
-  body:not(.theme-dark) 
+  
 
   .stats-table td:last-child {
     border-bottom: 0;
