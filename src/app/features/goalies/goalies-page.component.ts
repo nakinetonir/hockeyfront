@@ -184,55 +184,7 @@ import { TeamLogoComponent } from '../../shared/components/team-logo/team-logo.c
   filter: saturate(1.04) !important;
 }
 
-body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row td {
-  color: #1c1405 !important;
-  background: transparent !important;
-}
 
-body:not(.theme-dark) .mobile-player-table .stats-table tr.team-watermark-row td::before {
-  color: #b87812 !important;
-}
-
-    .mobile-player-table .stats-table tr.team-watermark-row.team-360-row {
-      background-image:
-      linear-gradient(
-        90deg,
-        rgba(255, 253, 240, 0.95),
-        rgba(255, 236, 171, 0.55)
-      ),
-      radial-gradient(
-        circle at center,
-        rgba(250, 204, 21, 0.28),
-        rgba(251, 191, 36, 0.18) 36%,
-        rgba(255, 248, 220, 0) 74%
-      ),
-      var(--team-logo-url) !important;
-      background-position: 0 0, center center, center center !important;
-      background-size: auto, 110.6% 110.6%, 51.8% auto !important;
-      filter: brightness(1.18) saturate(1.18) !important;
-    }
-
-
-    body:not(.theme-dark) .stats-table tr.team-watermark-row.team-360-row {
-      background-image:
-        linear-gradient(
-          90deg,
-          rgba(255, 255, 250, 0.94),
-          rgba(250, 204, 21, 0.38)
-        ),
-        radial-gradient(
-          circle at center,
-          rgba(251, 191, 36, 0.22),
-          rgba(245, 158, 11, 0.12) 36%,
-          rgba(255, 255, 255, 0) 74%
-        ),
-        var(--team-logo-url) !important;
-
-      background-position: 0 0, center center, center center !important;
-      background-size: auto, 110% 110%, 60% auto !important;
-
-      filter: brightness(1.02) saturate(1.05) !important;
-    }
 
     .mobile-player-table .stats-table tr.team-watermark-row td {
       position: relative;
