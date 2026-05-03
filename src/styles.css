@@ -3300,3 +3300,101 @@ body:not(.theme-dark) .card {
   outline: none !important;
   box-shadow: none !important;
 }
+
+/* === LIGHT mobile cards polish: players, goalies and teams === */
+@media (max-width: 720px) {
+  body:not(.theme-dark) .stats-table tr.team-watermark-row,
+  body:not(.theme-dark) .stats-table tr.team-stats-row.team-watermark-row {
+    border: 0 !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    margin-bottom: 14px !important;
+    background-image:
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(255, 248, 230, 0.52)
+      ),
+      var(--team-logo-url) !important;
+    background-repeat: no-repeat, no-repeat !important;
+    background-position: 0 0, center center !important;
+    background-size: auto, 74% auto !important;
+    box-shadow: 0 10px 28px rgba(120, 72, 6, 0.12) !important;
+    filter: none !important;
+  }
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row.team-360-row,
+  body:not(.theme-dark) .stats-table tr.team-stats-row.team-watermark-row.team-360-row {
+    background-image:
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(255, 248, 230, 0.52)
+      ),
+      radial-gradient(
+        circle at center,
+        rgba(250, 204, 21, 0.16),
+        rgba(245, 158, 11, 0.08) 38%,
+        rgba(255, 255, 255, 0) 74%
+      ),
+      var(--team-logo-url) !important;
+    background-position: 0 0, center center, center center !important;
+    background-size: auto, 130% 130%, 74% auto !important;
+  }
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row > td,
+  body:not(.theme-dark) .stats-table tr.team-stats-row.team-watermark-row > td {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    width: 100% !important;
+    padding: 12px 14px !important;
+    text-align: right !important;
+    color: #111827 !important;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(180, 122, 18, 0.11) !important;
+  }
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row > td:last-child,
+  body:not(.theme-dark) .stats-table tr.team-stats-row.team-watermark-row > td:last-child {
+    border-bottom: 0 !important;
+  }
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row > td::before,
+  body:not(.theme-dark) .stats-table tr.team-stats-row.team-watermark-row > td::before {
+    display: block !important;
+    flex: 0 0 auto !important;
+    min-width: 96px !important;
+    text-align: left !important;
+    color: #d97706 !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.045em !important;
+  }
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row > td.primary-cell,
+  body:not(.theme-dark) .stats-table tr.team-stats-row.team-watermark-row > td.primary-cell,
+  body:not(.theme-dark) .stats-table tr.team-watermark-row > td.team-data-cell,
+  body:not(.theme-dark) .stats-table tr.team-stats-row.team-watermark-row > td.team-data-cell {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    text-align: right !important;
+    font-weight: 900 !important;
+  }
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row > td.team-data-cell {
+    display: none !important;
+  }
+
+  body:not(.theme-dark) .stats-table tr.team-stats-row.team-watermark-row > td.team-data-cell {
+    display: flex !important;
+  }
+
+  body:not(.theme-dark) .stats-table tr.team-watermark-row .team-logo-wrap,
+  body:not(.theme-dark) .stats-table tr.team-stats-row.team-watermark-row .team-logo-wrap {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: 0 !important;
+  }
+}
