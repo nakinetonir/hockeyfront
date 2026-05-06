@@ -1,3 +1,60 @@
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-navbar',
+  standalone: true,
+  imports: [CommonModule, RouterLink, RouterLinkActive],
+  template: `
+    <header class="nav-shell" *ngIf="showNav">
+      <div class="nav-inner">
+        <a class="nav-brand" routerLink="/" aria-label="Volver al inicio">
+          <span class="brand-mark">HLM</span>
+          <span class="brand-copy">
+            <strong>Hockey Línea</strong>
+            <small>Madrid</small>
+          </span>
+        </a>
+
+        <nav class="nav-links" [class.nav-links-open]="mobileOpen">
+          <a routerLink="/equipos" [queryParams]="leagueQueryParams" routerLinkActive="active" (click)="mobileOpen = false">
+            <span class="nav-icon">🛡️</span>
+            Equipos
+          </a>
+          <a routerLink="/jugadores" [queryParams]="leagueQueryParams" routerLinkActive="active" (click)="mobileOpen = false">
+            <span class="nav-icon">⚡</span>
+            Jugadores
+          </a>
+          <a routerLink="/porteros" [queryParams]="leagueQueryParams" routerLinkActive="active" (click)="mobileOpen = false">
+            <span class="nav-icon">🥅</span>
+            Porteros
+          </a>
+          <a routerLink="/partidos" [queryParams]="leagueQueryParams" routerLinkActive="active" (click)="mobileOpen = false">
+            <span class="nav-icon">🏒</span>
+            Partidos
+          </a>
+        </nav>
+
+        <label class="theme-radio" [class.theme-radio-dark]="isDarkTheme" title="Cambiar tema">
+          <input type="checkbox" [checked]="isDarkTheme" (change)="toggleTheme()" />
+          <span class="theme-radio-track">
+            <span class="theme-radio-thumb"></span>
+            <span class="theme-radio-label light">Light</span>
+            <span class="theme-radio-label dark">Dark</span>
+          </span>
+        </label>
+
+        <button class="mobile-toggle" type="button" (click)="mobileOpen = !mobileOpen" [attr.aria-expanded]="mobileOpen">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+  `,
+  styles: [`
     .nav-shell {
       position: sticky;
       top: 0;
@@ -491,137 +548,69 @@
       }
     }
 
+  `]
+})
+export class NavbarComponent implements OnInit {
+  private readonly router = inject(Router);
 
-/* Final mobile navbar/dropdown fix: no horizontal overflow */
-@media (max-width: 860px) {
-  .nav-shell {
-    width: 100%;
-    max-width: 100vw;
-    overflow: visible;
+  showNav = false;
+  leagueKey = '';
+  leagueName = '';
+  leagueQueryParams: Record<string, string> = {};
+  isDarkTheme = false;
+  mobileOpen = false;
+
+  ngOnInit(): void {
+    this.loadTheme();
+    this.updateFromUrl(this.router.url);
+    this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe((event) => this.updateFromUrl(event.urlAfterRedirects));
   }
 
-  .nav-inner {
-    width: 100% !important;
-    max-width: 100vw !important;
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) auto 54px !important;
-    align-items: center !important;
-    gap: 8px !important;
-    padding: 8px 10px !important;
-    overflow: visible !important;
+
+  toggleTheme(): void {
+    this.isDarkTheme = !this.isDarkTheme;
+    this.applyTheme();
   }
 
-  .nav-brand {
-    min-width: 0 !important;
-    max-width: 100% !important;
-    width: auto !important;
+  private loadTheme(): void {
+    const stored = localStorage.getItem('hlm-theme');
+    this.isDarkTheme = stored === 'dark';
+    this.applyTheme();
   }
 
-  .theme-radio {
-    margin-left: 0 !important;
-    justify-self: end !important;
+  private applyTheme(): void {
+    document.body.classList.toggle('theme-dark', this.isDarkTheme);
+    localStorage.setItem('hlm-theme', this.isDarkTheme ? 'dark' : 'light');
   }
 
-  .theme-radio-track {
-    width: 82px !important;
-    height: 42px !important;
-    padding: 4px !important;
+  private updateFromUrl(url: string): void {
+    const tree = this.router.parseUrl(url);
+    const primary = tree.root.children['primary'];
+    const path = primary?.segments.map((segment) => segment.path).join('/') || '';
+
+    this.leagueKey = String(tree.queryParams['league_key'] || '');
+    this.leagueName = String(tree.queryParams['league_name'] || '');
+
+    if (path.startsWith('liga/')) {
+      this.leagueKey = path.split('/')[1] || this.leagueKey;
+      this.leagueName = this.leagueName || this.humanizeLeagueKey(this.leagueKey);
+    }
+
+    this.leagueQueryParams = this.leagueKey
+      ? { league_key: this.leagueKey, league_name: this.leagueName }
+      : {};
+
+    this.mobileOpen = false;
+    this.showNav = path !== '' && !!this.leagueKey;
   }
 
-  .theme-radio-thumb {
-    width: 34px !important;
-    height: 34px !important;
-  }
-
-  .theme-radio-dark .theme-radio-thumb {
-    transform: translateX(40px) !important;
-  }
-
-  .theme-radio-label {
-    width: 36px !important;
-    font-size: 0 !important;
-  }
-
-  .theme-radio-label.light::after {
-    content: '☀';
-    font-size: 1rem;
-  }
-
-  .theme-radio-label.dark::after {
-    content: '☾';
-    font-size: 1rem;
-  }
-
-  .mobile-toggle {
-    justify-self: end !important;
-    width: 52px !important;
-    height: 52px !important;
-    flex-basis: 52px !important;
-  }
-
-  .nav-links {
-    position: absolute !important;
-    top: 100% !important;
-    left: 8px !important;
-    right: 8px !important;
-    width: auto !important;
-    max-width: calc(100vw - 16px) !important;
-    box-sizing: border-box !important;
-    margin: 0 !important;
-    border-radius: 0 0 22px 22px !important;
-    overflow: hidden !important;
-    z-index: 120 !important;
-  }
-}
-
-@media (max-width: 420px) {
-  .nav-inner {
-    grid-template-columns: minmax(0, 1fr) auto 50px !important;
-    padding: 8px 8px !important;
-    gap: 6px !important;
-  }
-
-  .nav-brand {
-    padding: 6px 8px 6px 6px !important;
-    gap: 8px !important;
-  }
-
-  .brand-mark {
-    width: 40px !important;
-    height: 40px !important;
-  }
-
-  .brand-copy strong {
-    font-size: .9rem !important;
-  }
-
-  .brand-copy small {
-    font-size: .66rem !important;
-  }
-
-  .theme-radio-track {
-    width: 76px !important;
-    height: 40px !important;
-  }
-
-  .theme-radio-thumb {
-    width: 32px !important;
-    height: 32px !important;
-  }
-
-  .theme-radio-dark .theme-radio-thumb {
-    transform: translateX(36px) !important;
-  }
-
-  .mobile-toggle {
-    width: 48px !important;
-    height: 48px !important;
-    flex-basis: 48px !important;
-  }
-
-  .nav-links {
-    left: 6px !important;
-    right: 6px !important;
-    max-width: calc(100vw - 12px) !important;
+  private humanizeLeagueKey(key: string): string {
+    return key
+      .split('-')
+      .filter(Boolean)
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' ');
   }
 }

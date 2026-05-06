@@ -1,3 +1,64 @@
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ApiService } from '../../core/services/api.service';
+import { DashboardSummary } from '../../core/models/api.models';
+
+interface MenuCard {
+  title: string;
+  label: string;
+  description: string;
+  route: string;
+  accent: string;
+  icon: string;
+  metric?: keyof DashboardSummary | 'teams';
+}
+
+@Component({
+  selector: 'app-league-menu-page',
+  standalone: true,
+  imports: [CommonModule, RouterLink],
+  template: `
+    <section class="league-shell">
+      <div class="league-bg league-bg-one"></div>
+      <div class="league-bg league-bg-two"></div>
+
+      <header class="league-hero">
+        <div class="hero-copy">
+         
+          <h1>{{ leagueName }}</h1>
+        </div>
+      </header>
+
+      <section class="menu-section">
+       
+
+        <div class="menu-grid">
+          <a
+            *ngFor="let card of cards"
+            class="menu-card"
+            [routerLink]="card.route"
+            [queryParams]="queryParams"
+            [style.--card-accent]="card.accent"
+          >
+            <div class="menu-card-glow"></div>
+            <div class="menu-card-top">
+              <span class="menu-icon">{{ card.icon }}</span>
+              <div class="menu-card-metric" *ngIf="summary as data">
+                <span>Total</span>
+                <strong>{{ metricValue(card, data) }}</strong>
+              </div>
+            </div>
+            <div class="menu-card-main">
+              <h3>{{ card.title }}</h3>
+            </div>
+            <p>{{ card.description }}</p>
+          </a>
+        </div>
+      </section>
+    </section>
+  `,
+  styles: [`
     :host {
       display: block;
     }
@@ -544,62 +605,130 @@
       }
     }
 
+  `]
+})
+export class LeagueMenuPageComponent implements OnInit {
+  private readonly route = inject(ActivatedRoute);
+  private readonly api = inject(ApiService);
 
-/* Final mobile width fix: avoid horizontal scroll in league menu */
-@media (max-width: 640px) {
-  .league-shell {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: clip !important;
-    padding-left: 6px !important;
-    padding-right: 6px !important;
+  private readonly allLogos = [
+    '/assets/teams/360.png',
+    '/assets/teams/cplm.png',
+    '/assets/teams/lasrozas.png',
+    '/assets/teams/lobos.png',
+    '/assets/teams/madridpatina.png',
+    '/assets/teams/mamuts.png',
+    '/assets/teams/pinguinos.png',
+    '/assets/teams/renos.png',
+    '/assets/teams/rolleybeers.png',
+    '/assets/teams/sobre8ruedas.png',
+    '/assets/teams/tirso.png',
+    '/assets/teams/trescantos.png',
+    '/assets/teams/vikings.png'
+  ];
+
+  private readonly leagueLogoGroups: string[][] = [
+    ['/assets/teams/cplm.png', '/assets/teams/trescantos.png', '/assets/teams/sobre8ruedas.png', '/assets/teams/vikings.png'],
+    ['/assets/teams/360.png', '/assets/teams/lasrozas.png', '/assets/teams/lobos.png', '/assets/teams/madridpatina.png'],
+    ['/assets/teams/madridpatina.png', '/assets/teams/mamuts.png', '/assets/teams/pinguinos.png', '/assets/teams/renos.png'],
+    ['/assets/teams/renos.png', '/assets/teams/rolleybeers.png', '/assets/teams/tirso.png', '/assets/teams/360.png'],
+    ['/assets/teams/vikings.png', '/assets/teams/cplm.png', '/assets/teams/lasrozas.png', '/assets/teams/lobos.png'],
+    ['/assets/teams/trescantos.png', '/assets/teams/sobre8ruedas.png', '/assets/teams/pinguinos.png', '/assets/teams/mamuts.png']
+  ];
+
+  private readonly cardsBase: MenuCard[] = [
+    {
+      title: 'Equipos',
+      label: 'Rendimiento',
+      description: 'Totales, medias, goles y tiros a favor y en contra por equipo.',
+      route: '/equipos',
+      accent: '#38bdf8',
+      icon: '🛡️',
+      metric: 'teams'
+    },
+    {
+      title: 'Jugadores',
+      label: 'Ataque',
+      description: 'Goles, asistencias, puntos y ranking individual de la competición.',
+      route: '/jugadores',
+      accent: '#22c55e',
+      icon: '⚡',
+      metric: 'totalPlayers'
+    },
+    {
+      title: 'Porteros',
+      label: 'Portería',
+      description: 'Paradas, tiros recibidos, goles encajados y porcentaje de parada.',
+      route: '/porteros',
+      accent: '#a78bfa',
+      icon: '🥅',
+      metric: 'totalGoalies'
+    },
+    {
+      title: 'Partidos',
+      label: 'Calendario',
+      description: 'Resultados, enfrentamientos, sedes y detalle de cada encuentro.',
+      route: '/partidos',
+      accent: '#fb923c',
+      icon: '🏒',
+      metric: 'totalMatches'
+    }
+  ];
+
+  leagueKey = '';
+  leagueName = 'Liga';
+  queryParams: Record<string, string> = {};
+  summary?: DashboardSummary;
+  selectedLogos = this.leagueLogoGroups[0];
+  cards = this.cardsBase;
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      this.leagueKey = params.get('leagueKey') || '';
+      this.leagueName = this.route.snapshot.queryParamMap.get('league_name') || this.humanizeLeagueKey(this.leagueKey);
+      this.queryParams = { league_key: this.leagueKey, league_name: this.leagueName };
+      this.selectedLogos = this.pickLogos(this.leagueKey);
+      this.api.getDashboardSummary({ league_key: this.leagueKey }).subscribe((data) => (this.summary = data));
+    });
   }
 
-  .league-hero,
-  .menu-section,
-  .menu-grid,
-  .menu-card {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+
+  metricValue(card: MenuCard, data: DashboardSummary): number {
+    switch (card.metric) {
+      case 'totalMatches':
+        return data.totalMatches || 0;
+      case 'totalPlayers':
+        return data.totalPlayers || 0;
+      case 'totalGoalies':
+        return data.totalGoalies || 0;
+      case 'teams':
+        return data.topTeams?.length || 0;
+      default:
+        return 0;
+    }
   }
 
-  .league-hero {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+  private pickLogos(key: string): string[] {
+    const index = Math.max(0, this.leagueIndex(key));
+    return this.leagueLogoGroups[index] || this.allLogos.slice(0, 4);
   }
 
-  .section-heading h2 {
-    font-size: clamp(1.85rem, 11vw, 2.7rem) !important;
-    letter-spacing: -0.055em !important;
+  private leagueIndex(key: string): number {
+    const normalized = key.toLowerCase();
+    if (normalized.includes('femenina')) return 0;
+    if (normalized.endsWith('senior-1') || normalized.includes('senior-1')) return 1;
+    if (normalized.endsWith('senior-2') || normalized.includes('senior-2')) return 2;
+    if (normalized.includes('grupo-1')) return 3;
+    if (normalized.includes('grupo-2')) return 4;
+    if (normalized.includes('grupo-3')) return 5;
+    return 0;
   }
 
-  .menu-grid {
-    gap: 14px !important;
-  }
-
-  .menu-card {
-    padding: 20px !important;
-    min-height: 200px !important;
-    overflow: hidden !important;
-  }
-}
-
-@media (max-width: 380px) {
-  .league-shell {
-    padding-left: 4px !important;
-    padding-right: 4px !important;
-  }
-
-  .league-hero {
-    min-height: 135px !important;
-  }
-
-  h1 {
-    font-size: clamp(1.85rem, 10.5vw, 2.65rem) !important;
-  }
-
-  .menu-card {
-    padding: 18px !important;
+  private humanizeLeagueKey(key: string): string {
+    return key
+      .split('-')
+      .filter(Boolean)
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' ');
   }
 }
